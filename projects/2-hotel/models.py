@@ -103,3 +103,20 @@ class Reservation(models.Model):
     def __str__(self):
         return f'''Reservation: {self.customer_id.username.title()} booked Room: {self.room_id.room_no}
             from {self.start_time} to {self.end_time}.'''
+
+
+
+
+
+from django.db import models
+from django.contrib.auth.models import AbstractUser
+
+class User(AbstractUser):
+    phone_number = models.CharField(max_length=200, unique=True)
+    otp_code = models.CharField(max_length=4, default=None, unique=True, null=True)
+    email_verified = models.BooleanField(default=False)
+    created_at = models.DateTimeField(auto_now_add=True, null=True)
+    updated_at = models.DateTimeField(auto_now=True, null=True)
+    
+    def __str__(self):
+        return f'User: {self.username.title()}'

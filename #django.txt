@@ -476,7 +476,16 @@ Django Authentication Basics
 ######################################################
 ######################################################
 
+python manage.py migrate admin zero
+python manage.py migrate auth zero
+python manage.py migrate contenttypes zero
+python manage.py migrate sessions zero
 
+#Run migrations for your relative app
+python manage.py makemigrations users
+
+#Migrate the tables to database
+python manage.py migrate
 
 
 
