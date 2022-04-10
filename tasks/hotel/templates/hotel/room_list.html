@@ -1,0 +1,33 @@
+{% extends "hotel/base_dashboard.html" %}
+{% load static %}
+
+{% block heading %}
+    <h1>Room List</h1>
+{% endblock heading %}
+
+{% block main %}
+        <div class="table-responsive">
+        <table class="table table-striped table-sm">
+            <thead>
+            <tr>
+                <th scope="col">ROOM ID</th>
+                <th scope="col">ROOM NO.</th>
+                <th scope="col">TYPE</th>
+                <th scope="col">PRICE</th>
+                <th scope="col">STATUS</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for room in room_list %}    
+            <tr>
+                <td>{{room.id}}</td>
+                <td>{{room.room_no}}</td>
+                <td>{{room.room_type_id.room_type}}</td>
+                <td>{{room.room_type_id.price}}</td>
+                <td>{{room.room_status_id.status}}</td>
+            </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+        </div>
+{% endblock main %}

@@ -1,0 +1,100 @@
+PANDAS
+pip3 install pandas
+pip3 install jupyterlab
+
+https://insights.stackoverflow.com/survey
+
+>>>Jupyter notebook
+
+Import pandas as pd
+
+df = pd.read_csv(‘data/survey_results_public.csv’)
+
+print(df)
+print(df.head)
+print(df.head(10))
+print(df.tail)
+print(df.tail(10))
+df.shape
+df.info()
+pd.set_option(‘display.max_columns’, 85)
+pd.set_option(‘display.max_rows’, 85)
+
+schema_df = pd.read_csv(‘data/survey_results_schema.csv’)
+print(schema_df)
+
+
+
+
+
+MATPLOTLIB
+
+pip3 install matplotlib
+
+#LINEAR CHART
+
+from matplotlib import pyplot as plt
+
+ages_x = [25,26,27,28,29,30,31,32,33,34,35]
+
+java_dev_y = [38496,42000,46752,49320,53200,56000,62316,64928,67317,68748,73752]
+py_dev_y = [45372,48876,53850,57287,63016,65998,70003,70000,71496,75370,83640]
+
+plt.plot(ages_x, java_dev_y, color='#444444', linestyle='--', marker='.', label='All Devs')
+plt.plot(ages_x, py_dev_y, color='#5a7d9a', marker='o', label='Python')
+
+plt.xlabel('Ages')
+plt.ylabel('Median Salary (USD)')
+plt.title('Median Salary (USD) by Age')
+
+plt.legend()
+plt.show()
+
+
+#PIE CHART 
+
+from matplotlib import pyplot as plt
+
+plt.style.use('fivethirtyeight')
+
+slices = [120, 80, 60, 40]
+labels = ['one','two','three','four']
+colors = ['#008fd5','#fc4f30','#e5ae37','#6d904f']
+
+plt.pie(slices, labels=labels, colors=colors, wedgeprops={'edgecolor':'black'})
+plt.title('My Pie Chart')
+plt.tight_layout()
+plt.show()
+
+
+from matplotlib import pyplot as plt
+
+plt.style.use('fivethirtyeight')
+
+slices = [120, 80, 60, 40, 30]
+labels = ['one','two','three','four', 'five']
+colors = ['#008fd5','#fc4f30','#e5ae37','#6d904f','#f4f4cc']
+
+plt.pie(slices, labels=labels, shadow=True, startangle=90, autopct='%1.1f%%', colors=colors, wedgeprops={'edgecolor':'black'})
+plt.title('My Pie Chart')
+plt.tight_layout()
+plt.show()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

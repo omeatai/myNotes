@@ -1,0 +1,100 @@
+WEB SCRAPING
+
+import requests
+from bs4 import BeautifulSoup
+
+page = 3
+res = requests.get(f'https://news.ycombinator.com/?p={page}')
+soup = BeautifulSoup(res.text, 'html.parser')
+links = soup.select('.titlelink')
+subtext = soup.select('.subtext')
+r = []
+
+for idx, i in enumerate(links):
+    title = links[idx].get_text()
+    link = links[idx].get('href', None)
+    vote = subtext[idx].select('.score')
+    if len(vote):
+        points = int(vote[0].get_text().replace(' points', ''))
+        r.append({'title': title, 'link': {link}, 'votes': points})    
+
+print(sorted(r,key= lambda k:k['votes'],reverse=True))
+
+.storylink = .titlelink 
+
+apt-get install python3-bs4
+easy_install beautifulsoup4
+Pip3 install beautifulsoup4
+Pip3 install requests
+
+import requests
+from bs4 import BeautifulSoup
+
+res = requests.get('https://news.ycombinator.com/')
+soup = BeautifulSoup(res.text, 'html.parser')
+a = soup.select('a')
+for i in a:
+    if i.get('href')[:5] == 'https':
+        print(i.get('href'))   
+
+res = requests.get('https://news.ycombinator.com/')
+soup = BeautifulSoup(res.text, 'html.parser')
+a = soup.find('a')
+el = a.get('href')
+print(el)
+
+res = requests.get('https://news.ycombinator.com/')
+soup = BeautifulSoup(res.text, 'html.parser')
+print(soup.prettify())
+
+
+
+el = soup.select(‘p’)
+el = soup.select('.score')
+el = soup.select(‘#unv_30557088’)
+el = soup.find_all("a")
+el = soup.find("a")
+el = soup.find('title')
+el = soup.title
+el = soup.title.name
+el = soup.title.string
+el = soup.title.parent.name
+el = soup.find_all('div')
+el = soup.find(id='unv_30557088')
+el = soup.get_text()
+a = soup.find('a')
+el = a.get('href')
+
+
+print(el)
+
+soup = BeautifulSoup(html_doc, 'html.parser')
+soup = BeautifulSoup("<html>a web page</html>", 'html.parser')
+print(soup.prettify())
+
+with open("index.html") as fp:
+    soup = BeautifulSoup(fp, 'html.parser')
+
+for link in soup.find_all('a'):
+    print(link.get('href'))
+
+
+python3 -m venv venv
+source venv/bin/activate
+deactivate
+python3 -m unittest
+
+pwd
+ ~/.oh-my-zsh/themes
+robbyrussell.zsh-theme
+
+ZSH_THEME="agnoster"
+
+
+
+
+
+
+
+
+

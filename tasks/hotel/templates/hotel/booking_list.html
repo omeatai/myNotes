@@ -1,0 +1,33 @@
+{% extends "hotel/base_dashboard.html" %}
+{% load static %}
+
+{% block heading %}
+    <h1>Booking List</h1>
+{% endblock heading %}
+
+{% block main %}
+        <div class="table-responsive">
+        <table class="table table-striped table-sm">
+            <thead>
+            <tr>
+                <th scope="col">BOOKING ID</th>
+                <th scope="col">ROOM NO.</th>
+                <th scope="col">CUSTOMER</th>
+                <th scope="col">RECEPTIONIST</th>
+                <th scope="col">STATUS</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for booking in booking_list %}    
+            <tr>
+                <td>{{booking.id}}</td>
+                <td>{{booking.room_id.room_no}}</td>
+                <td>{{booking.customer_id.username | title}}</td>
+                <td>{{booking.staff_id.first_name}} {{booking.staff_id.last_name}}</td>
+                <td>#{{booking.payment_id.amount}}</td>
+            </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+        </div>
+{% endblock main %}

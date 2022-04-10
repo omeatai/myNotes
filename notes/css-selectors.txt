@@ -1,0 +1,112 @@
+CSS SELECTORS
+
+ID Selector - 
+#id
+
+Descendant Selector - 
+plate > apple
+
+Class Selector -
+.small
+
+Combine the Class Selector -
+orange.small
+
+Comma Combinator -
+plate, bento
+
+The Universal Selector -
+*
+
+Select all elements inside of P elements -
+plate > *
+
+Adjacent Sibling Selector(Next to) -
+p + .intro
+
+General Sibling Selector(Select all after) -
+bento ~ pickle
+
+First Child Pseudo-selector -
+plate > orange:first-child()
+
+Only Child Pseudo-selector -
+plate > :only-child()
+
+Last Child Pseudo-selector -
+ul > li:last-child()
+
+Nth Child Pseudo-selector -
+div > p:nth-child(2)
+
+Nth Last Child Selector -
+ul > li:nth-last-child(2)
+
+First of Type Selector -
+apple:first-of-type()
+
+Nth of Type Selector -
+div:nth-of-type(2)
+.example:nth-of-type(odd)
+plate:nth-of-type(even)
+
+Nth-of-type Selector with Formula -
+span:nth-of-type(6n+2)
+
+Only of Type Selector -
+apple:only-of-type()
+
+Last of Type Selector -
+p > span:last-of-type
+
+Empty Selector -
+div:empty
+
+Negation Pseudo-class -
+:not(#fancy) 
+div:not(:first-child)
+apple:not(.big, .medium)
+
+Attribute Selector -
+a[href]
+input[disabled]
+plate[for]
+
+Attribute Value Selector -
+input[type="checkbox"]
+
+Attribute Starts With Selector -
+.toy[category^="Swim"]
+[for ^= 'Sa']
+
+Attribute Ends With Selector -
+img[src$=".jpg"]
+[for $= 'ato']
+
+Attribute Wildcard Selector -
+img[src*="/thumbnails/"]
+[class*="heading"]
+[for *= 'obb']
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

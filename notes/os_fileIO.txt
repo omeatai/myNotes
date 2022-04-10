@@ -1,0 +1,281 @@
+OS & SYS MODULES
+
+import os
+
+#Getting Current Working Directory
+print(os.getcwd())
+
+#Creating a Directory
+os.mkdir('new_dir')
+
+#Changing the Current Working Directory
+dir_ = os.getcwd()
+os.chdir(f'{dir_}/new_dir')
+print(os.getcwd())
+
+#Change CWD to Parent
+os.chdir('..')
+print(os.getcwd())
+
+#Remove Directory
+dir_ = os.getcwd()
+os.rmdir(f'{dir_}/new_dir')
+
+#List Files and Sub-directories
+dir_ = os.getcwd()
+print(os.listdir(dir_))
+
+os.walk
+
+
+ 
+#sys.argv
+import sys
+
+#sys.version – This stores the information about the current version of python.
+print(sys.version)
+
+#sys.path – Path variable stores the directory path in the form of a list of strings.
+#sys.path.append('/root/test/')
+print(sys.path)
+
+#sys.platform – Prints the os platform type. This function will be very useful when you run your program as a platform dependent.
+print(sys.platform)
+
+#sys.maxsize – This is an integer value representing maximum value a variable can hold.
+print(sys.maxsize)
+
+#sys.argv – argv is used to pass run time arguments to your python program. Argv is a list that stores the script name as the 1st value followed by the arguments we pass. Argv values are stored as type string and you have to explicitly convert it according to your needs.
+#print("You entered: ",sys.argv[1], sys.argv[2], sys.argv[3])
+print(sys.argv)
+
+#sys.exit – Exit the interpreter by raising SystemExit(status). By default, status is said to be Zero and is said to be successful. 
+print(sys.exit)
+
+
+
+
+
+
+
+
+
+
+
+
+FILE I/O
+
+* strip(): returns a new string after removing any leading and trailing whitespaces including tabs (\t).
+* rstrip(): returns a new string with trailing whitespace removed. It’s easier to remember as removing white spaces from “right” side of the string.
+* lstrip(): returns a new string with leading whitespace removed, or removing whitespaces from the “left” side of the string.
+
+Python Interpreter converts code into a form the computer will understand.
+
+Types of Python Interpreters:
+- CPython
+- IronPython
+- Jython
+- PyPy
+- PythonNet
+
+Differences btw Scripts and Modules
+Module is designed to be imported while script is written directly to be executed.
+
+OS module - portable way of using os dependent functionalities.
+
+Files - Named location on a disk to store information.
+File descriptor object is formed when you create a file.
+
+open, close, read, write
+Modes:
+R - read
+W - write
+A - append
+T - open in text mode
+B - open in binary mode
+- rb, r+, rb+
+- w, wb, w+, wb+
+- a, ab, a+, ab+  
+- x, x+
+
+fd.read()
+fd.seek() - Sets the cursor back to another position.
+fd.tell() - Tells current position of the cursor.
+
+print(line, end = “”)
+
+readline = read line content till next line
+
+print(fd.readline())
+print(fd.readlines())
+print(fd.writeline())
+print(fd.writelines())
+readable
+writable
+write_reversed
+
+
+
+soup = re.sub(r'[^\w]|[0-9]', ' ', str(self.soup)).split()
+
+dict(sorted(word_hash.items(), key = lambda x: x[1], reverse = True))
+
+for x, y in thisdict.items():
+  print(x, y)
+
+for x in thisdict.values():
+  print(x)
+
+for x in thisdict:
+  print(thisdict[x])
+
+for x in thisdict:
+  print(x)
+
+thisdict =	{
+  "brand": "Ford",
+  "model": "Mustang",
+  "year": 1964
+}
+for x, y in thisdict.items():
+  print(x, y)
+
+
+Pip freeze > requirements.txt
+
+
+
+
+
+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
+
+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
+
+
+# import csv
+# with open('log.csv', 'a', newline="") as f:
+#     tup = ["Hello"]
+#     csv_writer = csv.writer(f)
+#     csv_writer.writerow(tup)
+
+#dump/dumps
+#load/loads
+
+# import json
+
+# py_obj = {
+#     'name': 'Moses',
+#     'siblings': ('Timothy', 'Aaron', 'Joshua')
+# }
+
+#object -> JSON.format (Serialization)
+#dumps
+#object -> JSON.format -> file
+#dump
+
+#JSON.format -> object (DeSerialization)
+#loads
+#file -> JSON.format -> object
+#load
+
+
+FILE I/O
+
+from translate import Translator
+
+translator= Translator(to_lang="fr")
+try:
+    with open('./text.txt', mode='r') as my_file:
+        message = my_file.read()
+        translation = translator.translate(message)
+        print(translation)
+        with open('./translation.txt', mode='w') as t_file:
+            t_file.write(translation)
+except FileNotFoundError as err:
+    print('file does not exist')
+    raise err from err
+ 
+
+with open('message.txt','r') as f:
+    #count = 0
+    content = f.read(6)
+    print(content)
+    
+    more_content = f.read(12)
+    print(more_content)
+    # for word in f:
+    #     words = word.split(' ')
+    #     print(word)
+    #     count += len(words)    
+    # print(count)     
+
+with open('ans.txt','r') as f:
+    print(f.readlines())
+
+
+
+with open('ans.txt','w') as f:
+    f.write('Howdy\n')
+    f.write('What is that?')
+
+with open('ans.txt','a') as f:
+    f.write('Howdy\n')
+    f.write('What is that?\n')
+
+with open('person.txt') as my_file:
+    print(my_file.read())
+
+with open('person.txt', mode='r') as my_file:
+    print(my_file.read())
+
+with open('someone.txt', mode='w') as my_file:
+    message = my_file.write('Somebody has arrived!')
+    print(message)
+
+with open('someone.txt', mode='a') as my_file:
+    message = my_file.write(' Hello Everybody!')
+    print(message)
+
+with open('./app/someone.txt', mode='r') as my_file:
+    message = my_file.read()
+    print(message)
+
+try:
+    with open('someone.txt', mode='r') as my_file:
+        message = my_file.read()
+        print(message)
+except FileNotFoundError as err:
+    print('file does not exist')
+    raise err from err
+
+my_file = open('person.txt')
+print(my_file.read())
+my_file.close()    
+
+with open('person.txt') as my_file:
+    print(my_file.read())
+    my_file.seek(0)
+    print(my_file.read())
+    
+with open('person.txt') as my_file:
+    print(my_file.readline())
+    print(my_file.readline())
+    print(my_file.readline())
+
+with open('person.txt') as my_file:
+    my_file = open('person.txt')
+    print(my_file.readlines())
+
+
+ 
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,28 @@
+{% extends "hotel/base.html" %}
+{% load static %}
+
+{% block styles%}
+    <!-- Custom styles for this page -->
+    <link href="{% static "hotel/login.css" %}" rel="stylesheet">
+{% endblock styles %}
+
+{% block title %}HMS - Login{% endblock title %}
+
+{% block content %}
+<main class="form-signin">
+    <form>
+        <h1 class="h3 mb-3 p-5 fw-normal">HMS - Login</h1>
+
+        <div class="form-floating">
+            <input type="text" class="form-control" id="floatingInput" placeholder="username">
+            <label for="floatingInput">Username</label>
+        </div>
+        <div class="form-floating">
+            <input type="password" class="form-control" id="floatingPassword" placeholder="Password">
+            <label for="floatingPassword">Password</label>
+        </div>
+        <button class="w-100 btn btn-lg btn-primary" type="submit">Login</button>
+    </form>
+</main>
+
+{% endblock content %}

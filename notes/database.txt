@@ -1,0 +1,271 @@
+DATABASE
+
+What is a Database?
+A systematic way of storing data for manipulation and use.
+
+Why Databases?
+Concurrency - multiple people can use the same system.
+Redundancy - avoids having multiple of the same file.
+Manipulation of data
+Easier to maintain than a file system 
+More secure with authentication 
+
+DBMS
+Software packages that helps us to define, interact, manage and manipulate data in the database with CRUD. It defines roles to perform function in a database.
+
+TYPES
+1. Relational DB - use of Tables
+2. Non-Relational DB - use of other types, does not rely on structure.
+
+SQL
+Used to perform queries on relational database.
+
+Columns = Fields/Attributes
+Rows = Records
+
+
+Relational DB - MariaDB, mySQL, SQLite, PostgreSQL
+Non-Relational DB - MongoDB
+
+Advantages of Relational DB :
+- Well structured
+- Data is easily understood visually
+- Easy to add Attributes to structure
+
+Disadvantages of Relational DB :
+- Scaling is complex due to constraints
+- Performance may be affected in scaling
+
+Categories/Classification of DBS:
+Memory-based
+Process-based
+Single-user 
+Multi-user
+Centralized - A single DB in a Network
+Distributed - Different DBS in a Network
+
+Schemas - Blueprint of a Database. It contains the table name, columns, datatype, and other objects.
+
+Instance - A snapshot of the state of a Database at a specific time.
+
+Model - Organises data objects and their relationships. 
+Normalisation -  Is the process of organising data in a database. This includes creating tables and establishing relationships between those tables according to rules designed both to protect the data and to make the database more flexible by eliminating redundancy and inconsistent dependency.
+There is no redundancy of data
+
+Normalization entails organising the columns (attributes) and tables (relations) of a database to ensure that their dependencies are properly enforced by database integrity constraints.
+
+Database normalisation is the process of restructuring a relational database in accordance with a series of so-called normal forms in order to reduce data redundancy and improve data integrity. 
+
+Entity Relationship Model:
+1. Entities - A table that holds data. 
+2. Relationships - The interaction between different entities
+
+An entity is an object in the real world that can standalone with independent existence that can be differentiated from other objects.
+
+Entity Set - Collection of all the entries that have the same entity type.
+
+Keys -  They are attributes that help define a row in a table.
+
+Primary Key - Is a group of attributes that uniquely identifies a record.
+
+Foreign Key - An attribute that creates a relationship between two tables.
+
+
+PRIMARY KEY is used when you want to restrict operations update and delete. Organise your table.
+
+FOREIGN KEY - used for referencing.
+
+Differences btw primary key and foreign key.
+- One primary key to many foreign keys.
+- Primary key do not accept null values but foreign keys do.
+
+Entity Relationships:
+- One-to-Many
+- Many-to-One
+- One to One
+- Many to Many
+
+ERD ENTITY SYMBOLS -
+Strong entity
+Weak entity
+Associative entity
+
+Tools for ERD Diagrams (Database Designs)
+- Lucid Chart
+- Smart Draw
+
+- SQL
+1. DDL - Data Definition Language
+Used to define the database schema or structure.
+CREATE
+DROP
+ALTER
+TRUNCATE
+RENAME
+COMMENT
+
+2. DQL - Data Query Language
+Statements to perform queries in database.
+SELECT
+
+3. DML - Data Manipulation LanguagE
+Manipulate data in the database.
+INSERT
+UPDATE
+DELETE
+
+4. DCL - Data Control LanguagE
+Restrict or permit access to database.
+GRANT
+REVOKE
+
+SQL Constraints:
+- NOT NULL Constraints
+- DEFAULT Constraints
+-  UNIQUE Constraints
+- FOREIGN Constraints
+
+
+
+
+
+
+
+
+
+
+
+
+
+CREATE DATABASE db_task
+    WITH 
+    OWNER = postgres
+    ENCODING = 'UTF8'
+    CONNECTION LIMIT = -1;
+
+
+
+
+
+Text
+
+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
+
+
+
+
+
+Explain briefly what you understand by the following: a.) Test Fixture, b.) Test Case, c.) Test Suite, d.) Test Runner
+
+ 
+Test Driven Development (TDD) is an evolutionary approach to building and designing software solutions. It is consisting of small cycles in which we are writing a unit test, that will initially fail, and then implementing the minimum amount of code to pass that test.
+ 
+Advantages of TDD :
+* You only write code that’s needed – Following the principles, you’ve got to prevent writing production code when all of your tests pass. If your project needs another feature, you would like a test to drive the implementation of the feature. The code you write is the simplest code possible. So, all the code ending up within the product is really needed to implement the features.
+* More modular design – In TDD, you consider one microfeature at a time. And as you write the test first, the code automatically becomes easy to check. Code that’s easy to check features a clear interface. This leads to a modular design for your application.
+* Easier to maintain – Because the different parts of your application are decoupled from one another and have clear interfaces, the code becomes easier to take care of, you’ll exchange the implementation of a microfeature with a far better implementation without affecting another module. you’ll even keep the tests and rewrite the entire application. When all the tests pass, you’re done.
+* Easier to refactor – Every feature is thoroughly tested. you do not get to be afraid to form drastic changes because if all the tests still pass, everything is ok. Now, is extremely important because you, as a developer, improve your skills each and each day. If you open the project after six months of performing on something else, most likely, you will have many ideas on the way to improve the code. But your memory about all the various parts and the way they fit together isn’t fresh anymore. So, making changes is often dangerous. With an entire test suite, you’ll easily improve the code without the fear of breaking your application.
+* High test coverage – There’s a test for each feature. This leads to a high test coverage It develops gain confidence in your code.
+* Tests document the code – The test code shows you ways your code is supposed to be used. As such, it documents your code. The test code is a sample code that shows what the code does and the way the interface has got to be used.
+* Less debugging – How often have you ever wasted each day to seek out a nasty bug? How often have you copied a mistake message from Xcode and looked for it on the web.
+Disadvantages of TDD :
+* No silver bullet – Tests help to seek out bugs, but they can not find bugs that you simply introduce within the test code and in implementation code. If you haven’t understood the matter you would like to unravel, writing tests most likely doesn’t help.
+* slow process – If you begin TDD, you’ll get the sensation that you simply need an extended duration of your time for straightforward implementations. you would like to believe the interfaces, write the test code, and run the tests before you’ll finally start writing the code.
+* All the members of a team got to do it – As TDD influences the planning of code, it’s recommended that either all the members of a team use TDD or nobody in the least. additionally, to the present, it’s sometimes difficult to justify TDD to the management because they often have the sensation that the implementation of latest features takes longer if developers write code that will not find themselves within the product half the time. It helps if the entire team agrees on the importance of unit tests.
+* Tests got to be maintained when requirements change – Probably, the strongest argument against TDD is that the tests need to be maintained because the code has got to. Whenever requirements change, you would like to vary the code and tests. But you’re working with TDD. this suggests that you simply got to change the tests first then make the tests pass. So, actually, this disadvantage is that the same as before when writing code that apparently takes an extended time.y takes a long time.
+ 
+ 
+python -m venv venv
+source venv/bin/activate
+deactivate
+ 
+python -m unittest
+ 
+Topics: 
+ 
+Testing, Virtual Environment, Modules & SOLID Principles  
+Virtual Environment 
+ 
+ Creating,  
+ 
+Activating and  
+ 
+Deactivating virtual environment 
+ 
+Decorators  
+ 
+Function Decorators 
+ 
+Class Decorators 
+ 
+Unittest 
+ 
+Understand the fundamentals and usage of python unittest library 
+ 
+Using coverage library to measure code coverage 
+ 
+Test driven development with Unittest (TDD)  
+ 
+ Working with modules 
+ 
+ 
+ 
+Learning Outcomes: 
+ 
+-  Understands the SOLID principles and how to apply them 
+ 
+-  Knows how to create virtual environments for projects 
+ 
+-  Understands decorators and how to decorate predefined functions with arguments 
+ 
+-  Understands the purpose of the functools.wraps decorator and how to use it 
+ 
+-  Knows how to import and work with modules in python 
+ 
+-  Understands the concept and benefits of Test-Driven Development (TDD)  
+ 
+-  Should be able to write unit tests using python unittest library 
+ 
+-  Understand how to use Python Coverage Library to measure code coverage 
+ 
+ 
+ 
+ 
+* Create a function named divisors that takes an integer (n > 1) and returns an array with all of the integer's divisors(except for 1 and the number itself), from smallest to largest. 
+* If the number is prime return the string ‘(integer) is prime’.
+ 
+def divisors(num):
+    l = [a for a in range(2,num) if num%a == 0]
+    if len(l) == 0:
+        return str(num) + " is prime"
+    return l
+ 
+def divisors(n):
+    return [i for i in xrange(2, n) if not n % i] or '%d is prime' % n
+ 
+def divisors(integer):
+  a = []
+  for i in range(2, integer):
+    if integer % i == 0:
+      a.append(i)
+  return a if a else str(integer) + " is prime"
+ 
+def divisors(integer):
+  return [n for n in range(2, integer) if integer % n == 0] or '{} is prime'.format(integer)
+ 
+def find_uniq(arr):
+    [n] = [i for i in set(arr) if arr.count(i) == 1]
+    return n  
+ 
+def is_square(n):
+    if str(n).isdigit():
+        r = "{:.2f}".format(n**(0.5))
+        rlist = list(r)
+        dot_index = rlist.index(".")
+        if int(rlist[dot_index + 1]) + int(rlist[dot_index + 2]) == 0:
+            return True
+    return False
+
+In Python property()is a built-in function that creates and returns a property object.
+A property object has three methods, getter(), setter(), and delete().
+property() function in Python has four arguments property(fget, fset, fdel, doc), fget is a function for retrieving an attribute value. fset is a function for setting an attribute value. fdel is a function for deleting an attribute value. doc creates a docstring for attribute. A property object has three methods, getter(), setter(), and delete() to specify fget, fset and fdel individually.

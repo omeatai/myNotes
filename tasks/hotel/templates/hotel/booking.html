@@ -1,0 +1,27 @@
+{% extends "hotel/base_dashboard.html" %}
+{% load static %}
+
+{% block heading %}
+    <h1>Book a Room</h1>
+{% endblock heading %}
+
+{% block more_styles %}
+<link href="https://cdn.jsdelivr.net/gh/Eonasdan/tempus-dominus@master/dist/css/tempus-dominus.css" rel="stylesheet" crossorigin="anonymous">
+{% endblock more_styles %}
+
+{% block main %}
+    <form action="" method="POST">
+        {% csrf_token %}
+        {{form.as_p}}
+        <button type="submit" class="btn btn-success">Book Room</button>
+    </form>    
+{% endblock main %}
+
+{% block more_scripts %}
+<!-- Popperjs -->
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.2/dist/umd/popper.min.js"
+    crossorigin="anonymous"></script>
+<!-- Tempus Dominus JavaScript -->
+<script src="https://cdn.jsdelivr.net/gh/Eonasdan/tempus-dominus@master/dist/js/tempus-dominus.js"
+    crossorigin="anonymous"></script>     
+{% endblock more_scripts %}

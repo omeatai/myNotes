@@ -1,0 +1,1493 @@
+#Database Engines
+django.db.backends.postgresql
+django.db.backends.mysql
+django.db.backends.sqlite3
+django.db.backends.oracle
+
+#Example configuration in settings.py
+DATABASES = {
+  'default': {
+     'ENGINE': 'django.db.backends.mysql',
+     'NAME': 'databasename',
+     'USER': 'username',
+     'PASSWORD': 'password',
+     'HOST': '127.0.0.1',
+     'PORT': '5432',
+}
+
+#Model Fields
+BooleanField
+CharField
+DateField
+DateTimeField
+DecimalField
+EmailField
+FileField
+FloatField
+ImageField
+IntegerField
+TextField
+
+#Relationship Fields
+ForeignKey
+ManyToManyField
+
+#Example Model
+from django.db import models
+from django.utils import timezone
+
+class Make (models.Model):
+  name = models.CharField (max_length=15)
+  factory_address = models. TextField()
+  email = models. EmailField()
+  def _str_(self):
+     return self.name
+
+class Car(models.Model):
+  name = models.CharField (max_length=20)
+  active = BooleanField()
+  date_added = DateTimeField (default=timezone.now)
+  price = FloatField()
+  make = models.ForeignKey (Make)
+  def _str_(self):
+     return self.name
+
+
+#Create Objects
+from .models import Make, Car
+toyota = Make (name='Toyota', factory_address='Somewhere in Japan...',
+      email='toyota@toyota.com')
+toyota.save()
+camry = Car(name='Camry', active=True, price=29999.99, make=toyota)
+camry.save()
+
+#Example Queries
+Car.objects.get(pk=1) #get car with primary key = 1
+Make.objects.all()
+Car.objects.filter(name='Camry')
+Make.objects.all() [5:10] #offset 5, limit 10
+Car.objects.order_by('name')
+Make.objects.filter(name_startswith='Toy')
+Car.objects.filter(make_name='Toyota') #relationship query
+
+#Useful Links
+Django Website - https://www.djangoproject.com
+Pretty Printed Website - http://prettyprinted.com
+Pretty Pretty YouTube Channel -
+https://www.youtube.com/c/prettyprintedtutorials
+
+
+# Automatic primary key fields
+By default, Django gives each model an auto-incrementing primary key with the type specified per app in AppConfig.default_auto_field or globally in the DEFAULT_AUTO_FIELD setting. 
+For example:
+
+id = models.BigAutoField(primary_key=True)
+
+
+# capture requirements to install
+pip freeze > requirements.txt
+
+# install requirements from requirements.txt
+pip install -r requirements.txt
+
+# Now to remove one by one
+pip uninstall -r requirements.txt
+
+# If we want to remove all at once then
+pip uninstall -r requirements.txt -y
+
+pip freeze or pip list
+
+$ python manage.py makemigrations
+
+$ python manage.py migrate
+
+$ python manage.py sqlmigrate weblog 0001
+
+$ python manage.py shell
+
+$ pip install django django-shortcuts
+
+pip install django-shortcuts
+
+#PIPENV
+pip install pipenv
+pipenv --python 3.10.3
+
+pipenv shell
+source $(pipenv --venv)/bin/activate
+
+exit
+
+#View location of the virtualenv:
+pipenv --venv
+
+pipenv --rm
+rm -rf /Users/ifeanyiomeata/.local/share/virtualenvs/docker_drf-yNZHhWWe
+
+###########################
+
+{% if user.is_authenticated %}{% endif %}
+
+#python decouple module
+
+from django.shortcuts import render
+from hotel.models import User, Receptionist, Room, RoomStatus, RoomType, Booking, Payment, PaymentType, Reservation
+
+from django.db import models
+from django.contrib.auth.models import AbstractUser
+
+class User(AbstractUser):
+    username = models.CharField(max_length=64, unique=True)
+    email = models.EmailField(max_length=64, unique=True)
+    phone_number = models.CharField(max_length=64, unique=True)
+    password = models.CharField(max_length=64)
+    otp_code = models.CharField(max_length=64, default=None, unique=True, null=True)
+    email_verified = models.BooleanField(default=False)
+    is_admin = models.BooleanField(default=False)
+    is_superadmin = models.BooleanField(default=False)
+    created_at = models.DateTimeField(auto_now_add=True, null=True)
+    updated_at = models.DateTimeField(auto_now=True, null=True)
+
+    def __str__(self):
+        return f'User: {self.username.title()}'
+
+from blog.models import Post
+from django.contrib.auth.models import User
+
+AUTH_USER_MODEL = 'hotel.user'
+
+INSTALLED_APPS = [
+    'hotel.apps.HotelConfig',
+    'aa.apps.AaConfig',
+    'booking.apps.BookingConfig',
+    'payment.apps.PaymentConfig',
+    'logs.apps.LogsConfig',
+]
+
+###########################
+# rest > models.py:
+
+from django.db import models
+from django.contrib.auth.models import AbstractUser
+
+
+class User(AbstractUser):
+    username = models.CharField(max_length=200, unique=True, null=False)
+    firstname = models.CharField(max_length=200, null=False)
+    lastname = models.CharField(max_length=200, null=False)
+    gender = models.CharField(max_length=10, null=False)
+    age = models.IntegerField(default=0, null=False)
+    password = models.CharField(max_length=200, null=False)
+
+    def __str__(self):
+        return f'{self.firstname} {self.lastname}'
+
+###########################
+
+AUTH_USER_MODEL = 'drf.user'
+
+from django.contrib import admin
+from .models import User
+
+admin.site.register(User)
+
+#djangorestframework 3.13.1
+pip install djangorestframework
+
+###########################
+# SERIALIZERS:
+# rest > serializers.py:
+
+from rest_framework import serializers
+from .models import User
+
+class UserSerializer(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = User
+        fields = ('id', 'firstname', 'lastname', 'gender', 'age', 'password')
+        
+class UserSerializer(serializers.ModelSerializer):
+
+###########################
+# rest > views.py:
+
+from django.shortcuts import render
+from rest_framework import viewsets
+from .models import User
+from .serializers import UserSerializer
+
+
+class UserView(viewsets.ModelViewSet):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
+
+
+###########################
+# rest > urls.py:
+
+from django.urls import include, path
+from . import views
+from rest_framework import routers
+
+router = routers.DefaultRouter()
+router.register('rest', views.UserView)
+
+urlpatterns = [
+    path('', include(router.urls))
+]
+
+
+###########################
+
+INSTALLED_APPS = [
+    'django.contrib.admin',
+    'django.contrib.auth',
+    'django.contrib.contenttypes',
+    'django.contrib.sessions',
+    'django.contrib.messages',
+    'django.contrib.staticfiles',
+    'rest.apps.RestConfig',
+    'rest_framework',
+]
+
+###########################
+
+Shortcuts
+# Django
+'c'  : 'collectstatic',
+'r'  : 'runserver',
+'sd' : 'syncdb',
+'sp' : 'startproject',
+'sa' : 'startapp',
+'t'  : 'test',
+
+# Shell
+'d'  : 'dbshell',
+'s'  : 'shell',
+
+# Auth
+'csu': 'createsuperuser',
+'cpw': 'changepassword',
+
+# South
+'m'  : 'migrate',
+'mm' : 'makemigrations',
+'sm' : 'schemamigration',
+'dm' : 'datamigration',
+
+# Haystack
+'ix' : 'update_index',
+'rix': 'rebuild_index',
+
+# Django Extensions
+'sk' : 'generate_secret_key',
+'rdb': 'reset_db',
+'rp' : 'runserver_plus',
+'shp': 'shell_plus',
+'url': 'show_urls',
+'gm' : 'graph_models',
+'rs' : 'runscript'
+
+######################################################
+######################################################
+Django Introduction for Beginners
+######################################################
+######################################################
+
+from django.contrib import admin
+from .models import User
+
+admin.site.register(User)
+
+###########################
+
+from django.shortcuts import render
+from .models import Comment
+
+def home(request):
+    comments = Comment.objects.order_by('-date_added')
+    return render(request, 'bookclub/home.html', {
+        "comments" : comments,
+    })
+
+###########################
+
+<div class="col-md-3">
+    <div class="h-100 p-5 text-white bg-dark rounded-3">
+    <h2>{{comment.name}}</h2>
+    <p>Comment on:<br> {{comment.date_added | date:"F d, Y"}}.</p>
+    </div>
+</div>
+
+###########################
+
+forms.py:
+
+from django import forms
+
+class CommentForm(forms.Form):
+    name = forms.CharField(max_length=200, 
+        widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Name'}))
+    title = forms.CharField(max_length=200, 
+        widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Title'}))
+    comment = forms.CharField(widget=forms.Textarea(attrs={'class': 'form-control'}))
+
+###########################
+
+views.py:
+
+def comment(request):
+    form = CommentForm()
+    return render(request, 'bookclub/comment.html', {
+        "form" : form,
+    })
+
+###########################
+
+urls.py:
+
+from django.urls import path
+from . import views
+
+urlpatterns = [
+    path('', views.home, name='home'),
+    path('comment/', views.comment, name='comment'),
+    path('register/', views.register, name='register'),
+    path('login/', views.login, name='login'),
+    path('logout/', views.logout, name='logout'),
+]
+
+###########################
+views.py:
+
+from django.shortcuts import render, redirect
+from .models import Comment
+from .forms import CommentForm
+
+def home(request):
+    comments = Comment.objects.order_by('-date_added')
+    return render(request, 'bookclub/home.html', {
+        "comments" : comments,
+    })
+
+def comment(request):
+    if request.method == 'POST':
+        form = CommentForm(request.POST)
+        data = request.POST
+        
+        if form.is_valid():
+            instance = Comment(name=data['name'],title=data['title'],comment=data['comment'])
+            instance.save()
+            return redirect('home')
+    else:
+        form = CommentForm()
+        return render(request, 'bookclub/comment.html', {
+            "form" : form,
+        })
+
+###########################
+home.html:
+
+{% block comment %}
+{% for comment in comments %}
+<div class="row align-items-md-stretch">
+    <div class="col-md-3">
+        <div class="h-100 p-5 text-white bg-dark rounded-3">
+        <h2>{{comment.name}}</h2>
+        <p>Comment on:<br> {{comment.date_added | date:"F d, Y"}}.</p>
+        </div>
+    </div>
+    <div class="col-md-9">
+        <div class="h-100 p-5 bg-light border rounded-3">
+        <h2>{{comment.title}}</h2>
+        <p>{{comment.comment}}</p>
+        </div>
+    </div>
+</div>
+<div class="row align-items-md-stretch">
+    <div class="col-md-12">
+        &nbsp;
+    </div>    
+</div> 
+{% endfor %}   
+{% endblock comment %}
+
+###########################
+comment.py:
+
+{% extends 'bookclub/base.html' %}
+
+{% block title %}BookClub.io - Comment{% endblock title %}
+
+{% block content %}
+<h1>Leave a Comment:</h1>
+<form method="POST" action="{% url 'comment' %}">
+    {% csrf_token %}
+    <div class="mb-3">
+        <label for="name" class="form-label">Name</label>
+        {% comment %} <input type="text" class="form-control" id="name"> {% endcomment %}
+        {{ form.name }}
+    </div>
+    <div class="mb-3">
+        <label for="title" class="form-label">Title</label>
+        {{ form.title }}
+    </div>
+    <div class="mb-3">
+        <label for="comment" class="form-label">Comment</label>
+        {{ form.comment }}
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+<h1>&nbsp;</h1>
+{% endblock content %}
+
+###########################
+forms.py:
+
+from django import forms
+
+class CommentForm(forms.Form):
+    name = forms.CharField(max_length=200,
+        widget=forms.TextInput(attrs={'class': 'form-control','placeholder': 'Full Name...', 'style': 'max-width: 600px', 'id': 'name'}))
+    title = forms.CharField(max_length=200, 
+        widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Title...', 'style': 'max-width: 600px', 'id': 'title'}))
+    comment = forms.CharField(widget=forms.Textarea(attrs={'class': 'form-control', 'placeholder': 'Write your comments here...', 'id': 'comment', 'style': 'max-width: 600px'}))
+
+###########################
+models.py:
+
+from django.db import models
+from django.utils import timezone
+
+class Comment(models.Model):
+    name = models.CharField(max_length=200, default=None)
+    title = models.CharField(max_length=200, default=None)
+    comment = models.TextField(default=None)
+    date_added = models.DateTimeField(default=timezone.now)
+    
+    def __str__(self):
+        return f'<Name: {self.name}, ID: {self.id}>'
+
+
+######################################################
+######################################################
+Django Authentication Basics
+######################################################
+######################################################
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#########################################################################################################################################################################################################################################################
+
+strip
+lafa-fblc-lski-ciqk-kdnq
+
+
+*Communication
+username - string
+password - string
+date_joined - datetime
+
+*Authentication
+username - string
+password - string
+date_joined - datetime
+
+*Authorization
+- groups - string
+- is_active - bool
+- is_superuser - bool
+- is_staff - bool
+
+*Extending Django user Models
+Proxy Model
+One to One link ==> OneToOneField
+AbstractUser
+AbstractBaseUser
+
+
+https://docs.djangoproject.com/en/4.0/topics/class-based-views/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#########################################################################################################################################################################################################################################################
+
+
+#9.DYNAMIC PATH SEGMENTS
+>>>APP.VIEWS.PY
+from django.shortcuts import render
+from django.http import HttpResponse, HttpResponseNotFound
+
+def index(request):
+    return HttpResponse('welcome Home!')
+
+def contact(request):
+    return HttpResponse('Contact us page')
+
+def my_challenges(request, month):
+    challenges = None
+    if month == 'january':
+        challenges = 'This is January!'
+    elif month == 'february':
+        challenges = 'This is February!'
+    elif month == 'march':
+        challenges = 'This is March!'
+    else:
+        return HttpResponseNotFound('Not a supported Month!')    
+    return HttpResponse(challenges)   
+
+>>>APP.URLS.PY
+from django.urls import path
+from . import views
+
+urlpatterns = [
+    path('', views.index, name='home'),
+    path('contact', views.contact, name='contact'),
+    path('<month>', views.my_challenges, name='my-challenges'),
+]
+
+
+
+#10.PATH CONVERTERS
+>>>APP.VIEWS.PY
+from django.shortcuts import render
+from django.http import HttpResponse, HttpResponseNotFound
+
+def index(request):
+    return HttpResponse('welcome Home!')
+
+def int_contact(request, contact):
+    return HttpResponse(f'Contact number {contact}.')
+
+def str_contact(request, contact):
+    return HttpResponse(f'This is the contact of {contact}.')
+
+>>>APP.URLS.PY
+from django.urls import path
+from . import views
+
+urlpatterns = [
+    path('', views.index, name='home'),
+    path('<int:contact>',views.int_contact, name='int-contact'),
+    path('<str:contact>', views.str_contact, name='str-contact'),
+]
+
+
+#11.Using Dictionary in view
+>>>APP.VIEWS.PY
+from django.shortcuts import render
+from django.http import HttpResponse, HttpResponseNotFound
+
+tasks = {
+    'january': 'Take a walk in january',
+    'february': 'Sing a song in february',
+    'march': 'Play a sport in march',
+    'april': 'Call the tailor in april',
+    'may': 'Pray for mary in may',
+    'june': 'Go for a marathon in june',
+    'july': 'Play the drums in july',
+    'august': 'Got to school in august',
+    'september': 'Watch a movie in september',
+    'october': 'Got to the cinema in october',
+    'november': 'Study for exam in november',
+    'december': 'Paint the house in december'
+}
+
+def index(request):
+    return HttpResponse('welcome Home!')
+
+def my_challenges(request, month):
+    try:
+        challenges = tasks[month]
+        return HttpResponse(challenges)   
+    except:     
+        return HttpResponseNotFound('Not a supported Month!')  
+
+>>>APP.URLS.PY
+from django.urls import path
+from . import views
+
+urlpatterns = [
+    path('', views.index, name='home'),
+    path('<month>', views.my_challenges, name='my-challenges'),
+]
+
+
+#12.Using HttpResponseRedirect
+>>>APP.VIEWS.PY
+from django.shortcuts import render
+from django.http import HttpResponse, HttpResponseNotFound, HttpResponseRedirect
+
+tasks = {
+    'january': 'Take a walk in january',
+    'february': 'Sing a song in february',
+    'march': 'Play a sport in march',
+    'april': 'Call the tailor in april',
+    'may': 'Pray for mary in may',
+    'june': 'Go for a marathon in june',
+    'july': 'Play the drums in july',
+    'august': 'Got to school in august',
+    'september': 'Watch a movie in september',
+    'october': 'Got to the cinema in october',
+    'november': 'Study for exam in november',
+    'december': 'Paint the house in december'
+}
+
+def index(request):
+    return HttpResponse('welcome Home!')
+
+def my_challenges_num(request, month):
+    try:
+        months = list(tasks.keys())
+        selected_month = months[month - 1]
+        return HttpResponseRedirect(f"/challenges/{selected_month}")
+    except:
+        return HttpResponseNotFound('Invalid value for Month')
+
+def my_challenges(request, month):
+    try:
+        challenges = tasks[month]
+        return HttpResponse(challenges)   
+    except:     
+        return HttpResponseNotFound('Not a supported Month!')   
+
+>>>APP.URLS.PY
+from django.urls import path
+from . import views
+
+urlpatterns = [
+    path('', views.index, name='home'),
+    path('<int:month>', views.my_challenges_num, name='my-challenges-num'),
+    path('<str:month>', views.my_challenges, name='my-challenges'),
+]
+
+
+#13.Using Reverse Function with Named URLS
+>>>APP.VIEWS.PY
+from django.shortcuts import render
+from django.http import HttpResponse, HttpResponseNotFound, HttpResponseRedirect
+from django.urls import reverse
+
+tasks = {
+    'january': 'Take a walk in january',
+    'february': 'Sing a song in february',
+    'march': 'Play a sport in march',
+    'april': 'Call the tailor in april',
+    'may': 'Pray for mary in may',
+    'june': 'Go for a marathon in june',
+    'july': 'Play the drums in july',
+    'august': 'Got to school in august',
+    'september': 'Watch a movie in september',
+    'october': 'Got to the cinema in october',
+    'november': 'Study for exam in november',
+    'december': 'Paint the house in december'
+}
+
+def index(request):
+    return HttpResponse('welcome Home!')
+
+def my_challenges_num(request, month):
+    try:
+        months = list(tasks.keys())
+        selected_month = months[month - 1]
+        redirect = reverse("my-challenges", args=[selected_month])
+        return HttpResponseRedirect(redirect)
+    except:
+        return HttpResponseNotFound('Invalid value for Month')
+
+def my_challenges(request, month):
+    try:
+        challenges = tasks[month]
+        return HttpResponse(challenges)   
+    except:     
+        return HttpResponseNotFound('Not a supported value for Month!')   
+
+>>>APP.URLS.PY
+from django.urls import path
+from . import views
+
+urlpatterns = [
+    path('', views.index, name='home'),
+    path('<int:month>', views.my_challenges_num, name='my-challenges-num'),
+    path('<str:month>', views.my_challenges, name='my-challenges'),
+]
+
+
+#14.Using Static HTML 
+>>>APP.VIEWS.PY
+from django.shortcuts import render
+from django.http import HttpResponse, HttpResponseNotFound, HttpResponseRedirect
+from django.urls import reverse
+
+tasks = {
+    'january': 'Take a walk in january',
+    'february': 'Sing a song in february',
+    'march': 'Play a sport in march',
+    'april': 'Call the tailor in april',
+    'may': 'Pray for mary in may',
+    'june': 'Go for a marathon in june',
+    'july': 'Play the drums in july',
+    'august': 'Got to school in august',
+    'september': 'Watch a movie in september',
+    'october': 'Got to the cinema in october',
+    'november': 'Study for exam in november',
+    'december': 'Paint the house in december'
+}
+
+def index(request):
+    return HttpResponse('<h1>Welcome Home!</h1>')
+
+def my_challenges_num(request, month):
+    try:
+        months = list(tasks.keys())
+        selected_month = months[month - 1]
+        redirect = reverse("my-challenges", args=[selected_month])
+        return HttpResponseRedirect(redirect)
+    except:
+        return HttpResponseNotFound('<h1>Invalid value for Month</h1>')
+
+def my_challenges(request, month):
+    try:
+        challenges = f"<h1>{tasks[month]}</h1>"
+        return HttpResponse(challenges)   
+    except:     
+        return HttpResponseNotFound('<h1>Not a supported value for Month!</h1>')   
+
+>>>APP.URLS.PY
+from django.urls import path
+from . import views
+
+urlpatterns = [
+    path('', views.index, name='home'),
+    path('<int:month>', views.my_challenges_num, name='my-challenges-num'),
+    path('<str:month>', views.my_challenges, name='my-challenges'),
+]
+
+
+#15.Using Static HTML with looping
+>>>APP.VIEWS.PY
+from django.shortcuts import render
+from django.http import HttpResponse, HttpResponseNotFound, HttpResponseRedirect
+from django.urls import reverse
+
+tasks = {
+    'january': 'Take a walk in january',
+    'february': 'Sing a song in february',
+    'march': 'Play a sport in march',
+    'april': 'Call the tailor in april',
+    'may': 'Pray for mary in may',
+    'june': 'Go for a marathon in june',
+    'july': 'Play the drums in july',
+    'august': 'Got to school in august',
+    'september': 'Watch a movie in september',
+    'october': 'Got to the cinema in october',
+    'november': 'Study for exam in november',
+    'december': 'Paint the house in december'
+}
+
+def index(request):
+    list_items = ""
+    months = list(tasks.keys())
+    for month in months:
+        capitalized_month = month.capitalize()
+        path = reverse("my-challenges", args=[month])
+        list_items += f"<li><a href='{path}'>{capitalized_month}</a></li>" 
+        
+    response_data = f"<ul>{list_items}</ul>"
+    return HttpResponse(response_data)
+
+def my_challenges_num(request, month):
+    try:
+        months = list(tasks.keys())
+        selected_month = months[month - 1]
+        redirect = reverse("my-challenges", args=[selected_month])
+        return HttpResponseRedirect(redirect)
+    except:
+        return HttpResponseNotFound('<h1>Invalid value for Month</h1>')
+
+def my_challenges(request, month):
+    try:
+        challenges = f"<h1>{tasks[month]}</h1>"
+        return HttpResponse(challenges)   
+    except:     
+        return HttpResponseNotFound('<h1>Not a supported value for Month!</h1>')   
+
+>>>APP.URLS.PY
+from django.urls import path
+from . import views
+
+urlpatterns = [
+    path('', views.index, name='home'),
+    path('<int:month>', views.my_challenges_num, name='my-challenges-num'),
+    path('<str:month>', views.my_challenges, name='my-challenges'),
+]
+
+
+#16.Using render_to_string
+>>>APP.VIEWS.PY
+from django.shortcuts import render
+from django.http import HttpResponse, HttpResponseNotFound, HttpResponseRedirect
+from django.urls import reverse
+from django.template.loader import render_to_string
+
+tasks = {
+    'january': 'Take a walk in january',
+    'february': 'Sing a song in february',
+    'march': 'Play a sport in march',
+    'april': 'Call the tailor in april',
+    'may': 'Pray for mary in may',
+    'june': 'Go for a marathon in june',
+    'july': 'Play the drums in july',
+    'august': 'Got to school in august',
+    'september': 'Watch a movie in september',
+    'october': 'Got to the cinema in october',
+    'november': 'Study for exam in november',
+    'december': 'Paint the house in december'
+}
+
+def index(request):
+    list_items = ""
+    months = list(tasks.keys())
+    for month in months:
+        capitalized_month = month.capitalize()
+        path = reverse("my-challenges", args=[month])
+        list_items += f"<li><a href='{path}'>{capitalized_month}</a></li>" 
+        
+    response_data = f"<ul>{list_items}</ul>"
+    return HttpResponse(response_data)
+
+def my_challenges_num(request, month):
+    try:
+        months = list(tasks.keys())
+        selected_month = months[month - 1]
+        redirect = reverse("my-challenges", args=[selected_month])
+        return HttpResponseRedirect(redirect)
+    except:
+        return HttpResponseNotFound('<h1>Invalid value for Month</h1>')
+
+def my_challenges(request, month):
+    try:
+        challenges = tasks[month]
+        response_data = render_to_string("challenges/challenge.html")
+        return HttpResponse(response_data)   
+    except:     
+        return HttpResponseNotFound('<h1>Not a supported value for Month!</h1>')   
+    
+>>>APP.TEMPLATES.CHALLENGES.CHALLENGE.HTML
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Monthly Challenges</title>
+</head>
+<body>
+    <h1>This month's challenge</h1>
+    <h2>Go for a walk everyday!</h2>
+</body>
+</html>
+
+>>>PROJECT.SETTINGS.PY
+TEMPLATES = [
+    {
+        'BACKEND': 'django.template.backends.django.DjangoTemplates',
+        'DIRS': [
+                BASE_DIR / "challenges" / "templates"
+            ],
+        'APP_DIRS': True,
+        'OPTIONS': {
+            'context_processors': [
+                'django.template.context_processors.debug',
+                'django.template.context_processors.request',
+                'django.contrib.auth.context_processors.auth',
+                'django.contrib.messages.context_processors.messages',
+            ],
+        },
+    },
+]
+
+
+#17.Using Application definition
+>>>PROJECT.SETTINGS.PY
+# Application definition
+
+INSTALLED_APPS = [
+    'challenges',
+    'django.contrib.admin',
+    'django.contrib.auth',
+    'django.contrib.contenttypes',
+    'django.contrib.sessions',
+    'django.contrib.messages',
+    'django.contrib.staticfiles',
+]
+
+
+#18.Using Render Function
+>>>APP.VIEWS.PY
+from django.shortcuts import render
+from django.http import HttpResponse, HttpResponseNotFound, HttpResponseRedirect
+from django.urls import reverse
+
+tasks = {
+    'january': 'Take a walk in january',
+    'february': 'Sing a song in february',
+    'march': 'Play a sport in march',
+    'april': 'Call the tailor in april',
+    'may': 'Pray for mary in may',
+    'june': 'Go for a marathon in june',
+    'july': 'Play the drums in july',
+    'august': 'Got to school in august',
+    'september': 'Watch a movie in september',
+    'october': 'Got to the cinema in october',
+    'november': 'Study for exam in november',
+    'december': 'Paint the house in december'
+}
+
+def index(request):
+    list_items = ""
+    months = list(tasks.keys())
+    for month in months:
+        capitalized_month = month.capitalize()
+        path = reverse("my-challenges", args=[month])
+        list_items += f"<li><a href='{path}'>{capitalized_month}</a></li>" 
+        
+    response_data = f"<ul>{list_items}</ul>"
+    return HttpResponse(response_data)
+
+def my_challenges_num(request, month):
+    try:
+        months = list(tasks.keys())
+        selected_month = months[month - 1]
+        redirect = reverse("my-challenges", args=[selected_month])
+        return HttpResponseRedirect(redirect)
+    except:
+        return HttpResponseNotFound('<h1>Invalid value for Month</h1>')
+
+def my_challenges(request, month):
+    try:
+        challenges = tasks[month]
+        return render(request, "challenges/challenge.html")
+    except:     
+        return HttpResponseNotFound('<h1>Not a supported value for Month!</h1>')   
+    
+
+#19.Using Django Template Language
+>>>APP.VIEWS.PY
+def my_challenges_num(request, month):
+    try:
+        months = list(tasks.keys())
+        selected_month = months[month - 1]
+        redirect = reverse("my-challenges", args=[selected_month])
+        return HttpResponseRedirect(redirect)
+    except:
+        return HttpResponseNotFound('<h1>Invalid value for Month</h1>')
+
+def my_challenges(request, month):
+    try:
+        challenges = tasks[month]
+        return render(request, "challenges/challenge.html", {"challenges": challenges})
+    except:     
+        return HttpResponseNotFound('<h1>Not a supported value for Month!</h1>') 
+
+>>>APP.TEMPLATES.CHALLENGES.CHALLENGE.HTML
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Monthly Challenges</title>
+</head>
+<body>
+    <h1>This month's challenge</h1>
+    <h2>{{challenges}}</h2>
+</body>
+</html>
+
+
+#20.Using Dynamic HTML Template
+>>>APP.VIEWS.PY
+def my_challenges_num(request, month):
+    try:
+        months = list(tasks.keys())
+        selected_month = months[month - 1]
+        redirect = reverse("my-challenges", args=[selected_month])
+        return HttpResponseRedirect(redirect)
+    except:
+        return HttpResponseNotFound('<h1>Invalid value for Month</h1>')
+
+def my_challenges(request, month):
+    try:
+        challenge = tasks[month]
+        return render(request, "challenges/challenge.html", {
+            "challenge": challenge,
+            "month": month.capitalize()
+            })
+    except:     
+        return HttpResponseNotFound('<h1>Not a supported value for Month!</h1>')   
+    
+>>>APP.TEMPLATES.CHALLENGES.CHALLENGE.HTML
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{month}} Challenge</title>
+</head>
+<body>
+    <h1>{{month}} challenge</h1>
+    <h2>{{challenge}}</h2>
+</body>
+</html>
+
+
+#21.Using Template Filters
+>>>APP.VIEWS.PY
+def my_challenges_num(request, month):
+    try:
+        months = list(tasks.keys())
+        selected_month = months[month - 1]
+        redirect = reverse("my-challenges", args=[selected_month])
+        return HttpResponseRedirect(redirect)
+    except:
+        return HttpResponseNotFound('<h1>Invalid value for Month</h1>')
+
+def my_challenges(request, month):
+    try:
+        challenge = tasks[month]
+        return render(request, "challenges/challenge.html", {
+            "challenge": challenge,
+            "month": month
+            })
+    except:     
+        return HttpResponseNotFound('<h1>Not a supported value for Month!</h1>')   
+    
+>>>APP.TEMPLATES.CHALLENGES.CHALLENGE.HTML
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{month|title}} Challenge</title>
+</head>
+<body>
+    <h1>{{month|title}} challenge</h1>
+    <h2>{{challenge}}</h2>
+</body>
+</html>
+
+
+#22.Using Template 'for' and 'url' Tags
+>>>APP.VIEWS.PY
+from django.shortcuts import render
+from django.http import HttpResponse, HttpResponseNotFound, HttpResponseRedirect
+from django.urls import reverse
+
+tasks = {
+    'january': 'Take a walk in january',
+    'february': 'Sing a song in february',
+    'march': 'Play a sport in march',
+    'april': 'Call the tailor in april',
+    'may': 'Pray for mary in may',
+    'june': 'Go for a marathon in june',
+    'july': 'Play the drums in july',
+    'august': 'Got to school in august',
+    'september': 'Watch a movie in september',
+    'october': 'Got to the cinema in october',
+    'november': 'Study for exam in november',
+    'december': 'Paint the house in december'
+}
+
+def index(request):
+    months = list(tasks.keys())
+    return render(request, 'challenges/index.html', {
+        "months": months
+    })
+
+def my_challenges_num(request, month):
+    try:
+        months = list(tasks.keys())
+        selected_month = months[month - 1]
+        redirect = reverse("my-challenges", args=[selected_month])
+        return HttpResponseRedirect(redirect)
+    except:
+        return HttpResponseNotFound('<h1>Invalid value for Month</h1>')
+
+def my_challenges(request, month):
+    try:
+        challenge = tasks[month]
+        return render(request, "challenges/challenge.html", {
+            "challenge": challenge,
+            "month": month
+            })
+    except:     
+        return HttpResponseNotFound('<h1>Not a supported value for Month!</h1>')   
+  
+>>>APP.TEMPLATES.CHALLENGES.INDEX.HTML
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Index</title>
+</head>
+<body>
+    <ul>
+        {% for month in months %}
+            <li><a href="{% url 'my-challenges' month %}">{{month|upper}}</a></li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
+
+
+#23.Using Template Conditional 'if' Tag
+>>>APP.VIEWS.PY
+from django.shortcuts import render
+from django.http import HttpResponse, HttpResponseNotFound, HttpResponseRedirect
+from django.urls import reverse
+
+tasks = {
+    'january': 'Take a walk in january',
+    'february': 'Sing a song in february',
+    'march': 'Play a sport in march',
+    'april': 'Call the tailor in april',
+    'may': 'Pray for mary in may',
+    'june': 'Go for a marathon in june',
+    'july': 'Play the drums in july',
+    'august': 'Got to school in august',
+    'september': 'Watch a movie in september',
+    'october': 'Got to the cinema in october',
+    'november': 'Study for exam in november',
+    'december': None
+}
+
+def index(request):
+    months = list(tasks.keys())
+    return render(request, 'challenges/index.html', {
+        "months": months
+    })
+
+def my_challenges_num(request, month):
+    try:
+        months = list(tasks.keys())
+        selected_month = months[month - 1]
+        redirect = reverse("my-challenges", args=[selected_month])
+        return HttpResponseRedirect(redirect)
+    except:
+        return HttpResponseNotFound('<h1>Invalid value for Month</h1>')
+
+def my_challenges(request, month):
+    try:
+        challenge = tasks[month]
+        return render(request, "challenges/challenge.html", {
+            "challenge": challenge,
+            "month": month
+            })
+    except Exception as err:     
+        return HttpResponseNotFound(f'''<h1>Sorry, There was an Error!</h1>
+                                    <h2>Error: {err}</h2>''')   
+    
+>>>APP.TEMPLATES.CHALLENGES.CHALLENGE.HTML
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{month|title}} Challenge</title>
+</head>
+<body>
+    <h1>{{month|title}} challenge</h1>
+    {% if challenge is not None %}
+        <h2>{{challenge}}</h2>
+    {% else %}
+        <h2>There is no challenge for this month yet.</h2>    
+    {% endif %}    
+</body>
+</html>
+
+
+#24.Using Template Inheritance - extends and block
+>>><PROJECT>TEMPLATES.BASE.HTML
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}App{% endblock %}</title>
+</head>
+<body>
+    {% block content %}{% endblock %}
+</body>
+</html>
+
+>>>PROJECT.SETTINGS.PY
+TEMPLATES = [
+    {
+        'BACKEND': 'django.template.backends.django.DjangoTemplates',
+        'DIRS': [
+                # BASE_DIR / "challenges" / "templates"
+                BASE_DIR / "templates"
+            ],
+        'APP_DIRS': True,
+        'OPTIONS': {
+            'context_processors': [
+                'django.template.context_processors.debug',
+                'django.template.context_processors.request',
+                'django.contrib.auth.context_processors.auth',
+                'django.contrib.messages.context_processors.messages',
+            ],
+        },
+    },
+]
+
+>>>APP.TEMPLATES.CHALLENGES.INDEX.HTML
+{% extends 'base.html' %}
+
+{% block title %}All Challenges{% endblock %} 
+
+{% block content %}
+    <ul>
+        {% for month in months %}
+            <li><a href="{% url 'my-challenges' month %}">{{month|upper}}</a></li>
+        {% endfor %}
+    </ul>
+{% endblock %}
+
+
+>>>APP.TEMPLATES.CHALLENGES.CHALLENGE.HTML
+{% extends 'base.html' %}
+
+{% block title %}{{month|title}} Challenge{% endblock %}
+
+{% block content %}
+    <h1>{{month|title}} challenge</h1>
+    {% if challenge is not None %}
+        <h2>{{challenge}}</h2>
+    {% else %}
+        <h2>There is no challenge for this month yet.</h2>    
+    {% endif %}    
+{% endblock %}
+
+
+#25.Using Template Includes function
+>>>APP.URLS.PY
+from django.urls import path
+from . import views
+
+urlpatterns = [
+    path('', views.index, name='home'),
+    path('<int:month>', views.my_challenges_num, name='my-challenges-num'),
+    path('<str:month>', views.my_challenges, name='my-challenges'),
+]
+
+>>>APP.TEMPLATES.CHALLENGES.INCLUDES.HEADER.HTML
+<header>
+    <nav>
+        <a href="{% url 'home' %}">All Challenges</a>
+    </nav>
+</header>    
+
+>>>APP.TEMPLATES.CHALLENGES.CHALLENGE.HTML
+{% extends 'base.html' %}
+
+{% block title %}{{month|title}} Challenge{% endblock %}
+
+{% block content %}
+    {% include 'challenges/includes/header.html'%}
+    <h1>{{month|title}} challenge</h1>
+    {% if challenge is not None %}
+        <h2>{{challenge}}</h2>
+    {% else %}
+        <h2>There is no challenge for this month yet.</h2>    
+    {% endif %}    
+{% endblock %}
+
+
+
+#26.Setting 404 page
+>>>APP.VIEWS.PY
+from django.shortcuts import render
+from django.http import Http404, HttpResponse, HttpResponseNotFound, HttpResponseRedirect
+from django.urls import reverse
+from django.template.loader import render_to_string
+
+tasks = {
+    'january': 'Take a walk in january',
+    'february': 'Sing a song in february',
+    'march': 'Play a sport in march',
+    'april': 'Call the tailor in april',
+    'may': 'Pray for mary in may',
+    'june': 'Go for a marathon in june',
+    'july': 'Play the drums in july',
+    'august': 'Got to school in august',
+    'september': 'Watch a movie in september',
+    'october': 'Got to the cinema in october',
+    'november': 'Study for exam in november',
+    'december': None
+}
+
+def index(request):
+    months = list(tasks.keys())
+    return render(request, 'challenges/index.html', {
+        "months": months
+    })
+
+def my_challenges_num(request, month):
+    try:
+        months = list(tasks.keys())
+        selected_month = months[month - 1]
+        redirect = reverse("my-challenges", args=[selected_month])
+        return HttpResponseRedirect(redirect)
+    except:
+        return HttpResponseNotFound('<h1>Invalid value for Month</h1>')
+
+def my_challenges(request, month):
+    try:
+        challenge = tasks[month]
+        return render(request, "challenges/challenge.html", {
+            "challenge": challenge,
+            "month": month
+            })
+    except: 
+        response_data = render_to_string("404.html")
+        return HttpResponseNotFound(response_data)    
+        # raise Http404() 
+
+>>><PROJECT>TEMPLATES.404.HTML
+{% extends 'base.html' %}
+
+{% block title %}
+    Something went wrong - we could not find that page!
+{% endblock %} 
+
+{% block content %}
+    <h1>Error: 404 - we could not find that page!</h1>
+    <p>Sorry, but we could not find a matching page</p>
+{% endblock %}
+
+
+#Set Models.py file
+>>>Models.py
+from django.db import models
+
+class Members(models.Model):
+    firstname = models.CharField(max_length=50)
+    lastname = models.CharField(max_length=50)
+    email = models.EmailField(max_length=254)
+    password = models.CharField(max_length=50)
+    age = models.IntegerField()
+
+
+Pull Data From The Database
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+</head>
+<body>
+    <h1>Members Database</h1>
+    {% for member in all%}
+        <h2>Name: {{member.firstname | title}}</h2>
+        <h2>Email: {{member.email | lower}}</h2>
+        <h2>Age: {{member.age}}</h2>
+        <hr>
+    {% endfor %}
+</body>
+</html>
+
+>>>models.py
+from django.db import models
+
+class Member(models.Model):
+    firstname = models.CharField(max_length=50)
+    lastname = models.CharField(max_length=50)
+    email = models.EmailField(max_length=254)
+    password = models.CharField(max_length=50)
+    age = models.IntegerField()
+
+    def __str__(self):
+        return f"{self.firstname} {self.lastname}"
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

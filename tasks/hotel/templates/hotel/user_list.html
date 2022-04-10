@@ -1,0 +1,39 @@
+{% extends "hotel/base_dashboard.html" %}
+{% load static %}
+
+{% block heading %}
+    <h1>Customer List</h1>
+{% endblock heading %}
+
+{% block main %}
+        <div class="table-responsive">
+        <table class="table table-striped table-sm">
+            <thead>
+            <tr>
+                <th scope="col">CUSTOMER ID</th>
+                <th scope="col">USERNAME</th>
+                <th scope="col">EMAIL</th>
+                <th scope="col">PHONE</th>
+                <th scope="col">OTP_CODE</th>
+                <th scope="col">IS_VERIFIED</th>
+                <th scope="col">IS_ADMIN</th>
+                <th scope="col">IS_SUPERADMIN</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for customer in user_list %}    
+            <tr>
+                <td>{{customer.id}}</td>
+                <td>{{customer.username}}</td>
+                <td>{{customer.email}}</td>
+                <td>{{customer.phone_number}}</td>
+                <td>{{customer.otp_code}}</td>
+                <td>{{customer.email_verified}}</td>
+                <td>{{customer.is_admin}}</td>
+                <td>{{customer.is_superadmin}}</td>
+            </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+        </div>
+{% endblock main %}

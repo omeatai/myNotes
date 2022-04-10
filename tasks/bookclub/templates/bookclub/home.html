@@ -1,0 +1,43 @@
+{% extends 'bookclub/base.html' %}
+
+{% block title %}BookClub.io - Home{% endblock title %}
+
+{% block jumbotron %}
+<div class="p-5 mb-4 bg-light rounded-3">
+    <div class="container-fluid py-5">
+        <h1 class="display-5 fw-bold">What is BookClub?</h1>
+        <p class="col-md-8 fs-4">BookClub Inc. is a registered organisation that helps encourage people to read books and participate in reviews which makes reading more enjoyable and engaging. Join a community of readers and authors ready to journey beyond the page.</p>
+        <a href="{% url 'register' %}" class="btn btn-danger btn-lg" type="button">Register</a>
+        <a href="{% url 'login' %}" class="btn btn-success btn-lg" type="button">Login</a>
+    </div>
+</div>
+{% endblock jumbotron %}
+
+{% block comment %}
+{% for comment in comments %}
+<div class="row align-items-md-stretch">
+    <div class="col-md-3">
+        <div class="h-100 p-5 text-white bg-dark rounded-3">
+        <h2>{{comment.name}}</h2>
+        <p>Comment on:<br> {{comment.date_added | date:"F d, Y"}}.</p>
+        </div>
+    </div>
+    <div class="col-md-9">
+        <div class="h-100 p-5 bg-light border rounded-3">
+        <h2>{{comment.title}}</h2>
+        <p>{{comment.comment}}</p>
+        </div>
+    </div>
+</div>
+<div class="row align-items-md-stretch">
+    <div class="col-md-12">
+        &nbsp;
+    </div>    
+</div> 
+{% endfor %}   
+{% endblock comment %}
+
+
+{% block content %}
+
+{% endblock content %}

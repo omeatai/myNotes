@@ -1,0 +1,131 @@
+Anaconda/VENV/Jupyter Notebook
+
+Anaconda
+coreyschafer at Coreys-iMac in -
+ $ python
+>>> import numpy
+>>> import matplotlib
+>>> exit()
+
+$ pip list
+$ conda --help
+$ conda list
+$ conda create --name my_app flask sqlalchemy
+$ source activate my_app
+(my_app)
+
+$ which python
+/Users/coreyschafer/anaconda/envs/my_app/bin/python
+(my_app)
+
+$ conda create --name my_app27 python=2.7 flask sqlalchemy
+$ source activate my_app27
+(my_app27)
+$ python
+>>> exit()
+(my_app27)
+
+$ source deactivate
+$ conda env list
+$ conda remove —name my_app —all
+
+
+VENV
+$ pip install venv env
+$ source env/bin/activate
+$ deactivate
+
+$ pip install virtualenv
+$ pip list
+$ virtualenv env
+$ source env/bin/activate
+(projectl_env)
+
+$ which python
+/Users/coreyschafer/Projects/Environments/projectl_env/bin/python
+
+$ which pip
+/Users/coreyschafer/Projects/Environments/projectl_env/bin/pip
+
+$ pip list
+$ pip install numpy
+$ pip freeze --local > requirements.txt
+$ git freeze --local > requirements.txt
+$ cat requirements.txt
+numpy==1.9.2
+psutil==2.2.1
+pytz==2015.2
+(projecti_env)
+
+$ deactivate
+$ which python
+/Users/coreyschafer/anaconda/bin/python
+$ pip list
+$ rm -rf project1_env/
+$ ls
+requirements.txt
+
+$ virtualenv -p /usr/bin/python2.6 env
+$ ls
+$ source env/bin/activate
+$ which python
+/Users/coreyschafer/Projects/Environments/py26_env/bin/python
+$ python --version
+Python 2.6.9
+
+
+Jupyter Notebook
+ $ Is -la
+
+ $ jupyter notebook
+
+%lsmagic
+%pwd
+%ls
+%matplotlib inline
+
+%%HTML
+%%javascript
+%%bash
+%%timeit
+
+
+
+
+
+
+
+VENV & TESTING
+
+
+python3 -m venv venv
+source venv/bin/activate
+deactivate
+
+python -m unittest
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
