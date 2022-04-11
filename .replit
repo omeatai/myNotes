@@ -1,2 +1,2 @@
-language = "bash"
-run = ""
+language = "html"
+run = "index.html"s
