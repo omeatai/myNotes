@@ -1,0 +1,196 @@
+body {
+    background-color: black;
+    font-family: "Lato", "monospace";
+
+}
+
+.container {
+    display: grid;
+    grid-template-columns: repeat(19, 1fr);
+    grid-template-rows: repeat(8, 1fr);
+    grid-gap: 0.2em;
+    font-size: 1.5em;
+}
+
+p.name {
+    padding-top: 0.1em;
+    padding-right: 0.8em;
+    padding-bottom: 0.8em;
+    padding-left: 0.8em;
+    text-align: center;
+    font-weight: bold;
+    color: white;
+    font-size: 0.8em;
+    margin: 0;
+}
+
+.topnumber,
+p {
+    text-align: center;
+    color: white;
+    font-size: 0.8em;
+    margin-bottom: 0.2em;
+
+}
+
+.rownumber {
+    text-align: center;
+    color: white;
+    margin-left: 0;
+    font-size: 0.8em;
+
+}
+
+.row1 {
+    grid-row-start: 1;
+}
+
+.row2 {
+    grid-row-start: 2
+}
+
+.row3 {
+    grid-row-start: 3
+}
+
+.row4 {
+    grid-row-start: 4
+}
+
+.row5 {
+    grid-row-start: 5
+}
+
+.row6 {
+    grid-row-start: 6
+}
+
+.row7 {
+    grid-row-start: 7
+}
+
+.row8 {
+    grid-row-start: 8
+}
+
+
+p.number {
+    text-align: left;
+    margin: 0;
+    color: white;
+    font-size: 0.45em;
+    padding-left: 0.2em;
+}
+
+.topsentence {
+    grid-column-start: 1;
+    color: white;
+}
+
+.element1,
+.element3,
+.element11,
+.element19,
+.element37,
+.element55,
+.element87,
+.number1 {
+    grid-column-start: 2;
+}
+
+.element2 {
+    grid-column-start: 19;
+
+}
+
+.element5,
+.element13 {
+    grid-column-start: 14;
+
+}
+
+.element72,
+.element104 {
+    grid-column-start: 5;
+}
+
+.green {
+    background-color: #002200;
+}
+
+.pink {
+    background-color: #660044;
+}
+
+.blue {
+    background-color: #004488;
+}
+
+.red {
+    background-color: #880000;
+}
+
+.orange {
+    background-color: #884400;
+}
+
+.purple {
+    background-color: #dd22aa;
+}
+
+.lightblue {
+    background-color: #226688;
+}
+
+.lightgreen {
+    background-color: #44aa00;
+}
+
+@media screen and (min-width: 320px) and (max-width:768px) {
+    #table {
+        display: grid;
+        grid-template-columns: repeat(19, auto);
+        grid-template-rows: repeat(8, auto);
+        grid-gap: 0.19em;
+        font-size: 0.4em;
+    }
+
+    p.name {
+        padding-top: 0.1rem;
+        padding-right: 0.2rem;
+        padding-bottom: 0.2rem;
+        padding-left: 0.2rem;
+        text-align: center;
+        font-weight: bold;
+        color: white;
+        font-size: 0.2rem !important;
+        margin: 0;
+    }
+
+    .topnumber,
+    p {
+        text-align: center;
+        color: white;
+        font-size: 0.5rem !important;
+        margin-bottom: 0.2em;
+
+    }
+
+    div.rownumber {
+        text-align: center;
+        color: white;
+        margin-left: 0;
+        font-size: 0.5rem;
+        margin: 0;
+
+    }
+
+    p.number {
+        text-align: left;
+        margin: 0;
+        color: white;
+        font-size: 0.2rem !important;
+        padding-left: 0.1rem;
+    }
+
+}
