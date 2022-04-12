@@ -505,9 +505,20 @@ REST_FRAMEWORK = {
 
 .gitignore
 
+python manage.py test
 
+pip install coverage
 
+coverage run manage.py test && coverage report && coverage html
 
+.coveragerc:
+[run]
+source=authentication/,todos/,
+omit=
+    venv
+    */migrations/*
+    */tests/*
+    */__init__.py
 
 
 
