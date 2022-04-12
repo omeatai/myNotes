@@ -488,6 +488,13 @@ python manage.py makemigrations users
 python manage.py migrate
 
 
+###########################
+
+pip install djangorestframework-simplejwt
+
+###########################
+
+
 
 
 
