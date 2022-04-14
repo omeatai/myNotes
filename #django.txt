@@ -535,14 +535,53 @@ pip3 install -r requirements.txt
 pip3 install -U -r requirements.txt
 
 
+###########################
+
+
+# capture requirements to install
+pip freeze > requirements.txt
+
+# install requirements from requirements.txt
+pip install -r requirements.txt
+
+# Now to remove one by one
+pip uninstall -r requirements.txt
+
+# If we want to remove all at once then
+pip uninstall -r requirements.txt -y
+
+pip freeze or pip list
+
+$ python manage.py makemigrations
+
+$ python manage.py migrate
+
+$ python manage.py sqlmigrate weblog 0001
+
+$ python manage.py shell
+
+$ pip install django django-shortcuts
+
+pip install django-shortcuts
+
+#PIPENV
+pip install pipenv
+pipenv --python 3.10.3
+
+pipenv shell
+source $(pipenv --venv)/bin/activate
+
+exit
+
+#View location of the virtualenv:
+pipenv --venv
+
+pipenv --rm
+rm -rf /Users/ifeanyiomeata/.local/share/virtualenvs/docker_drf-yNZHhWWe
 
 
 
-
-
-
-
-
+curl http://127.0.0.1:8000/api/
 
 
 
