@@ -734,9 +734,10 @@ $ pipenv shell
 (blogapi) $ django-admin startproject blog_project .
 (blogapi) $ python manage.py startapp posts
 
+(blogapi) $ python manage.py makemigrations posts
+(blogapi) $ python manage.py migrate
 
-
-
+python manage.py createsuperuser
 
 
 
