@@ -717,9 +717,13 @@ $ npx create-react-app frontend
 $ cd frontend
 $ npm start
 
+http://127.0.0.1:8000/api/?format=json
 
+$ npm install
 
+$ npm install axios
 
+import axios from 'axios';
 
 
 
