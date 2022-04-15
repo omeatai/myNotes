@@ -583,6 +583,86 @@ rm -rf /Users/ifeanyiomeata/.local/share/virtualenvs/docker_drf-yNZHhWWe
 
 curl http://127.0.0.1:8000/api/
 
+###########################
+
+books > view.py:
+
+from django.shortcuts import render
+from django.views.generic import ListView
+from books.models import Book
+
+
+class BookListView(ListView):
+    model = Book
+    template_name = 'book_list.html'
+
+###########################
+
+api > view.py:
+
+from django.shortcuts import render
+from rest_framework import generics
+from books.models import Book
+from api.serializers import BookSerializer
+
+class BookAPIView(generics.ListAPIView): 
+    queryset = Book.objects.all() 
+    serializer_class = BookSerializer
+
+###########################
+
+books > model.py:
+
+from django.db import models
+
+
+class Book(models.Model):
+    title = models.CharField(max_length=250)
+    subtitle = models.CharField(max_length=250)
+    author = models.CharField(max_length=100)
+    isbn = models.CharField(max_length=13)
+    
+    def __str__(self):
+        return self.title
+
+###########################
+
+books > urls:
+
+from django.urls import include, path
+from books.views import BookListView
+
+urlpatterns = [
+    path('', BookListView.as_view(), name='home')
+]
+
+###########################
+
+api > urls:
+
+from django.urls import path
+from api.views import BookAPIView
+
+urlpatterns = [
+    path('', BookAPIView.as_view()),
+]
+
+###########################
+
+api > serializers.py:
+
+from rest_framework import serializers
+from books.models import Book
+
+
+class BookSerializer(serializers.ModelSerializer): 
+    
+    class Meta:
+        model = Book
+        fields = ('title', 'subtitle', 'author', 'isbn')
+
+
+###########################
 
 
 
