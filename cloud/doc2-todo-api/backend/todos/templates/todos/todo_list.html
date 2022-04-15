@@ -1,0 +1,9 @@
+<h1>Todo List</h1>
+
+<ul>
+{% for item in object_list %}
+    <li>{{item.title}}</li>
+    <p>{{item.body}}</p>
+{% endfor %}
+</ul>
+
