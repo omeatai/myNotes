@@ -715,7 +715,7 @@ CORS_ORIGIN_WHITELIST = (
 ###########################
 
 brew install node
-
+pip install nodejs
 
 
 
