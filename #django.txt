@@ -682,11 +682,28 @@ REST_FRAMEWORK = {
 
 Cross-Origin Resource Sharing (CORS).
 
+django-cors-headers
 
+pipenv install django-cors-headers==3.1.1
 
+pip install django-cors-headers
 
+• add corsheaders to the INSTALLED_APPS
+• addCorsMiddlewareaboveCommonMiddleWareinMIDDLEWARE 
+• create a CORS_ORIGIN_WHITELIST
 
+INSTALLED_APPS = [
+    'corsheaders', # new
+]
 
+MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware', # new
+]
+
+CORS_ORIGIN_WHITELIST = (
+    'http://localhost:3000',
+    'http://localhost:8000',
+)
 
 
 
