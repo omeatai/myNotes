@@ -5,3 +5,38 @@ https://www.figma.com/file/8RyjNynAFf0ltzpF49yov1/testimonials-grid-section?node
 
 
 
+
+
+
+
+strip
+lafa-fblc-lski-ciqk-kdnq
+
+
+*Communication
+username - string
+password - string
+date_joined - datetime
+
+*Authentication
+username - string
+password - string
+date_joined - datetime
+
+*Authorization
+- groups - string
+- is_active - bool
+- is_superuser - bool
+- is_staff - bool
+
+*Extending Django user Models
+Proxy Model
+One to One link ==> OneToOneField
+AbstractUser
+AbstractBaseUser
+
+
+https://docs.djangoproject.com/en/4.0/topics/class-based-views/
+
+
+
