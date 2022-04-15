@@ -541,10 +541,6 @@ pip3 install -r requirements.txt
 
 pip3 install -U -r requirements.txt
 
-
-###########################
-
-
 # capture requirements to install
 pip freeze > requirements.txt
 
@@ -680,22 +676,54 @@ REST_FRAMEWORK = {
 
 ###########################
 
+Cross-Origin Resource Sharing (CORS).
 
+django-cors-headers
 
+pipenv install django-cors-headers==3.1.1
 
+pip install django-cors-headers
 
+• add corsheaders to the INSTALLED_APPS
+• addCorsMiddlewareaboveCommonMiddleWareinMIDDLEWARE 
+• create a CORS_ORIGIN_WHITELIST
 
+INSTALLED_APPS = [
+    'corsheaders', # new
+]
 
+MIDDLEWARE = [
+    'django.middleware.security.SecurityMiddleware',
+    'django.contrib.sessions.middleware.SessionMiddleware',
+    'corsheaders.middleware.CorsMiddleware', # new
+    'django.middleware.common.CommonMiddleware',
+    'django.middleware.csrf.CsrfViewMiddleware',
+    'django.contrib.auth.middleware.AuthenticationMiddleware',
+    'django.contrib.messages.middleware.MessageMiddleware',
+    'django.middleware.clickjacking.XFrameOptionsMiddleware',
+]
 
+CORS_ORIGIN_WHITELIST = (
+    'http://localhost:3000',
+    'http://localhost:8000',
+)
 
+###########################
 
+brew install node
+pip install nodejs
 
+$ npx create-react-app frontend
+$ cd frontend
+$ npm start
 
+http://127.0.0.1:8000/api/?format=json
 
+$ npm install
 
+$ npm install axios
 
-
-
+import axios from 'axios';
 
 
 
