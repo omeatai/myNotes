@@ -541,10 +541,6 @@ pip3 install -r requirements.txt
 
 pip3 install -U -r requirements.txt
 
-
-###########################
-
-
 # capture requirements to install
 pip freeze > requirements.txt
 
@@ -717,7 +713,9 @@ CORS_ORIGIN_WHITELIST = (
 brew install node
 pip install nodejs
 
-
+$ npx create-react-app frontend
+$ cd frontend
+$ npm start
 
 
 
