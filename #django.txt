@@ -725,8 +725,14 @@ $ npm install axios
 
 import axios from 'axios';
 
+###########################
 
-
+$ cd ~/Desktop && cd code
+$ mkdir blogapi && cd blogapi
+$ pipenv install django==2.2.6
+$ pipenv shell
+(blogapi) $ django-admin startproject blog_project .
+(blogapi) $ python manage.py startapp posts
 
 
 
