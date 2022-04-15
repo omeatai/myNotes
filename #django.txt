@@ -680,6 +680,8 @@ REST_FRAMEWORK = {
 
 ###########################
 
+Cross-Origin Resource Sharing (CORS).
+
 
 
 
