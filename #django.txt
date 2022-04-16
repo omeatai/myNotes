@@ -740,6 +740,18 @@ $ pipenv shell
 python manage.py createsuperuser
 
 
+view -> ListView
+view -> DetailView
+from rest_framework.generics -> ListAPIView
+from rest_framework.generics -> RetrieveAPIView
+from rest_framework.generics -> CreateAPIView
+from rest_framework.generics -> DestroyAPIView
+from rest_framework.generics -> UpdateAPIView
+from rest_framework.generics -> ListCreateAPIView
+from rest_framework.generics -> RetrieveUpdateAPIView
+from rest_framework.generics -> RetrieveDestroyAPIView
+from rest_framework.generics -> RetrieveUpdateDestroyAPIView
+
 
 
 

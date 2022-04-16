@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from django.views.generic import ListView
+from django.views.generic import ListView, DetailView
 from rest_framework.generics import (ListAPIView, RetrieveAPIView)
 from .serializers import TodoSerializer
 from .models import Todo
