@@ -853,7 +853,16 @@ django-allauth
 (blogapi) $ pipenv install django-rest-auth==0.9.5
 pip install django-rest-auth
 
+INSTALLED_APPS = [
 
+    # 3rd-party apps
+    'rest_framework',
+    'rest_framework.authtoken',
+    'rest_auth',
+
+# Local
+    'posts.apps.PostsConfig',
+]
 
 
 
