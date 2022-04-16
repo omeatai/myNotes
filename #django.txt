@@ -847,18 +847,17 @@ INSTALLED_APPS = [
 
 ###########################
 
-django-rest-auth 
+dj-rest-auth 
 django-allauth
 
-(blogapi) $ pipenv install django-rest-auth==0.9.5
-pip install django-rest-auth
+pip install dj-rest-auth
 
 INSTALLED_APPS = [
 
     # 3rd-party apps
     'rest_framework',
     'rest_framework.authtoken',
-    'rest_auth',
+    'dj_rest_auth',
 
 # Local
     'posts.apps.PostsConfig',
@@ -866,15 +865,26 @@ INSTALLED_APPS = [
 
 ###########################
 
-from django.contrib import admin
+from django.contrib import admin 
 from django.urls import include, path
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/v1/', include('posts.urls')),
     path('api-auth/', include('rest_framework.urls')),
-    path('api/v1/rest-auth/', include('rest_auth.urls')),
+    path('dj-rest-auth/', include('dj_rest_auth.urls')),
 ]
+
+
+http://127.0.0.1:8000/api/v1/dj-rest-auth/login/
+
+http://127.0.0.1:8000/api/v1/dj-rest-auth/logout/
+
+http://127.0.0.1:8000/api/v1/dj-rest-auth/password/reset/
+
+http://127.0.0.1:8000/api/v1/dj-rest-auth/password/reset/confirm/
+
+
 
 ###########################
 
