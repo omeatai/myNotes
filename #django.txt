@@ -845,8 +845,13 @@ INSTALLED_APPS = [
     'posts.apps.PostsConfig',
 ]
 
+###########################
 
+django-rest-auth 
+django-allauth
 
+(blogapi) $ pipenv install django-rest-auth==0.9.5
+pip install django-rest-auth
 
 
 
