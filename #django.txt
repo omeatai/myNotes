@@ -739,48 +739,154 @@ $ pipenv shell
 
 python manage.py createsuperuser
 
+###########################
+
+views.py:
+
+view -> ListView
+view -> DetailView
+from rest_framework.generics -> ListAPIView
+from rest_framework.generics -> RetrieveAPIView
+from rest_framework.generics -> CreateAPIView
+from rest_framework.generics -> DestroyAPIView
+from rest_framework.generics -> UpdateAPIView
+from rest_framework.generics -> ListCreateAPIView
+from rest_framework.generics -> RetrieveUpdateAPIView
+from rest_framework.generics -> RetrieveDestroyAPIView
+from rest_framework.generics -> RetrieveUpdateDestroyAPIView
+
+
+from django.shortcuts import render
+from rest_framework import generics
+from .models import Post
+from .serializers import PostSerializer
+
+
+class PostList(generics.ListCreateAPIView): 
+    queryset = Post.objects.all() 
+    serializer_class = PostSerializer
+
+class PostDetail(generics.RetrieveUpdateDestroyAPIView): 
+    queryset = Post.objects.all()
+    serializer_class = PostSerializer
+
+
+###########################
+
+serializers.py:
+
+from rest_framework import serializers 
+from .models import Post
+
+
+class PostSerializer(serializers.ModelSerializer):
+    
+    class Meta:
+        model = Post
+        fields = ('id', 'author', 'title', 'body', 'created_at')
+
+###########################
+
+urlpatterns = [
+    path('admin/', admin.site.urls),
+    path('api/v1/', include('posts.urls')),
+    path('api-auth/', include('rest_framework.urls')),
+]
+
+###########################
+
+permission_classes = (permissions.IsAuthenticated,)
+
+• AllowAny - any user, authenticated or not, has full access
+• IsAuthenticated - only authenticated, registered users have access
+• IsAdminUser - only admins/superusers have access
+• IsAuthenticatedOrReadOnly - unauthorized users can view any page, but only
+authenticated users have write, edit, or delete privileges
+
+###########################
+
+REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.IsAuthenticated',
+    ]
+}
+
+###########################
+
+BasicAuthentication
+TokenAuthentication
+SessionAuthentication
+RemoteUserAuthentication
+Custom authentication
+
+401 (Unauthorized) 
+403 Forbidden status
+
+
+REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.IsAuthenticated',
+    ],
+    'DEFAULT_AUTHENTICATION_CLASSES': [ 
+        'rest_framework.authentication.SessionAuthentication',
+        # 'rest_framework.authentication.BasicAuthentication',
+        'rest_framework.authentication.TokenAuthentication',
+    ],
+}
+
+
+INSTALLED_APPS = [
+    
+    # 3rd-party apps
+    'rest_framework',
+    'rest_framework.authtoken',
+    
+    # Local
+    'posts.apps.PostsConfig',
+]
+
+###########################
+
+dj-rest-auth 
+django-allauth
+
+pip install dj-rest-auth
+
+INSTALLED_APPS = [
+
+    # 3rd-party apps
+    'rest_framework',
+    'rest_framework.authtoken',
+    'dj_rest_auth',
+
+# Local
+    'posts.apps.PostsConfig',
+]
+
+###########################
+
+from django.contrib import admin 
+from django.urls import include, path
+
+urlpatterns = [
+    path('admin/', admin.site.urls),
+    path('api/v1/', include('posts.urls')),
+    path('api-auth/', include('rest_framework.urls')),
+    path('dj-rest-auth/', include('dj_rest_auth.urls')),
+]
+
+
+http://127.0.0.1:8000/api/v1/dj-rest-auth/login/
+
+http://127.0.0.1:8000/api/v1/dj-rest-auth/logout/
+
+http://127.0.0.1:8000/api/v1/dj-rest-auth/password/reset/
+
+http://127.0.0.1:8000/api/v1/dj-rest-auth/password/reset/confirm/
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+###########################
 
 
 
