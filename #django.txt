@@ -834,7 +834,16 @@ REST_FRAMEWORK = {
     ],
 }
 
-'rest_framework.authtoken',
+
+INSTALLED_APPS = [
+    
+    # 3rd-party apps
+    'rest_framework',
+    'rest_framework.authtoken',
+    
+    # Local
+    'posts.apps.PostsConfig',
+]
 
 
 
