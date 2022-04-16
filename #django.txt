@@ -739,6 +739,9 @@ $ pipenv shell
 
 python manage.py createsuperuser
 
+###########################
+
+views.py:
 
 view -> ListView
 view -> DetailView
@@ -753,12 +756,36 @@ from rest_framework.generics -> RetrieveDestroyAPIView
 from rest_framework.generics -> RetrieveUpdateDestroyAPIView
 
 
+from django.shortcuts import render
+from rest_framework import generics
+from .models import Post
+from .serializers import PostSerializer
 
 
+class PostList(generics.ListCreateAPIView): 
+    queryset = Post.objects.all() 
+    serializer_class = PostSerializer
+
+class PostDetail(generics.RetrieveUpdateDestroyAPIView): 
+    queryset = Post.objects.all()
+    serializer_class = PostSerializer
 
 
+###########################
+
+serializers.py:
+
+from rest_framework import serializers 
+from .models import Post
 
 
+class PostSerializer(serializers.ModelSerializer):
+    
+    class Meta:
+        model = Post
+        fields = ('id', 'author', 'title', 'body', 'created_at')
+
+###########################
 
 
 
