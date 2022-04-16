@@ -794,6 +794,8 @@ REST_FRAMEWORK = {
     ]
 }
 
+permission_classes = (permissions.IsAuthenticated,)
+
 ###########################
 
 urlpatterns = [
