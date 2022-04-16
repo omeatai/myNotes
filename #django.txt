@@ -804,7 +804,7 @@ urlpatterns = [
 
 ###########################
 
-
+permission_classes = (permissions.IsAuthenticated,)
 
 
 
