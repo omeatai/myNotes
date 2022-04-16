@@ -813,7 +813,11 @@ REST_FRAMEWORK = {
 
 ###########################
 
-
+BasicAuthentication
+TokenAuthentication
+SessionAuthentication
+RemoteUserAuthentication
+Custom authentication
 
 
 
