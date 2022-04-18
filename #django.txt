@@ -1137,7 +1137,27 @@ READ
 >>> record.tagline
 'Hey! This is a tagline.'
 
-
+UPDATE
+>>> from fundamentals.models import (Blog, Author, Entry)
+>>> Blog.objects.all()
+<QuerySet [<Blog: The sway of the sea>, <Blog: The Comet>, <Blog: New Blog>, <Blog: Welcome to Lagos>]>
+>>> Author.objects.all()
+<QuerySet [<Author: Frank Zola>, <Author: Mary Slessor>]>
+>>> Entry.objects.all()
+<QuerySet [<Entry: The Sway of the sea>, <Entry: The Comet>]>
+>>> record_blog = Blog.objects.get(name='Welcome to Lagos')
+>>> record_entry = Entry.objects.get(pk=1)
+>>> record_entry.blog = record_blog
+>>> record_entry.save()
+>>> record_blog = Blog.objects.get(name='Welcome to Lagos')
+>>> record_blog
+<Blog: Welcome to Lagos>
+>>> record_entry = Entry.objects.get(pk=1)
+>>> record_entry
+<Entry: The Sway of the sea>
+>>> record_entry.headline = record_blog.name
+>>> record_entry.save()
+>>>
 
 
 
