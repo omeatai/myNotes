@@ -4,8 +4,8 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
-django = "*"
-django-shortcuts = "*"
+django = "4.0.4"
+django-shortcuts = "1.6"
 
 [dev-packages]
 
