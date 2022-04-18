@@ -884,72 +884,258 @@ http://127.0.0.1:8000/api/v1/dj-rest-auth/password/reset/
 
 http://127.0.0.1:8000/api/v1/dj-rest-auth/password/reset/confirm/
 
+###########################
+
+(blogapi) $ pipenv install django-allauth
+
+INSTALLED_APPS = [
+    'django.contrib.admin',
+    'django.contrib.auth',
+    'django.contrib.contenttypes',
+    'django.contrib.sessions',
+    'django.contrib.messages',
+    'django.contrib.staticfiles',
+    'django.contrib.sites', # new
+
+    # 3rd-party apps
+    'rest_framework',
+    'rest_framework.authtoken',
+    'allauth', # new
+    'allauth.account', # new
+    'allauth.socialaccount', # new
+    'rest_auth',
+    'rest_auth.registration', # new
+
+# Local
+    'posts.apps.PostsConfig',
+]
+
+
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend' # new
+SITE_ID = 1 # new
+
+###########################
+
+from django.contrib import admin 
+from django.urls import include, path
+
+urlpatterns = [
+    path('admin/', admin.site.urls),
+    path('api/v1/', include('posts.urls')),
+    path('api-auth/', include('rest_framework.urls')),
+    path('api/v1/dj-rest-auth/', include('dj_rest_auth.urls')),
+    path('api/v1/dj-rest-auth/registration/', include('dj_rest_auth.registration.urls')),
+]
+
+
+http://127.0.0.1:8000/api/v1/dj-rest-auth/registration/
+
+dj-rest-auth
+django-allauth 
+
+###########################
+
+freeze > requirements.txt && pipenv install -r requirements.txt
+
+#PIPENV
+pip install pipenv
+pipenv --python 3.10.3
+
+pipenv shell
+source $(pipenv --venv)/bin/activate
+
+pipenv install
+pipenv install --ignore-pipfile
+
+exit
+
+#View location of the virtualenv:
+pipenv --venv
+
+pipenv --rm
+rm -rf /Users/ifeanyiomeata/.local/share/virtualenvs/docker_drf-yNZHhWWe
+
+Commands:
+  check      Checks for PyUp Safety security vulnerabilities and against PEP
+             508 markers provided in Pipfile.
+  clean      Uninstalls all packages not specified in Pipfile.lock.
+  graph      Displays currently-installed dependency graph information.
+  install    Installs provided packages and adds them to Pipfile, or (if no
+             packages are given), installs all packages from Pipfile.
+  lock       Generates Pipfile.lock.
+  open       View a given module in your editor.
+  run        Spawns a command installed into the virtualenv.
+  scripts    Lists scripts in current environment config.
+  shell      Spawns a shell within the virtualenv.
+  sync       Installs all packages specified in Pipfile.lock.
+  uninstall  Uninstalls a provided package and removes it from Pipfile.
+  update     Runs lock, then sync.
+  verify     Verify the hash in Pipfile.lock is up-to-date.
+
+###########################
+
+git remote add origin git@bitbucket.org:<USER>/hello-world.git
+git push -u origin master
+
+python -m venv venv
+
+# pages_project/settings.py
+TEMPLATES = [
+    {
+        ...
+        'DIRS': [os.path.join(BASE_DIR, 'templates')], # new
+        ...
+}, ]
+
+
+TemplateView
+GenericView
+ListView
+DetailView
+
+(pages) $ git remote add origin git@bitbucket.org:wsvincent/pages-app.git
+(pages) $ git push -u origin master
+
+rm -fr $(brew --repo homebrew/core)  # because you can't `brew untap homebrew/core`
+brew tap homebrew/core
+
+$ brew tap heroku/brew && brew install heroku
+$ brew install heroku
+
+• updatePipfile.lock
+• make a new Procfile file
+• install gunicorn as our web server
+• make aone-line change to settings.py file
+
+[requires]
+python_version = "3.7"
+
+(pages) $ pipenv lock
+
+(pages) $ touch Procfile
+web: gunicorn pages_project.wsgi --log-file -
+
+(pages) $ pipenv install gunicorn==19.9.0
+
+# pages_project/settings.py
+ALLOWED_HOSTS = ['*']
+
+(pages) $ git status
+(pages) $ git add -A
+(pages) $ git commit -m "New updates for Heroku deployment"
+
+(pages) $ git push -u origin master
+
+• create a new app on Heroku and push our code to it
+• add a git remote “hook” for Heroku
+• configure the app to ignore static files, which we’ll cover in later chapters • start the Heroku server so the app is live
+• visit the app on Heroku’s provided URL
+
+(pages) $ heroku create
+Creating app... done, ฀ fathomless-hamlet-26076
+https://fathomless-hamlet-26076.herokuapp.com/ |
+https://git.heroku.com/fathomless-hamlet-26076git
+
+(pages) $ heroku git:remote -a fathomless-hamlet-26076
+
+You should replace fathomless-hamlet-26076 with the app name Heroku provides.
+
+(pages) $ heroku config:set DISABLE_COLLECTSTATIC=1
+
+(pages) $ git push heroku master
+
+(pages) $ heroku ps:scale web=􏰇
+
+(pages) $ heroku open
+
+###########################
+
+$ git config --list --show-origin
+
+$ git config --global user.name "John Doe"
+$ git config --global user.email johndoe@example.com
+
+git remote add origin https://omeatai@bitbucket.org/omeatai/pages-app.git
+git push -u origin main
+
+cdBXz9h5YQ47Eq44fFqj
+
+heroku login
+
+• updatePipfile.lock
+• make a new Procfile file
+• install gunicorn as our web server
+• make aone-line change to settings.py file
+
+[requires]
+python_version = "3.10"
+
+• updatePipfile.lock
+(pages) $ pipenv lock
+
+• make a new Procfile file
+(pages) $ touch Procfile
+web: gunicorn pages_project.wsgi --log-file -
+
+• install gunicorn as our web server
+pipenv install gunicorn==19.9.0
+
+(pages) $ git status
+(pages) $ git add -A
+(pages) $ git commit -m "New updates for Heroku deployment"
+
+• create a new app on Heroku and push our code to it
+• add a git remote “hook” for Heroku
+• configure the app to ignore static files, 
+which we’ll cover in later chapters • start the Heroku server so the app is live
+• visit the app on Heroku’s provided URL
+
+(pages) $ heroku create
+agile-bastion-21993
+https://agile-bastion-21993.herokuapp.com/ | 
+https://git.heroku.com/agile-bastion-21993.git
+
+(pages) $ heroku git:remote -a agile-bastion-21993
+set git remote heroku to https://git.heroku.com/agile-bastion-21993.git
+
+(pages) $ heroku config:set DISABLE_COLLECTSTATIC=1
+
+(pages) $ git push heroku main
+(pages) $ git push origin main
+
+(pages) $ heroku ps:scale web=􏰇
+
+(pages) $ heroku open
 
 
 ###########################
 
+• create a new directory for our code on the Desktop called mb 
+• install Django in a new virtual environment
+• create a new project called mb_project
+• create a new app call posts
+• updatesettings.py
 
 
+###########################
 
+CREATE
+>>> from fundamentals.models import (Reporter, Article)
+>>> record = Reporter(full_name='Tom Hadley')
+>>> record.save()
 
+UPDATE
+>>> record.full_name = 'Sally Hadley'
+>>> record.save()
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+READ
+>>> record = Blog.objects.get(pk=3)
+>>> record
+<Blog: New Blog>
+>>> record.name
+'New Blog'
+>>> record.tagline
+'Hey! This is a tagline.'
 
 
 
