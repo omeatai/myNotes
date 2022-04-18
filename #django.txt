@@ -1137,7 +1137,7 @@ READ
 >>> record.tagline
 'Hey! This is a tagline.'
 
-UPDATE
+UPDATE(2)
 >>> from fundamentals.models import (Blog, Author, Entry)
 >>> Blog.objects.all()
 <QuerySet [<Blog: The sway of the sea>, <Blog: The Comet>, <Blog: New Blog>, <Blog: Welcome to Lagos>]>
@@ -1159,26 +1159,129 @@ UPDATE
 >>> record_entry.save()
 >>>
 
+UPDATE(3)-DATE
+>>> Entry.objects.get(pk=1).pub_date
+datetime.date(2022, 4, 18)
+>>> from datetime import datetime, date
+>>> record_entry = Entry.objects.get(pk=1)
+>>> record_entry.pub_date = date.today()
+>>> record_entry.save()
+>>> record_entry.pub_date = date(2022, 4, 14)
+>>> record_entry.save()
+>>>
+
+CREATE(2)/ManyToManyField
+
+>>> from datetime import datetime, date
+>>> record_entry = Entry()
+>>> Blog.objects.all()
+<QuerySet [<Blog: The sway of the sea>, <Blog: The Comet>, <Blog: New Blog>, <Blog: Welcome to Lagos>]>
+>>> Blog.objects.all()[2]
+<Blog: New Blog>
+>>> record_entry.blog = Blog.objects.all()[2]
+>>> record_entry.headline = 'This is the new Blog'
+>>> record_entry.body_text = 'This is the new Body Text'
+>>> record_entry.pub_date = date.today()
+>>> record_author_1 = Author.objects.get(pk=1)
+>>> record_author_2 = Author.objects.get(pk=2)
+>>> record_author_3 = Author.objects.create(name='Benjamin', email='ben@gmail.com')
+>>> record_entry.save()
+>>> record_entry.authors.add(record_author_1,record_author_2,record_author_3)
+>>> record_entry.save()
+
+>>> john = Author.objects.create(name="John")
+>>> paul = Author.objects.create(name="Paul")
+>>> george = Author.objects.create(name="George")
+>>> ringo = Author.objects.create(name="Ringo")
+>>> entry.authors.add(john, paul, george, ringo)
+
+exact
+iexact
+contains
+icontains
+startswith
+endswith
+istartswith
+iendswith
+
+Blog.objects.get(id__exact=14)
+Blog.objects.get(name__iexact="beatles blog")
+Entry.objects.get(headline__contains='Lennon')
+There’s also a case-insensitive version, icontains.
+startswith, endswith
+There are also case-insensitive versions called istartswith and iendswith.
+
+all()
+get()
+filter()
+exclude()
+order_by()
+reverse()
+distinct()
+values()
+values_list()
+all()
+union()
+intersection()
+difference()
+
+>>> qs1.union(qs2, qs3)
+
+filter(**kwargs)
+Returns a new QuerySet containing objects that match the given lookup parameters.
+
+exclude(**kwargs)
+Returns a new QuerySet containing objects that do not match the given lookup parameters.
 
 
+this returns the first 5 objects (LIMIT 5):
+>>> Entry.objects.all()[:5]
+
+This returns the sixth through tenth objects (OFFSET 5 LIMIT 5):
+>>> Entry.objects.all()[5:10]
 
 
+>>> from fundamentals.models import (Reporter, Article)
+>>> Reporter.objects.all()
+<QuerySet [<Reporter: Benjamin Slayer>, <Reporter: Candice Jones>, <Reporter: Sally Hadley>]>
+>>> record_reporter = Reporter(full_name='John Smith')
+>>> record_reporter.save()
+>>> record_reporter.id
+4
+>>> record_reporter.full_name
+'John Smith'
+>>> Reporter.objects.get(id=4)
+<Reporter: John Smith>
+>>> Reporter.objects.get(full_name__startswith='John')
+<Reporter: John Smith>
+>>> Reporter.objects.get(full_name__contains='mith')
+<Reporter: John Smith>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+>>> from datetime import date
+>>> record_article = Article(pub_date=date.today(),headline='Django is cool',content='really really cool',reporter=record_reporter)
+>>> record_article.save()
+>>> Article.objects.all()
+<QuerySet [<Article: The end of time>, <Article: Why are there people>, <Article: Django is cool>]>
+>>> record_reporter.full_name
+'John Smith'
+>>> record_article.reporter.full_name
+'John Smith'
+>>>
+>>>
+>>> record_reporter.article_set.all()
+<QuerySet [<Article: Django is cool>]>
+>>> Article.objects.filter(reporter__full_name__startswith='John')
+<QuerySet [<Article: Django is cool>]>
+>>>
+>>>
+>>> record_reporter
+<Reporter: John Smith>
+>>> record_reporter.full_name='Ben Carson'
+>>> record_reporter.save()
+>>> record_reporter
+<Reporter: Ben Carson>
+>>>
+>>>
 
 
 
