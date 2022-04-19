@@ -1287,7 +1287,13 @@ This returns the sixth through tenth objects (OFFSET 5 LIMIT 5):
 ###########################
 
 
-
+{
+    messages.DEBUG: 'debug',
+    messages.INFO: 'info',
+    messages.SUCCESS: 'success',
+    messages.WARNING: 'warning',
+    messages.ERROR: 'error',
+}
 
 
 
