@@ -1295,20 +1295,36 @@ This returns the sixth through tenth objects (OFFSET 5 LIMIT 5):
     messages.ERROR: 'error',
 }
 
+###########################
+print(movies)
+<QuerySet [<Movie: The Game>, <Movie: Seaside Hawksaw>, <Movie: The Blaze>]>
+
+print(movies.values())
+<QuerySet [{'id': 1, 'name': 'The Game', 'description': '1998. Action.', 'active': True}, {'id': 2, 'name': 'Seaside Hawksaw', 'description': '2020. Horror.', 'active': True}, {'id': 3, 'name': 'The Blaze', 'description': '2021.Action.', 'active': True}]>
+
+print(list(movies.values()))
+[{'id': 1, 'name': 'The Game', 'description': '1998. Action.', 'active': True}, {'id': 2, 'name': 'Seaside Hawksaw', 'description': '2020. Horror.', 'active': True}, {'id': 3, 'name': 'The Blaze', 'description': '2021.Action.', 'active': True}]
+
+json.loads() takes in a string and returns a json object.
+
+json.dumps() takes in a json object and returns a string.
+
+###########################
+
+from django.shortcuts import render
+from .models import Movie
+from django.http import HttpResponse, JsonResponse
 
 
+def movie_list(request):
+    if request.method == 'GET':
+        movies = Movie.objects.all()
+        data = {
+            "Movies": list(movies.values())
+            }
+        return JsonResponse(data)
 
-
-
-
-
-
-
-
-
-
-
-
+###########################
 
 
 
