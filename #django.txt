@@ -1329,7 +1329,7 @@ def movie_list(request):
    Queryset     ----->      Python Dictionary     ----->       Json Data
  (Model Object)              (Python Object)                 (Json Object)
             DeSerialization                     Json Parsing
-   Queryset     <-----      Python Dictionary     <-----       Json Object
+   Queryset     <-----      Python Dictionary     <-----       Json Data
  (Model Object)              (Python Object)                 (Json Object)
 
 
