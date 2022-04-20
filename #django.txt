@@ -1333,8 +1333,14 @@ def movie_list(request):
  (Model Object)              (Python Object)                 (Json Object)
 
 
+Function Based Views
+@api_view()
 
-
+Class Based Views
+- Generic views
+- Mixins
+- Concrete View Classes
+- ViewSets
 
 
 
