@@ -1342,7 +1342,9 @@ Class Based Views
 - Concrete View Classes
 - ViewSets
 
-
+DRF Browsable API
+Postman
+HTTPie
 
 
 
