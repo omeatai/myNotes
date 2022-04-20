@@ -1325,17 +1325,26 @@ def movie_list(request):
         return JsonResponse(data)
 
 ###########################
+             Serialization                     Json Rendering
+   Queryset     ----->      Python Dictionary     ----->       Json Data
+ (Model Object)              (Python Object)                 (Json Object)
+            DeSerialization                     Json Parsing
+   Queryset     <-----      Python Dictionary     <-----       Json Data
+ (Model Object)              (Python Object)                 (Json Object)
 
 
+Function Based Views
+@api_view()
 
+Class Based Views
+- Generic views
+- Mixins
+- Concrete View Classes
+- ViewSets
 
-
-
-
-
-
-
-
+DRF Browsable API
+Postman
+HTTPie
 
 
 
