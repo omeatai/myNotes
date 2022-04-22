@@ -1,10 +1,118 @@
 from django.shortcuts import render
-from watchlist_app.models import (Movie, WatchList, StreamPlatform)
+from django.shortcuts import get_object_or_404
 # from rest_framework.decorators import api_view
 from rest_framework.views import APIView
 from rest_framework.response import Response
+from rest_framework import viewsets
 from rest_framework import status
-from .serializers import (MovieSerializer, WatchListSerializer, StreamPlatformSerializer)
+
+from rest_framework.mixins import (ListModelMixin,CreateModelMixin,RetrieveModelMixin,UpdateModelMixin,DestroyModelMixin)
+from rest_framework.generics import (GenericAPIView, ListCreateAPIView, RetrieveUpdateDestroyAPIView,CreateAPIView,ListAPIView)
+from watchlist_app.models import (Movie, WatchList, StreamPlatform, Review)
+from .serializers import (MovieSerializer, WatchListSerializer, StreamPlatformSerializer, ReviewSerializer)
+
+
+##########################
+'''Review Views'''
+##########################
+
+class ReviewCreate(CreateAPIView):
+    # queryset = Review.objects.all()
+    serializer_class = ReviewSerializer
+    
+    def perform_create(self, serializer):
+        pk = self.kwargs.get('pk')
+        movie = WatchList.objects.get(pk=pk)
+        serializer.save(watchlist=movie)
+
+class ReviewList(ListAPIView):
+    # queryset = Review.objects.all()
+    serializer_class = ReviewSerializer
+    
+    def get_queryset(self):
+        pk = self.kwargs['pk']
+        return Review.objects.filter(watchlist=pk)  
+    
+class ReviewDetail(RetrieveUpdateDestroyAPIView):
+    queryset = Review.objects.all()
+    serializer_class = ReviewSerializer    
+
+
+
+# class ReviewList(ListModelMixin,CreateModelMixin,GenericAPIView):
+#     queryset = Review.objects.all()
+#     serializer_class = ReviewSerializer
+
+#     def get(self, request, *args, **kwargs):
+#         return self.list(request, *args, **kwargs)
+
+#     def post(self, request, *args, **kwargs):
+#         return self.create(request, *args, **kwargs)
+
+# class ReviewDetail(RetrieveModelMixin,UpdateModelMixin,DestroyModelMixin,GenericAPIView):
+#     queryset = Review.objects.all()
+#     serializer_class = ReviewSerializer
+
+#     def get(self, request, *args, **kwargs):
+#         return self.retrieve(request, *args, **kwargs)
+
+#     def put(self, request, *args, **kwargs):
+#         return self.update(request, *args, **kwargs)
+
+#     def delete(self, request, *args, **kwargs):
+#         return self.destroy(request, *args, **kwargs)
+
+
+##########################
+'''StreamPlatformVS Viewset'''
+##########################
+
+class StreamPlatformVS(viewsets.ModelViewSet):
+    queryset = StreamPlatform.objects.all()
+    serializer_class = StreamPlatformSerializer
+    
+#ReadOnlyModelViewSet 
+
+# class StreamPlatformVS(viewsets.ViewSet):
+    
+#     def list(self, request):
+#         queryset = StreamPlatform.objects.all()
+#         serializer = StreamPlatformSerializer(
+#             queryset, 
+#             many=True, 
+#             context={'request': request})
+#         return Response(serializer.data)
+    
+#     def retrieve(self, request, pk=None):
+#         queryset = StreamPlatform.objects.all()
+#         watchlist = get_object_or_404(queryset, pk=pk)
+#         serializer = StreamPlatformSerializer(watchlist)
+#         return Response(serializer.data)
+        
+#     def create(self, request):
+#         serializer = StreamPlatformSerializer(data=request.data)
+#         if not serializer.is_valid():
+#             return Response(
+#                 serializer.errors, 
+#                 status=status.HTTP_400_BAD_REQUEST)
+#         serializer.save()
+#         message = f"The Stream Platform {serializer.data.get('name')} has been created." 
+#         return Response({
+#             "data": serializer.data,
+#             "message": message
+#             }, status.HTTP_201_CREATED)  
+        
+#     def destroy(self, request):
+#         platform = StreamPlatform.objects.get(pk=pk)
+#         platform.delete()
+#         message = 'StreamPlatform deleted successfully'
+#         return Response({
+#             'message': message
+#             },status=status.HTTP_204_NO_CONTENT)      
+
+
+
+
 
 
 ##########################
@@ -14,15 +122,31 @@ from .serializers import (MovieSerializer, WatchListSerializer, StreamPlatformSe
 class StreamPlatformAPIView(APIView):
     def get(self, request):
         platform = StreamPlatform.objects.all()
-        serializer = StreamPlatformSerializer(platform, many=True)
-        return Response(serializer.data, status=status.HTTP_200_OK)
+        serializer = StreamPlatformSerializer(
+            platform, 
+            many=True, 
+            context={'request': request})
+        if platform:
+            message = "This is the complete list of stream networks."
+        else:
+            message = "No Streaming Platform available."  
+        return Response({
+            "data": serializer.data, 
+            "message": message
+            }, status.HTTP_200_OK)
 
     def post(self, request):
         serializer = StreamPlatformSerializer(data=request.data)
         if not serializer.is_valid():
-            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+            return Response(
+                serializer.errors, 
+                status=status.HTTP_400_BAD_REQUEST)
         serializer.save()
-        return Response(serializer.data)
+        message = f"The Stream Platform {serializer.data.get('name')} has been created." 
+        return Response({
+            "data": serializer.data,
+            "message": message
+            }, status.HTTP_201_CREATED)
 
 
 class StreamPlatformDetailAPIView(APIView):
@@ -30,25 +154,37 @@ class StreamPlatformDetailAPIView(APIView):
         try:
             platform = StreamPlatform.objects.get(pk=pk)
         except StreamPlatform.DoesNotExist:
-            return Response({'Error': 'StreamPlatform not found'}, status=status.HTTP_404_NOT_FOUND)    
-        serializer = StreamPlatformSerializer(platform) 
-        return Response(serializer.data, status=status.HTTP_200_OK)
+            return Response({
+                "Error": "StreamPlatform not found."
+                }, status=status.HTTP_404_NOT_FOUND)    
+        serializer = StreamPlatformSerializer(
+            platform,
+            context={'request': request}) 
+        return Response({
+            "data": serializer.data
+            }, status=status.HTTP_200_OK)
 
     def put(self, request, pk):
         platform = StreamPlatform.objects.get(pk=pk)
-        serializer = StreamPlatformSerializer(platform, data=request.data)
+        serializer = StreamPlatformSerializer(
+            platform, 
+            data=request.data)
         if not serializer.is_valid():
-            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+            return Response(
+                serializer.errors, 
+                status=status.HTTP_400_BAD_REQUEST)
         serializer.save()
-        return Response(serializer.data)
+        return Response(
+            serializer.data, 
+            status=status.HTTP_200_OK)
 
     def delete(self, request, pk):
         platform = StreamPlatform.objects.get(pk=pk)
         platform.delete()
+        message = 'StreamPlatform deleted successfully'
         return Response({
-            'message': 'StreamPlatform deleted successfully'
-            }, 
-            status=status.HTTP_204_NO_CONTENT)
+            'message': message
+            },status=status.HTTP_204_NO_CONTENT)
         
 
 ##########################
@@ -58,15 +194,31 @@ class StreamPlatformDetailAPIView(APIView):
 class WatchListAPIView(APIView):
     def get(self, request):
         watchlist = WatchList.objects.all()
-        serializer = WatchListSerializer(watchlist, many=True)
-        return Response(serializer.data, status=status.HTTP_200_OK)
+        serializer = WatchListSerializer(
+            watchlist, 
+            many=True,
+            context={'request': request})
+        if watchlist:
+            message = "This is the complete watchlist."
+        else:
+            message = "No watchlist available."
+        return Response({
+            "data": serializer.data,
+            "message": message
+            }, status=status.HTTP_200_OK)
 
     def post(self, request):
         serializer = WatchListSerializer(data=request.data)
         if not serializer.is_valid():
-            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+            return Response(
+                serializer.errors, 
+                status=status.HTTP_400_BAD_REQUEST)
         serializer.save()
-        return Response(serializer.data)
+        message = f"The Watchlist {serializer.data.get('title')} has been created." 
+        return Response({
+            "data": serializer.data,
+            "message": message
+            }, status.HTTP_201_CREATED)
 
 
 class WatchDetailAPIView(APIView):
@@ -74,25 +226,36 @@ class WatchDetailAPIView(APIView):
         try:
             watchlist = WatchList.objects.get(pk=pk)
         except WatchList.DoesNotExist:
-            return Response({'Error': 'WatchList not found'}, status=status.HTTP_404_NOT_FOUND)    
-        serializer = WatchListSerializer(watchlist) 
-        return Response(serializer.data, status=status.HTTP_200_OK)
-
+            return Response(
+                {'Error': 'WatchList not found'}, 
+                status=status.HTTP_404_NOT_FOUND)    
+        serializer = WatchListSerializer(
+            watchlist, 
+            context={'request': request}) 
+        return Response({
+            "data": serializer.data
+            }, status=status.HTTP_200_OK)
+        
     def put(self, request, pk):
         watchlist = WatchList.objects.get(pk=pk)
-        serializer = WatchListSerializer(watchlist, data=request.data)
+        serializer = WatchListSerializer(
+            watchlist, 
+            data=request.data)
         if not serializer.is_valid():
-            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+            return Response(
+                serializer.errors, 
+                status=status.HTTP_400_BAD_REQUEST)
         serializer.save()
-        return Response(serializer.data)
+        return Response(
+            serializer.data, 
+            status = status.HTTP_200_OK)
 
     def delete(self, request, pk):
         watchlist = WatchList.objects.get(pk=pk)
         watchlist.delete()
         return Response({
             'message': 'WatchList deleted successfully'
-            }, 
-            status=status.HTTP_204_NO_CONTENT)
+            }, status=status.HTTP_204_NO_CONTENT)
 
 
 ##########################
@@ -138,6 +301,20 @@ class MovieDetailAPIView(APIView):
             }, 
             status=status.HTTP_204_NO_CONTENT)
 
+
+#  obj = []   
+# for ins in serializer.data:
+#     obj.append({
+#         "id": ins.get("id"),
+#         "storyline": ins.get("storyline"),
+#         "platform": StreamPlatform.objects.get(pk=ins.get("platform")).name,
+#         "active": ins.get("active"),
+#     })
+# return Response({
+#     # "data": serializer.data,
+#     "obj": obj,
+#     "message": message
+#     }, status=status.HTTP_200_OK)
 
 
 

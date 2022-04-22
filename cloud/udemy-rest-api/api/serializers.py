@@ -1,6 +1,29 @@
 from pyexpat import model
 from rest_framework import serializers
-from watchlist_app.models import (Movie, WatchList, StreamPlatform)
+from watchlist_app.models import (Movie, Review, WatchList, StreamPlatform)
+
+
+##########################
+'''ReviewSerializer'''
+##########################
+
+class ReviewSerializer(serializers.ModelSerializer):
+    
+    class Meta:
+        model = Review
+        exclude = ('watchlist',)
+        # fields = "__all__"
+
+##########################
+'''WatchListSerializer'''
+##########################
+
+class WatchListSerializer(serializers.ModelSerializer):
+    reviews = ReviewSerializer(many=True, read_only=True)
+    
+    class Meta:
+        model = WatchList
+        fields = "__all__"
 
 
 ##########################
@@ -8,20 +31,19 @@ from watchlist_app.models import (Movie, WatchList, StreamPlatform)
 ##########################
 
 class StreamPlatformSerializer(serializers.ModelSerializer):
+    watchlist = WatchListSerializer(many=True, read_only=True)
+    # watchlist = serializers.StringRelatedField(many=True)
+    # watchlist = serializers.PrimaryKeyRelatedField(many=True, read_only=True)
+    # watchlist = serializers.HyperlinkedRelatedField(
+    #     many=True,
+    #     read_only=True,
+    #     view_name='watch_detail'
+    # )
     
     class Meta:
         model = StreamPlatform
         fields = "__all__"
         
-##########################
-'''WatchListSerializer'''
-##########################
-
-class WatchListSerializer(serializers.ModelSerializer):
-    
-    class Meta:
-        model = WatchList
-        fields = "__all__"
 
 
 ##########################
