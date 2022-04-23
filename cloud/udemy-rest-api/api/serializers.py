@@ -1,4 +1,3 @@
-from pyexpat import model
 from rest_framework import serializers
 from watchlist_app.models import (Movie, Review, WatchList, StreamPlatform)
 
