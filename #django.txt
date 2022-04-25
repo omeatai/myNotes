@@ -1352,13 +1352,84 @@ Field-Level Validation
 Object-Level Validation
 Validators
 
+###########################
+
+git pull --rebase origin main
+git push origin main
+
+pipenv install
+pipenv lock
+
+HER_API b0755129-75d7-43da-8b33-10927f4a4a52
+
+heroku login
+heroku create django-blog-ifeanyi-omeata
+heroku git:remote -a django-blog-ifeanyi-omeata
+
+HEROKU 
+(django-1) ➜ heroku login
+#Logging in... done
+#Logged in as omeatai@gmail.com
+
+(django-1) ➜ heroku create django-blog-ifeanyi-omeata
+#Creating ⬢ django-blog-ifeanyi-omeata... done
+#https://django-blog-ifeanyi-omeata.herokuapp.com/ | #https://git.heroku.com/django-blog-ifeanyi-omeata.git
+
+(django-1) ➜ heroku git:remote -a django-blog-ifeanyi-omeata
+#set git remote heroku to https://git.heroku.com/django-blog-ifeanyi-omeata.git
+
+#Use static files in Heroku
+pipenv install whitenoise
+..............
+
+heroku create django-blog-app-ifeanyi
+heroku git:remote -a django-blog-app-ifeanyi
+
+(blog) $ git add -A
+(blog) $ git commit -m 'Heroku config'
+(blog) $ git push origin main
+
+(blog) $ git push heroku main
+(blog) $ heroku ps:scale web=1
 
 
+pip install django-environ
+
+vaazbfbodqtsvbbs
+
+# EmailProject/settings.py
+# This should be at the start of the file
+import environ
+
+env = environ.Env()
+environ.Env.read_env()
+
+# Previous settings ...
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = env('EMAIL_HOST')
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = env('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = env('EMAIL_HOST_PASSWORD')
+
+# Custom setting. To email
+RECIPIENT_ADDRESS = env('RECIPIENT_ADDRESS')
 
 
+from django.core.mail import send_mail
+from django.conf import settings
+send_mail(
+subject='A cool subject',
+message='A stunning message',
+from_email=settings.EMAIL_HOST_USER,
+recipient_list=[settings.RECIPIENT_ADDRESS])
 
-
-
+Grab your SMTP credentials:
+SMTP hostname: smtp.mailgun.org
+Port: 587 (recommended)
+Username: postmaster@sandbox80aec075d7b84cbaafbb1fcb5139eedd.mailgun.org
+Default password:
+60cc362a9a85b633d3d752550a2ccfbb-115fe3a6-e4721e84
 
 
 
