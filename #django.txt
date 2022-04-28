@@ -1042,9 +1042,9 @@ You should replace fathomless-hamlet-26076 with the app name Heroku provides.
 
 (pages) $ heroku config:set DISABLE_COLLECTSTATIC=1
 
-(pages) $ git push heroku master
+(pages) $ git push heroku main
 
-(pages) $ heroku ps:scale web=􏰇
+(pages) $ heroku ps:scale web=1
 
 (pages) $ heroku open
 
@@ -1430,6 +1430,126 @@ Port: 587 (recommended)
 Username: postmaster@sandbox80aec075d7b84cbaafbb1fcb5139eedd.mailgun.org
 Default password:
 60cc362a9a85b633d3d752550a2ccfbb-115fe3a6-e4721e84
+
+
+
+def home(request):
+    if request.method == 'GET':
+        return render(request, 'divccon/home.html', {})
+        
+    if request.method == 'POST':
+        return render(request, 'divccon/form2.html', {
+            'request_method': request.method,
+            'request_path': request.path,
+            'request_POST': request.POST,
+            'request_POST_list': list(request.POST.values()),
+        })   
+
+{% block container %}
+    <h1>This is the Form2 page.</h1>
+    <h2>request_method:<br> {{request_method}}</h2>
+    <h2>request_path:<br> {{request_path}}</h2>
+    <h2>request_POST:<br> {{request_POST}}</h2>
+    <h2>FirstName:<br> {{request_POST.firstname}}</h2>
+    <h2>LastName:<br> {{request_POST.lastname}}</h2>
+    <h2>PIN:<br> {{request_POST.pin}}</h2>
+    <h2>request_POST_list:<br> {{request_POST_list}}</h2>
+    
+{% endblock %}
+
+
+{% block container %}
+    <form class="form-group" action="{% url 'home' %}" method="post">
+        {% csrf_token %}
+        <div class="row d-flex align-items-center">
+            <div class="col-12 input-group mb-3">
+                <label for="firstname"><span class="input-group-text" id="firstname-label">Firstname</span></label>
+                <input type="text" class="form-control" id="firstname" name="firstname" placeholder="Enter your First name" required>
+            </div>   
+        </div>
+        <div class="row d-flex align-items-center">
+            <div class="col-12 input-group mb-3">
+                <label for="lastname"><span class="input-group-text" id="lastname-label">Lastname</span></label>
+                <input type="text" class="form-control" id="lastname" name="lastname" placeholder="Enter your Last name" required>
+            </div>   
+        </div>
+        <div class="row d-flex align-items-center">
+            <div class="col-12 input-group mb-3">
+                <label for="pin"><span class="input-group-text" id="pin-label">PIN</span></label>
+                <input type="password" class="form-control" id="pin" name="pin" placeholder="Enter your PIN" required>
+            </div>   
+        </div>
+        <button type="submit" class="btn btn-primary">Continue</button>
+    </form>
+{% endblock container %}
+
+
+PICKLE
+
+import pickle
+
+
+def home(request):
+    if request.method == 'GET':
+        return render(request, 'divccon/home.html', {})
+        
+    if request.method == 'POST':
+        records = list(request.POST.values())[1::]
+        with open("dict.pickle","wb") as pickle_out:
+            pickle.dump(records,pickle_out) 
+        return redirect('registration-two')
+
+def registration_two(request):
+    with open("dict.pickle","rb") as pickle_in:
+        records = pickle.load(pickle_in)
+        return render(request, 'divccon/form2.html', {
+            'records': records,
+        })
+
+
+
+
+from dotenv import load_dotenv
+
+load_dotenv()
+
+############################
+
+1. CREATE HEROKU APP
+(pages) $ heroku create
+Creating app... done, ฀ fathomless-hamlet-26076
+https://fathomless-hamlet-26076.herokuapp.com/ |
+https://git.heroku.com/fathomless-hamlet-26076git
+
+2. SET CREATED HEROKU APP AS REMOTE REPO
+(pages) $ heroku git:remote -a fathomless-hamlet-26076
+<You should replace fathomless-hamlet-26076 with the app name Heroku provides.>
+
+3. SET COLLECTSTATIC
+(pages) $ heroku config:set DISABLE_COLLECTSTATIC=1
+
+4. PUSH CODE TO HEROKU REMOTE APP
+(pages) $ git push heroku main
+
+5. SET PS SCALE
+(pages) $ heroku ps:scale web=1
+
+6. OPEN HEROKU APP
+(pages) $ heroku open
+
+7. RENAME HEROKU APP
+(pages) $ heroku apps:rename week9-team-a
+Renaming fathomless-hamlet-26076 to week9-team-a... done
+
+8. REOPEN HEROKU APP
+(pages) $ heroku open
+
+9. RUN MIGRATION ON HEROKU
+(pages) $ heroku run python manage.py migrate
+
+https://week9-team-a.herokuapp.com/api/v1/login/
+
+
 
 
 

@@ -20,7 +20,8 @@ class BlogDetailView(DetailView):
 class BlogCreateView(CreateView):
     model = Post
     template_name = 'blog/post_new.html'
-    fields = '__all__'    
+    fields = '__all__'  
+    # exclude = [author]
     
 class BlogUpdateView(UpdateView):
     model = Post
