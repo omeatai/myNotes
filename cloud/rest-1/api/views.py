@@ -13,6 +13,35 @@ from .serializers import (MovieSerializer, WatchListSerializer, StreamPlatformSe
 
 
 ##########################
+'''Wallet Views'''
+##########################
+
+class WalletApiView(generics.ListCreateAPIView):
+    permission_classes = [permissions.IsAuthenticated]
+    serializer_class = serializers.WalletSerializers
+    queryset = Wallet.objects.all()
+
+    # def get_serializer_context(self):
+    #     context = super().get_serializer_context()
+
+    def get(self, request):
+        # return response.Response(request.COOKIES)
+        serializer = serializers.WalletSerializers(self.get_queryset(), many=True) 
+        return response.Response(serializer.data, status=status.HTTP_200_OK)
+
+    def post(self, request):
+        serializer = self.serializer_class(data=request.data)
+        serializer.context['username_id'] = request.user
+        if serializer.is_valid():
+            serializer.save()
+            return response.Response({'message': 'Wallet Created', 'details': serializer.data}, status=status.HTTP_201_CREATED)
+        return response.Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+
+
+
+##########################
 '''Review Views'''
 ##########################
 
@@ -68,47 +97,49 @@ class ReviewDetail(RetrieveUpdateDestroyAPIView):
 ##########################
 
 class StreamPlatformVS(viewsets.ModelViewSet):
-    queryset = StreamPlatform.objects.all()
+    queryset = StreamPlatform.objects.all() #Model Object
     serializer_class = StreamPlatformSerializer
-    
+
+
+  
 #ReadOnlyModelViewSet 
 
-# class StreamPlatformVS(viewsets.ViewSet):
+class StreamPlatformVS(viewsets.ViewSet):
     
-#     def list(self, request):
-#         queryset = StreamPlatform.objects.all()
-#         serializer = StreamPlatformSerializer(
-#             queryset, 
-#             many=True, 
-#             context={'request': request})
-#         return Response(serializer.data)
+    def list(self, request):
+        queryset = StreamPlatform.objects.all()
+        serializer = StreamPlatformSerializer(
+            queryset, 
+            many=True, 
+            context={'request': request})
+        return Response(serializer.data)
     
-#     def retrieve(self, request, pk=None):
-#         queryset = StreamPlatform.objects.all()
-#         watchlist = get_object_or_404(queryset, pk=pk)
-#         serializer = StreamPlatformSerializer(watchlist)
-#         return Response(serializer.data)
+    def retrieve(self, request, pk=None):
+        queryset = StreamPlatform.objects.all()
+        watchlist = get_object_or_404(queryset, pk=pk)
+        serializer = StreamPlatformSerializer(watchlist)
+        return Response(serializer.data)
         
-#     def create(self, request):
-#         serializer = StreamPlatformSerializer(data=request.data)
-#         if not serializer.is_valid():
-#             return Response(
-#                 serializer.errors, 
-#                 status=status.HTTP_400_BAD_REQUEST)
-#         serializer.save()
-#         message = f"The Stream Platform {serializer.data.get('name')} has been created." 
-#         return Response({
-#             "data": serializer.data,
-#             "message": message
-#             }, status.HTTP_201_CREATED)  
+    def create(self, request):
+        serializer = StreamPlatformSerializer(data=request.data)
+        if not serializer.is_valid():
+            return Response(
+                serializer.errors, 
+                status=status.HTTP_400_BAD_REQUEST)
+        serializer.save()
+        message = f"The Stream Platform {serializer.data.get('name')} has been created." 
+        return Response({
+            "data": serializer.data,
+            "message": message
+            }, status.HTTP_201_CREATED)  
         
-#     def destroy(self, request):
-#         platform = StreamPlatform.objects.get(pk=pk)
-#         platform.delete()
-#         message = 'StreamPlatform deleted successfully'
-#         return Response({
-#             'message': message
-#             },status=status.HTTP_204_NO_CONTENT)      
+    def destroy(self, request):
+        platform = StreamPlatform.objects.get(pk=pk)
+        platform.delete()
+        message = 'StreamPlatform deleted successfully'
+        return Response({
+            'message': message
+            },status=status.HTTP_204_NO_CONTENT)      
 
 
 
@@ -264,9 +295,9 @@ class WatchDetailAPIView(APIView):
 
 class MovieListAPIView(APIView):
     def get(self, request):
-        movies = Movie.objects.all()
-        serializer = MovieSerializer(movies, many=True)
-        return Response(serializer.data, status=status.HTTP_200_OK)
+        movies = Movie.objects.all() # Model Object
+        serializer = MovieSerializer(movies, many=True) # Python Object
+        return Response(serializer.data, status=status.HTTP_200_OK) #JSON Object
 
     def post(self, request):
         serializer = MovieSerializer(data=request.data)
@@ -278,12 +309,12 @@ class MovieListAPIView(APIView):
 
 class MovieDetailAPIView(APIView):
     def get(self, request, pk):
-        try:
-            movie = Movie.objects.get(pk=pk)
-        except Movie.DoesNotExist:
-            return Response({'Error': 'Movie not found'}, status=status.HTTP_404_NOT_FOUND)    
-        serializer = MovieSerializer(movie) 
-        return Response(serializer.data, status=status.HTTP_200_OK)
+        # try:
+            movie = Movie.objects.get(pk=pk) # Model Object
+        # except Movie.DoesNotExist:
+        #     return Response({'Error': 'Movie not found'}, status=status.HTTP_404_NOT_FOUND)    
+        serializer = MovieSerializer(movie) # Python Object
+        return Response(serializer.data, status=status.HTTP_200_OK) #JSON Object
 
     def put(self, request, pk):
         movie = Movie.objects.get(pk=pk)
@@ -318,49 +349,49 @@ class MovieDetailAPIView(APIView):
 
 
 
-# #Function Views
-# @api_view(['GET','POST'])
-# def movie_list(request):
-#     if request.method == 'GET':
-#         movies = Movie.objects.all()
-#         serializer = MovieSerializer(movies, many=True)
-#         return Response(serializer.data)
+#Function Views
+@api_view(['GET','POST'])
+def movie_list(request):
+    if request.method == 'GET':
+        movies = Movie.objects.all() #<queryset[......]> model object
+        serializer = MovieSerializer(movies, many=True) # python object
+        return Response(serializer.data) #JSON object
     
-#     if request.method == 'POST':
-#         serializer = MovieSerializer(data=request.data)
-#         if serializer.is_valid():
-#             serializer.save()
-#             return Response(serializer.data)
-#         else:
-#             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    if request.method == 'POST':
+        serializer = MovieSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        else:
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
-# @api_view(['GET','PUT','DELETE'])
-# def movie_detail(request, pk):
-#     if request.method == 'GET':
-#         try:
-#             movie = Movie.objects.get(pk=pk)
-#         except Movie.DoesNotExist:
-#             return Response({'Error': 'Movie not found'}, status=status.HTTP_404_NOT_FOUND)    
+@api_view(['GET','PUT','DELETE'])
+def movie_detail(request, pk):
+    if request.method == 'GET':
+        try:
+            movie = Movie.objects.get(pk=pk)
+        except Movie.DoesNotExist:
+            return Response({'Error': 'Movie not found'}, status=status.HTTP_404_NOT_FOUND)    
         
-#         serializer = MovieSerializer(movie) 
-#         return Response(serializer.data)   
+        serializer = MovieSerializer(movie) 
+        return Response(serializer.data)   
     
-#     if request.method == 'PUT':
-#         movie = Movie.objects.get(pk=pk)
-#         serializer = MovieSerializer(movie, data=request.data)
-#         if serializer.is_valid():
-#             serializer.save()
-#             return Response(serializer.data)
-#         else:
-#             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    if request.method == 'PUT':
+        movie = Movie.objects.get(pk=pk)
+        serializer = MovieSerializer(movie, data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        else:
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
     
-#     if request.method == 'DELETE':
-#         movie = Movie.objects.get(pk=pk)
-#         movie.delete()
-#         return Response({
-#             'message': 'Movie deleted successfully'
-#             }, 
-#             status=status.HTTP_204_NO_CONTENT)
+    if request.method == 'DELETE':
+        movie = Movie.objects.get(pk=pk)
+        movie.delete()
+        return Response({
+            'message': 'Movie deleted successfully'
+            }, 
+            status=status.HTTP_204_NO_CONTENT)
 
 
