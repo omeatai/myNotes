@@ -1,0 +1,59 @@
+.purple{
+    background: #800080 !important;
+}
+
+.grey{
+    background: whitesmoke !important;
+}
+
+.logo{
+    text-align: center;
+  }
+
+.divname{
+    font-size: 100%;
+    font-weight: 800%;
+    font-family: 'Orelega One', cursive;
+  }
+
+.divname2{
+    font-size: 150%;
+    font-weight: 800%;
+    font-family: 'Orelega One', cursive;
+    color: purple;
+  }
+
+.topic{
+    font-size: 200%;
+    font-weight: 800%;
+    font-family: 'Orelega One', cursive;
+}
+
+.welcome{
+    color: purple;
+    font-size: 200%;
+    font-weight: 800%;
+    font-family: 'Orelega One', cursive;
+}
+
+.topic2{
+    font-size: 150%;
+    font-weight: 800%;
+}
+
+.fa-check {
+    color: green;
+  }
+
+.fa-check-square {
+    color: green;
+  }
+
+
+.fa-window-close {
+    color: red;
+  }
+
+.fa-exclamation-triangle {
+    color: red;
+  }

@@ -1,0 +1,59 @@
+.jumbo{
+    background-color: #800080 !important;
+    color: white !important;
+    padding-bottom: 1% !important;
+    margin-bottom: 1% !important;
+}
+
+.grey{
+    background-color: #E3E3E3 !important;
+}
+
+.blue-button{
+    background-color: #17649A !important;
+}
+
+.reg1-red{
+    color: red !important;
+    font-weight: 600 !important;
+}
+
+.reg4-purple{
+    color: #800080 !important;
+    font-weight: 600 !important;
+}
+
+.success-text{
+    color: red !important;
+    font-weight: 800 !important;
+    font-size: 150% !important;
+}
+
+.size-150{
+    font-size: 150% !important;	
+}
+
+
+
+.black-bg{
+    margin-top: 5px !important;
+    padding: 5px !important;
+    color: #fff !important;
+    background: #000 !important;
+}
+
+
+#footer{
+    margin-top: 30px !important;
+    padding: 20px !important;
+    color: #fff !important;
+    background: #333 !important;
+}
+
+
+
+
+
+
+
+

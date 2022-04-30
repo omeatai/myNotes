@@ -1,0 +1,12 @@
+img#photo{
+    max-width:260px;
+    max-height:240px;
+    height:240px;
+    width:260px;
+    border-radius: 30px;
+    padding:10px;
+    background:#d3d3d3;
+  }
+  input[type=file]{
+  padding:10px;
+  background:#d3d3d3;}
