@@ -1,0 +1,50 @@
+
+################################
+
+npx create-react-app my-app
+cd my-app
+npm start
+
+################################
+
+function Statement(){
+    return (
+        <div>
+            <h1>This is a statement...</h1>
+            <p>React is a great library!</p>
+        </div>    
+    )
+
+}
+
+ReactDOM.render(
+    <div>
+        <Navbar />
+        <Statement />
+    </div>,
+    document.getElementById("root")
+)
+
+#Function Based
+export const Header = () => {
+  return (
+    <div>
+      <h1>My Header</h1>
+    </div>
+  )  
+}
+
+#Class Based
+export default class Header extends React.Component {
+  render() {
+    return (
+      <div>
+        <h1>My Header</h1>
+      </div>
+    )
+  }
+} 
+
+
+
+
