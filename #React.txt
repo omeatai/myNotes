@@ -7,24 +7,6 @@ npm start
 
 ################################
 
-function Statement(){
-    return (
-        <div>
-            <h1>This is a statement...</h1>
-            <p>React is a great library!</p>
-        </div>    
-    )
-
-}
-
-ReactDOM.render(
-    <div>
-        <Navbar />
-        <Statement />
-    </div>,
-    document.getElementById("root")
-)
-
 #Function Based
 export const Header = () => {
   return (
@@ -44,6 +26,30 @@ export default class Header extends React.Component {
     )
   }
 } 
+
+################################
+
+function Statement(){
+    return (
+        <div>
+            <h1>This is a statement...</h1>
+            <p>React is a great library!</p>
+        </div>    
+    )
+
+}
+
+ReactDOM.render(
+    <div>
+        <Navbar />
+        <Statement />
+    </div>,
+    document.getElementById("root")
+)
+
+################################
+
+
 
 
 
