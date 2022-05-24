@@ -2,10 +2,14 @@ noteVC by Ifeanyi Omeata 26/03/2022
 - A minimal version control system that takes each instances commited in a code editor (vscode) as Notes in files.
 - It allows the user specify books, chapters and topics for each instance commited.
 - It allows books to be stored as collections both locally and remotely.
-- It allows the user to view books, chapters and topics conviniently in web or mobile interface and deploy instance quickly at button click.
+- It allows the user to view books, chapters and topics conveniently in web or mobile interface and deploy instance quickly at button click.
 - Dependencies would be installed manually when deployed.
 
 
 bloganise.com by Ifeanyi Omeata 08/04/2022
-Blog Youtube pages and websites from your extension with one-click
+Blog websites from your extension with one-click
 
+
+Videeoo.com
+An app to organise videos from any fetchable source and put them in one place.
+It will be a replica of Netflix with the dark interface.
