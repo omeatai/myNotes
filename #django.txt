@@ -2184,11 +2184,34 @@ npm i react-icons --save-prod
 npx json-server -p 3500 -w data/db.json
 
 
+###################################################
+
+
+from django.db import models
+from django.contrib.auth.models import AbstractUser
+
+
+class User(AbstractUser):
+    first_name = models.CharField(max_length=255)
+    last_name = models.CharField(max_length=255)
+    email = models.EmailField(max_length=255, unique=True)
+    password = models.CharField(max_length=255)
+    username = None
+
+    USERNAME_FIELD = 'email'
+    REQUIRED_FIELDS = []
 
 
 
 
+pipenv install pyMySQL
 
+import pymysql
+pymysql.install_as_MySQLdb()
+
+
+from dotenv import load_dotenv
+load_dotenv()
 
 
 
