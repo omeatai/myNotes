@@ -2163,9 +2163,15 @@ docker-compose up
 git status
 git add .
 git commit -m ""
+git push
+git fetch
+git merge origin/main
 git merge --continue
 git status 
-git push
+
+
+
+
 
 
 1. git clone https://github.com/decadevs/recyclepay-api.git
@@ -2175,7 +2181,7 @@ git push
 5. docker-compose exec api python project/manage.py makemigrations
 6. docker-compose exec api python project/manage.py migrate
 
-docker-compose exec api python project/manage.py test
+docker-compose exec api python project/manage.py test project/
 
 
 npm i react-icons --save-prod
@@ -2201,8 +2207,7 @@ class User(AbstractUser):
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = []
 
-
-
+###################################################
 
 pipenv install pyMySQL
 
@@ -2212,6 +2217,202 @@ pymysql.install_as_MySQLdb()
 
 from dotenv import load_dotenv
 load_dotenv()
+
+###################################################
+
+pipenv install PyJWT
+
+
+pipenv install django-cors-headers
+
+INSTALLED_APPS = [
+    ...,
+    "corsheaders",
+    ...,
+]
+
+MIDDLEWARE = [
+    ...,
+    "corsheaders.middleware.CorsMiddleware",
+    "django.middleware.common.CommonMiddleware",
+    ...,
+]
+
+CORS_ALLOW_ALL_ORIGINS: True
+CORS_ALLOW_CREDENTIALS: True
+
+
+CORS_ALLOWED_ORIGINS = [
+    "https://example.com",
+    "https://sub.example.com",
+    "http://localhost:8080",
+    "http://127.0.0.1:9000",
+]
+
+CORS_ALLOWED_ORIGINS = [
+    "http://read.only.com",
+    "http://change.allowed.com",
+]
+
+CSRF_TRUSTED_ORIGINS = [
+    "http://change.allowed.com",
+]
+
+CORS_ALLOW_METHODS = [
+    "DELETE",
+    "GET",
+    "OPTIONS",
+    "PATCH",
+    "POST",
+    "PUT",
+]
+
+###################################################
+
+mailhog
+brew update && brew install mailhog
+Then, start MailHog by running mailhog in the command line.
+
+
+EMAIL_HOST = " 0.0.0.0"
+EMAIL_PORT = 1025
+
+
+REST_FRAMEWORK = {
+    'EXCEPTION_HANDLER': 'core_app.exceptions.status_code_handler',
+}
+
+
+
+################################
+
+npx create-react-app my-app
+cd my-app
+npm start
+
+################################
+
+#Function Based
+export const Header = () => {
+  return (
+    <div>
+      <h1>My Header</h1>
+    </div>
+  )  
+}
+
+#Class Based
+export default class Header extends React.Component {
+  render() {
+    return (
+      <div>
+        <h1>My Header</h1>
+      </div>
+    )
+  }
+} 
+
+################################
+
+npx create-react-app frontend --template typescript
+
+
+#Production - 
+npm run build
+
+npm i react-router-dom
+npm i -D @types/react-router-dom
+
+npm i axios
+npm i -D @types/axios
+
+
+###################################################
+
+YARN
+
+npm install --global yarn
+yarn --version
+yarn init
+
+#Adding a dependency
+
+yarn add [package]
+yarn add [package]@[version]
+yarn add [package]@[tag]
+yarn add [package] --dev
+
+#Upgrading a dependency
+
+yarn upgrade [package]
+yarn upgrade [package]@[version]
+yarn upgrade [package]@[tag]
+
+#Removing a dependency
+
+yarn remove [package]
+
+
+#Installing all the dependencies of project
+
+yarn
+
+or
+
+yarn install
+
+
+
+git pull origin main --no-rebase
+
+
+yarn add react-icons --save
+
+
+
+color	undefined (inherit)	
+size	1em	
+className	undefined	
+style	undefined	Can overwrite size and color
+attr	undefined	Overwritten by other attributes
+title	undefined	Icon description for accessibility
+
+ <PlusCircleOutlined  style={{
+        fontSize: "50px",
+         color: "#408021",
+         strokeWidth: "30", // --> higher value === more thickness the filled area
+         stroke: "white" 
+  }}/>
+
+
+docker-compose up
+git status
+git add .
+git commit -m ""
+git push
+git fetch
+git merge origin/main
+git merge --continue
+git status 
+
+
+VS CODE SHORTCUTS
+ctrl + shift + P = open command pallete
+ctrl + p = choose options
+ctrl + B = toggle sidebar
+ctrl + D = select multiple
+ctrl + shift + L = select multiple
+ctrl + ~ = open terminal
+ctrl + space = open suggestion box
+ctrl + shift + [ = open block of code
+ctrl + shift + ] = close block of code
+ctrl + , = open settings
+alt + up/down = move line of code
+alt + shift + up/down = copy lines of code and paste
+alt + click = multiple cursors
+ctrl + tab = select files
+ctrl + shift + T = reopen last closed tabs
+ctrl + W = close all tabs
 
 
 
