@@ -81,8 +81,29 @@ if(fs.existsSync("./books/thesage.txt")) {
     })
 }
 
+####################################################
+DELETE AND CREATE FOLDER -
 
+if(!fs.existsSync("./books")) {
+    fs.mkdir("./books", (err) => {
+        if (err) {
+        console.log(err);
+        } else {
+        console.log("Folder created successfully");
+        }
+    })
+}else {
+    fs.rmdir("./books", (err) => {
+        if (err) {
+        console.log(err);
+        } else {
+        console.log("Folder deleted successfully");
+        }
+    })
+}
 
+####################################################
+STREAMS AND BUFFER -
 
 
 
