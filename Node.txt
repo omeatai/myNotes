@@ -26,7 +26,8 @@ module.exports = {
 const {men, women} = require("./people.js")
 console.log(men, women)
 
-
+const os = require("os")
+console.log(os.platform(), os.homedir())
 
 
 
