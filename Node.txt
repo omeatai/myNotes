@@ -1,0 +1,26 @@
+
+node -v
+
+
+const myinterval = global.setInterval(()=>{
+    count += 1;
+    console.log(`Your number is ${count}`);
+}, 2000)
+
+global.setTimeout(()=>{
+    clearInterval(myinterval);
+}, 10000)
+
+
+console.log(__dirname);
+console.log(__filename);
+
+
+
+
+
+
+
+
+
+

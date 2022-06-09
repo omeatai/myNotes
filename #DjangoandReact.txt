@@ -2377,6 +2377,7 @@ style	undefined	Can overwrite size and color
 attr	undefined	Overwritten by other attributes
 title	undefined	Icon description for accessibility
 
+
  <PlusCircleOutlined  style={{
         fontSize: "50px",
          color: "#408021",
@@ -2415,7 +2416,51 @@ ctrl + shift + T = reopen last closed tabs
 ctrl + W = close all tabs
 
 
+STORYBOOK
+npx create-react-app .
+npm uninstall --save react-scripts
 
+
+
+
+
+https://www.linkedin.com/posts/onalenna-mtezuka-669a2843_realestate-realestatedevelopment-propertymanagement-activity-6889157292143587329-GVAU?utm_source=linkedin_share&utm_medium=member_desktop_web
+
+
+JavaScript
+Python
+Django
+DRF Django
+Django Rest Framework
+Node.js
+SQL
+CSS
+PostgreSQL
+React.js
+REST API
+AWS
+Bootstrap
+MySQL
+HTML5
+Laravel
+Azure
+TypeScript
+Git
+CSS3
+Docker
+JIRA
+Object-Oriented Pragramming
+CI/CD
+API
+WordPress
+Test-Driven Development (TDD)
+JSON
+Postman
+GitHub
+Redux
+Unit Testing
+
+https://youtu.be/mUKvwoWGeQ0
 
 
 
@@ -2457,15 +2502,17 @@ https://ifeanyiomeata.hashnode.dev
 https://ifeanyiomeata.com
 
 
+Check out my Expanding Card Slider for my React Project
+https://ifeanyiomeata.com
+Netlify: http://expanding-card-slider.netlify.app
+Github: https://github.com/omeatai/Expanding-Cards-Slider
+Watch: https://youtu.be/8wWIuY1t4-k
+#React #Reactjs #100DaysOfCode #100daysofcodechallenge #DEVCommunity #100daysofreact #python #django #developer #100DaysOfCode 
+
 
 
 DJANGO RF TUTORIAL -  5 - MODEL FOREIGN KEY RELATIONSHIP
 https://youtu.be/mYLhnzMNqvY
-
-
-
-
-
 
 DJANGO RF TUTORIAL -  5 - MODEL FOREIGN KEY RELATIONSHIP
 https://youtu.be/mYLhnzMNqvY
