@@ -15,6 +15,7 @@ console.log(__dirname);
 console.log(__filename);
 
 ####################################################
+EXPORT -
 
 const men = ['Ben','Jamie','Sam'];
 const women = ['Alice','Mary','Shade'];
@@ -25,6 +26,7 @@ module.exports = {
 }
 
 ####################################################
+IMPORT -
 
 const {men, women} = require("./people.js")
 console.log(men, women)
