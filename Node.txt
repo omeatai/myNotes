@@ -119,7 +119,18 @@ readStream.on('data', (chunk) => {
     writeStream.write(chunk);
 })
 
+####################################################
+CREATE SERVER FOR REQUEST AND RESPONSE
 
+const http = require('http')
+
+const server = http.createServer((req, res) => {
+    console.log('request made!')
+})
+
+server.listen(3000, 'localhost', () => {
+    console.log('listening on port 3000')
+})
 
 
 
