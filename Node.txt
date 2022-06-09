@@ -15,6 +15,21 @@ global.setTimeout(()=>{
 console.log(__dirname);
 console.log(__filename);
 
+const men = ['Ben','Jamie','Sam'];
+const women = ['Alice','Mary','Shade'];
+
+module.exports = {
+    men,
+    women
+}
+
+const {men, women} = require("./people.js")
+console.log(men, women)
+
+
+
+
+
 
 
 
