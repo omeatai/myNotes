@@ -137,10 +137,27 @@ server.listen(3000, 'localhost', () => {
 })
 
 
+####################################################
+RAW HTML REQUEST AND RESPONSE
 
+const http = require('http')
 
+const server = http.createServer((req, res) => {
+    console.log(req.url, req.method)
 
+    res.setHeader('Content-Type', 'text/html');
+    res.write('<h1>The Beginning</h1>')
+    res.write('<h2>This is the first</h2>');
+    res.write('<p>This is the paragraph</p>');
+    res.end();
+})
 
+server.listen(3000, 'localhost', () => {
+    console.log('listening on port 3000')
+})
+
+####################################################
+HTML FILE REQUEST AND RESPONSE
 
 
 
