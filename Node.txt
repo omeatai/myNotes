@@ -33,6 +33,7 @@ const os = require("os")
 console.log(os.platform(), os.homedir())
 
 ####################################################
+READ -
 
 const fs = require('fs');
 
@@ -45,10 +46,19 @@ fs.readFile("./books/thesage.txt", "utf8", (err, data) => {
 })
 
 ####################################################
+WRITE-
 
+const fs = require('fs');
 
+fs.writeFile("./books/thesage.txt", "The Sage has been replaced.", (err) => {
+    if (err) {
+    console.log(err);
+    } else {
+    console.log("File written successfully");
+    }
+})
 
-
+####################################################
 
 
 
