@@ -212,7 +212,48 @@ server.listen(3000, 'localhost', () => {
 
 
 ####################################################
-STATUS CODE
+STATUS CODES
+
+const http = require('http');
+const fs = require('fs');
+
+const server = http.createServer((req, res) => {
+    path = "./views/";
+    res.setHeader('Content-Type', 'text/html' );
+
+    switch(req.url){
+        case '/':
+            path += 'index.html';
+            res.statusCode = 200;
+            break;
+        case '/about':
+            path += 'about.html';
+            res.statusCode = 200;
+            break;
+        default:
+            path += '404.html';
+            res.statusCode = 404;
+            break;
+    }
+
+    fs.readFile(path, 'utf8', (err, html) => {
+        //res.write(html);
+        res.end(html);
+    })
+});
+
+
+server.listen(3000, 'localhost', () => {
+    console.log('listening on port 3000')
+})
+
+####################################################
+REDIRECTS
+
+
+
+
+
 
 
 
