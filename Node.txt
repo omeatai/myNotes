@@ -1,7 +1,6 @@
 
 node -v
 
-
 const myinterval = global.setInterval(()=>{
     count += 1;
     console.log(`Your number is ${count}`);
@@ -15,6 +14,8 @@ global.setTimeout(()=>{
 console.log(__dirname);
 console.log(__filename);
 
+####################################################
+
 const men = ['Ben','Jamie','Sam'];
 const women = ['Alice','Mary','Shade'];
 
@@ -23,11 +24,45 @@ module.exports = {
     women
 }
 
+####################################################
+
 const {men, women} = require("./people.js")
 console.log(men, women)
 
 const os = require("os")
 console.log(os.platform(), os.homedir())
+
+####################################################
+
+const fs = require('fs');
+
+fs.readFile("./books/thesage.txt", "utf8", (err, data) => {
+    if (err) {
+    console.log(err);
+    } else {
+    console.log(data);
+    }
+})
+
+####################################################
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
