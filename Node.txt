@@ -103,21 +103,24 @@ if(!fs.existsSync("./books")) {
 }
 
 ####################################################
-STREAMS AND BUFFER/ READ -
+STREAMS AND BUFFER/ READ, COPY AND WRITE -
 
 const fs = require("fs");
 const readStream = fs.createReadStream("./books/thesage.txt", "utf8");
+const writeStream = fs.createWriteStream("./books/thesage2.txt", "utf8");
+
+// readStream.pipe(writeStream);
+// const readStream = fs.createReadStream("./books/thesage.txt").pipe(fs.createWriteStream("./books/thesage2.txt"));
 
 readStream.on('data', (chunk) => {
     console.log("---- New Stream -----")
     console.log(chunk);
+    writeStream.write("\n---- New Stream -----\n");
+    writeStream.write(chunk);
 })
 
-####################################################
-STREAMS AND BUFFER/ COPY AND PASTE -
 
-const fs = require("fs");
-const readStream = fs.createReadStream("./books/thesage.txt").pipe(fs.createWriteStream("./books/thesage2.txt"));
+
 
 
 
