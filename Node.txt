@@ -294,6 +294,8 @@ nodemon server.js
 
 npm init
 
+$ npm i --save lodash
+
 
 
 
