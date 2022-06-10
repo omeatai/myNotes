@@ -321,7 +321,7 @@ INSTALL NPM PACKAGES
 npm install
 
 ####################################################
-INSTALL EXPRESS
+EXPRESS
 
 npm install express
 
