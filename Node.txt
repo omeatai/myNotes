@@ -304,6 +304,12 @@ const _ = require('lodash');
   const random = _.random(0, 10);
   console.log(random);
 
+  const greeting = _.once(() => {
+      console.log(_.upperCase('hello world'));
+  })
+  greeting();
+  greeting();
+
 
 
 
