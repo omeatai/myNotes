@@ -287,12 +287,16 @@ server.listen(3000, 'localhost', () => {
 })
 
 ####################################################
-NPM
+NPM NODEMON
 
 sudo npm install -g nodemon
 nodemon server.js
 
 npm init
+
+####################################################
+_LODASH
+https://lodash.com/docs/
 
 $ npm i --save lodash
 
@@ -311,8 +315,8 @@ const _ = require('lodash');
   greeting();
 
 
-
-
+####################################################
+_LODASH
 
 
 
