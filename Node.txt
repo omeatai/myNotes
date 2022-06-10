@@ -289,6 +289,12 @@ server.listen(3000, 'localhost', () => {
 ####################################################
 NPM
 
+sudo npm install -g nodemon
+nodemon server.js
+
+npm init
+
+
 
 
 
