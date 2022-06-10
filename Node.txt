@@ -296,7 +296,13 @@ npm init
 
 $ npm i --save lodash
 
-
+//lodash
+const _ = require('lodash');
+  const arr = [1,2,3,4,5];
+  const arr2 = _.chunk(arr, 2);
+  console.log(arr2);
+  const random = _.random(0, 10);
+  console.log(random);
 
 
 
