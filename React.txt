@@ -69,7 +69,34 @@ export default Home;
 ####################################################
 OUTPUTING LISTS 
 
+import { useState } from "react";   
 
+const Home = () => {
+
+    const [posts, setPosts] = useState([
+        {title: "First Post", description: "This is the first post", author: "Ben Lewis", id: 1},
+        {title: "Second Post", description: "This is the second post", author: "George Franks", id: 2},
+        {title: "Third Post", description: "This is the third post", author: "Bello Ahmed", id: 3},
+    ]);
+
+    return ( 
+        <div className="home">
+            <h2>Homepage</h2>
+            {posts.map((post)=>(
+                <div key={post.id} className="blog-preview">
+                    <p>Id: {post.id}</p>
+                    <h2>Title: {post.title}</h2>
+                    <h3>Written by {post.author}</h3>
+                    <p>Description: {post.description}</p>
+                    <p>--------------------------------</p>
+                </div>
+                
+            ))}
+        </div>
+     );
+}
+ 
+export default Home;
 
 
 
