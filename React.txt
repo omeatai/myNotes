@@ -181,13 +181,65 @@ const Home = () => {
 export default Home;
 
 
+####################################################
+DELETE CONTENTS
+
+import { useState } from "react"; 
+import { BlogList } from "./BlogList";  
+
+const Home = () => {
+
+    const [posts, setPosts] = useState([
+        {title: "First Post", description: "This is the first post", author: "Ben Lewis", id: 1},
+        {title: "Second Post", description: "This is the second post", author: "George Franks", id: 2},
+        {title: "Third Post", description: "This is the third post", author: "Bello Ahmed", id: 3},
+    ]);
+
+    const handleDelete = (id) => {
+        setPosts(posts.filter(post => post.id !== id));
+        console.log(`Deleted post with id ${id}`);
+    }
+
+    return ( 
+        <div className="home">
+            <h2>Homepage</h2>
+            <BlogList 
+                posts={posts} 
+                handleDelete={handleDelete} 
+                title="All Posts!"
+            />
+            <BlogList 
+                posts={posts.filter((post)=>post.author === "Bello Ahmed")}
+                title="Bello's Posts!"
+            />
+        </div>
+     );
+}
+ 
+export default Home;
 
 
+export const BlogList = ({posts, title, handleDelete}) => {
+    return ( 
+        <div className="blog-list">
+            <h2>{title}</h2>
+            <hr />
+            {posts.map((post)=>(
+                <div key={post.id} className="blog-preview">
+                    <p>Id: {post.id}</p>
+                    <h2>Title: {post.title}</h2>
+                    <h3>Written by {post.author}</h3>
+                    <p>Description: {post.description}</p>
+                    <button onClick={()=>{handleDelete(post.id)}}>Delete Post</button>
+                </div>
+                
+            ))}
+        </div>
+     );
+}
 
-
-
-
-
+####################################################
+DELETE CONTENTS
 
 
 
