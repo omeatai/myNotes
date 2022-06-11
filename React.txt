@@ -239,7 +239,21 @@ export const BlogList = ({posts, title, handleDelete}) => {
 }
 
 ####################################################
-DELETE CONTENTS
+USEEFFECT
+
+import { useState, useEffect } from "react"; 
+
+ useEffect(() => {
+        console.log("Home component rendered");
+    }, []);
+
+
+
+
+
+
+
+
 
 
 
