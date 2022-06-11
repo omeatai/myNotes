@@ -1,0 +1,101 @@
+node -v
+
+npx create-react-app dojoapp
+
+npm start
+
+npm install
+
+
+####################################################
+EVENTS
+
+const Home = () => {
+
+    const handleClick = (e) => {
+        console.log('clicked',e.target);
+    }
+
+    const handleClickAgain = (name,e) => {
+        console.log(`clicked again ${name}`,e.target);
+    }
+
+    return ( 
+        <div className="home">
+            <h2>Homepage</h2>
+            <button onClick={handleClick}>Click Me</button>
+            <button onClick={(e)=>{handleClickAgain("Andrew",e)}}>Click Me Again</button>
+        </div>
+     );
+}
+ 
+export default Home;
+
+####################################################
+USING STATE
+
+import { useState } from "react";   
+
+const Home = () => {
+
+    const [name, setName] = useState('mario');
+    const [age, setAge] = useState(20);
+
+    const handleClick = (e) => {
+        console.log('clicked',e.target);
+        const kid = "Franks"
+        const age = "24"
+        setName(kid);
+        setAge(age);
+        console.log(`${kid} is ${age} years old.`);
+    }
+
+    const handleClickAgain = (name,e) => {
+        console.log(`clicked again ${name}`,e.target);
+    }
+
+    return ( 
+        <div className="home">
+            <h2>Homepage</h2>
+            <h2>{name} is {age} years old</h2>
+            <button onClick={handleClick}>Click Me</button>
+            <button onClick={(e)=>{handleClickAgain("Andrew",e)}}>Click Me Again</button>
+        </div>
+     );
+}
+ 
+export default Home;
+
+####################################################
+OUTPUTING LISTS 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

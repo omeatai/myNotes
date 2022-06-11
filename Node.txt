@@ -359,25 +359,146 @@ app.listen(3000, 'localhost', () => {
 ####################################################
 EJS
 
+- Express HandleBars
+- Pug
+- EJS
+
+$ npm install ejs
+
+
+//Deploy Express App
+const express = require('express');
+const app = express();
+
+//Set View Engine
+app.set('view engine', 'ejs');
+// app.set('views', 'views');
+
+const students = [
+    // {name: 'John', age: 25, course: 'Physics'}, 
+    // {name: 'Jane', age: 23, course: 'Biology'}, 
+    // {name: 'Bob', age: 22, course: 'Maths'}
+];
+
+//index.html
+app.get('/', (req, res) => {
+    // res.send('<h1>Hello World</h1>');
+    // res.sendFile("./views/index.html", {root: __dirname});
+    res.render('index', {title: 'HomePage', students: students});
+})
+
+//about.html
+app.get('/about', (req, res) => {
+    // res.send('<h1>About Page</h1>');
+    // res.sendFile("./views/about.html", {root: __dirname});
+    res.render('about', {title: 'About us'});
+})
+
+//redirect to about page
+app.get('/about-us', (req, res) => {
+    res.redirect('/about');
+})
+
+//404 error
+app.use((req, res) => {
+    // res.status(404).sendFile("./views/404.html", {root: __dirname});
+    res.status(404).render('404', {title: '404'});
+})
+
+
+app.listen(3000, 'localhost', () => {
+    console.log('listening on port 3000')
+})
 
 
 
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Node Class | <%= title %>
+    </title>
+</head>
+
+<body>
+    <h1>Welcome to the Node Class Newbies!</h1>
+    <p>Let's see how HTML works with Node!</p>
+    <% const content="This is a dynamic text inside HTML." %>
+    <nav>
+        <a href="/">Home</a>
+        <a href="/about">About</a>
+        <br />
+        <p>
+            <%= content %>
+        </p>
+    </nav>
+
+    <% if(students.length> 0) { %>
+    <% students.forEach((student)=> { %>
+    <ul>
+        <li>
+            <%= student.name %>
+        </li>
+        <li>
+            <%= student.age %>
+        </li>
+        <li>
+            <%= student.course %>
+        </li>
+    </ul>
+    <% }); %>
+    <% } else { %>
+    <p>No students found</p>
+    <% } %>
+</body>
+
+</html>
 
 
 
+####################################################
+INCLUDE
+
+<%- include('./partials/header.ejs') %>
+
+<%- include('./partials/nav.ejs') %>
 
 
+####################################################
+MIDDLEWARE
+
+app.use((req, res, next) => {
+    console.log('New request made.');
+    console.log('Request URL:', req.url);
+    console.log('Hostname:', req.hostname);
+    console.log('Path:', req.path);
+    console.log('Method:', req.method);
+    next();
+});
 
 
+####################################################
+THIRD PARTY - MIDDLEWARE (MORGAN)
 
+npm install morgan
 
+const morgan = require('morgan');
 
+app.use(morgan('dev'));
+app.use(morgan('tiny'));
 
+GET /about 304 16.316 ms - -
+GET /about 304 - - 16.316 ms
 
+####################################################
+STYLES.CSS
 
+app.use(express.static('public'));
 
-
-
+<link rel="stylesheet" href="styles.css">
 
 
 
