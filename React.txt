@@ -460,6 +460,62 @@ export default App;
 ####################################################
 REACT LINKS
 
+import { Link } from "react-router-dom";
+
+const Navbar = ({title}) => {
+    return (  
+        <nav className="navbar">
+            <header>
+                <h1>{title}</h1>
+            </header>
+            <div className="links">
+                <Link to="/">Home</Link>
+                <Link to="/create" style={{
+                    backgroundColor: '#f1356d',
+                    color: '#fff',
+                    padding: '10px 20px',
+                    borderRadius: '5px',
+                }}>New Blog</Link>
+            </div>
+        </nav>
+    );
+}
+ 
+export default Navbar;
+
+
+####################################################
+USE EFFECT CLEANUP
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
