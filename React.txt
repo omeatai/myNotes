@@ -181,6 +181,16 @@ const Home = () => {
 export default Home;
 
 
+ {posts.filter((post)=>post.author === "Bello Ahmed").length > 0 ? 
+  <BlogList 
+      posts={posts.filter((post)=>post.author === "Bello Ahmed")}
+      handleDelete={handleDelete} 
+      title="Bello's Posts!"
+  />
+  : <p>No posts available for Bello Ahmed.</p>
+  }
+
+
 ####################################################
 DELETE CONTENTS
 
@@ -247,14 +257,94 @@ import { useState, useEffect } from "react";
         console.log("Home component rendered");
     }, []);
 
+####################################################
+JSON-SERVER
+
+{
+    "posts": [
+        {
+            "id": 1,
+            "title": "First Post", 
+            "description": "This is the first post", 
+            "author": "Ben Lewis"
+        },     
+        {
+            "id": 2, 
+            "title": "Second Post", 
+            "description": "This is the second post", 
+            "author": "George Franks" },
+        {
+            "id": 3,
+            "title": "Third Post", 
+            "description": "This is the third post", 
+            "author": "Bello Ahmed"}
+    ]
+}
+
+
+npx json-server --watch data/db.json --port 7000
 
 
 
+####################################################
+ERROR HANDLING & CONDITIONAL RENDERING
 
+import { useState, useEffect } from "react"; 
+import { BlogList } from "./BlogList";
 
+const Home = () => {
 
+    const [posts, setPosts] = useState([]);
+    const [isLoading, setIsLoading] = useState(true);
+    const [error, setError] = useState(null);
 
+    const handleDelete = (id) => {
+        setPosts(posts.filter(post => post.id !== id));
+        console.log(`Deleted post with id ${id}`);
+    }
 
+    useEffect(() => {
+        fetch('http://localhost:7000/postss')
+            .then(res => {
+                if(!res.ok) {
+                    throw new Error("Error: Failed to fetch resource...");
+                    // throw new Error(res.statusText);
+                }
+                return res.json();
+            })
+            .then(data => {
+                setPosts(data);
+                setIsLoading(false);
+                setError(null);
+                console.log(data);
+            })
+            .catch((err) => {
+                setIsLoading(false);
+                setError(err.message);
+                // console.log("Error: ", err.message);
+            });
+    }, []);
+
+    return ( 
+        <div className="home">
+            <h2>Homepage</h2>
+
+            {error && <h3 style={{color: 'red'}}>{error}</h3>}
+
+            {isLoading ? <p>Loading...</p> 
+            : posts.length > 0 
+            ?<BlogList 
+            posts={posts} 
+            handleDelete={handleDelete} 
+            title="All Posts!"
+            /> 
+            :<p>No posts available.</p>}
+
+        </div>
+     );
+}
+ 
+export default Home;
 
 
 
