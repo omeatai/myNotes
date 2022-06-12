@@ -430,10 +430,35 @@ REACT ROUTER
 
 npm install react-router-dom@5
 
+import Navbar from './components/Navbar';
+import Home from './components/Home';
+import Create from './components/Create';
+import { BrowserRouter, Switch, Route } from 'react-router-dom';
 
+function App() {
 
+  const title = "The Maple city Blog."
 
+  return (
+    <BrowserRouter>
+      <div className="App">
+        <Navbar title={title} />
+        <div className="content">
+          <Switch>
+            <Route exact path="/" component={Home} />
+            <Route exact path="/create" component={Create} />
+          </Switch>
+        </div>
+      </div>
+    </BrowserRouter>
+    
+  );
+}
 
+export default App;
+
+####################################################
+REACT LINKS
 
 
 
