@@ -284,8 +284,6 @@ JSON-SERVER
 
 npx json-server --watch data/db.json --port 7000
 
-
-
 ####################################################
 ERROR HANDLING & CONDITIONAL RENDERING
 
@@ -347,7 +345,8 @@ const Home = () => {
 export default Home;
 
 
-
+####################################################
+ERROR HANDLING & CONDITIONAL RENDERING
 
 
 
