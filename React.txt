@@ -346,14 +346,87 @@ export default Home;
 
 
 ####################################################
-CUSTOM HOOK
+CUSTOM HOOKS
+
+import useFetch from "../hooks/useFetch";
+import { BlogList } from "./BlogList";
+
+const Home = () => {
+    const {
+        data: posts,
+        isLoading,
+        error,
+        setData,
+    } = useFetch("http://localhost:7000/posts");
+
+    const handleDelete = (id) => {
+        setData(posts.filter((post) => post.id !== id));
+        console.log(`Deleted post with id ${id}`);
+    };
+
+    return (
+        <div className="home">
+            <h2>Homepage</h2>
+
+            {error && <h3 style={{ color: "red" }}>{error}</h3>}
+
+            {isLoading ? (
+                <p>Loading...</p>
+            ) : posts.length > 0 ? (
+                <BlogList
+                    posts={posts}
+                    handleDelete={handleDelete}
+                    title="All Posts!"
+                />
+            ) : (
+                <p>No posts available.</p>
+            )}
+        </div>
+    );
+};
+
+export default Home;
+
+##############
+
+import { useState, useEffect } from "react"; 
+
+const useFetch = (url) => {
+
+    const [data, setData] = useState([]);
+    const [isLoading, setIsLoading] = useState(true);
+    const [error, setError] = useState(null);
+
+    useEffect(() => {
+        fetch(url)
+            .then(res => {
+                if(!res.ok) {
+                    throw new Error("Error: Failed to fetch resource...");
+                    // throw new Error(res.statusText);
+                }
+                return res.json();
+            })
+            .then(data => {
+                setData(data);
+                setIsLoading(false);
+                setError(null);
+                console.log(data);
+            })
+            .catch((err) => {
+                setIsLoading(false);
+                setError(err.message);
+                // console.log("Error: ", err.message);
+            });
+    }, [url]);
+
+    return ({data, isLoading, error, setData, setIsLoading, setError});
+}
+ 
+export default useFetch;
 
 
-
-
-
-
-
+####################################################
+CUSTOM HOOKS
 
 
 
