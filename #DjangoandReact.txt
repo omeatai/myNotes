@@ -2165,6 +2165,7 @@ git add .
 git commit -m ""
 git push
 git fetch
+git fetch --all
 git merge origin/main
 git merge --continue
 git status 
@@ -2334,6 +2335,9 @@ YARN
 npm install --global yarn
 yarn --version
 yarn init
+#Installing all the dependencies of project
+yarn
+yarn install
 
 #Adding a dependency
 
@@ -2352,19 +2356,7 @@ yarn upgrade [package]@[tag]
 
 yarn remove [package]
 
-
-#Installing all the dependencies of project
-
-yarn
-
-or
-
-yarn install
-
-
-
 git pull origin main --no-rebase
-
 
 yarn add react-icons --save
 
@@ -2424,43 +2416,7 @@ npm uninstall --save react-scripts
 
 
 
-https://www.linkedin.com/posts/onalenna-mtezuka-669a2843_realestate-realestatedevelopment-propertymanagement-activity-6889157292143587329-GVAU?utm_source=linkedin_share&utm_medium=member_desktop_web
 
-
-JavaScript
-Python
-Django
-DRF Django
-Django Rest Framework
-Node.js
-SQL
-CSS
-PostgreSQL
-React.js
-REST API
-AWS
-Bootstrap
-MySQL
-HTML5
-Laravel
-Azure
-TypeScript
-Git
-CSS3
-Docker
-JIRA
-Object-Oriented Pragramming
-CI/CD
-API
-WordPress
-Test-Driven Development (TDD)
-JSON
-Postman
-GitHub
-Redux
-Unit Testing
-
-https://youtu.be/mUKvwoWGeQ0
 
 
 
@@ -2568,3 +2524,56 @@ https://app.usebraintrust.com/r/akorede2/?job_id=3507
 
 
 There was an Error - (535, b'5.7.8 Username and Password not accepted. Learn more at\n5.7.8 https://support.google.com/mail/?p=BadCredentials j1-20020a05620a410100b006a65c58db99sm2124556qko.64 - gsmtp')
+
+
+
+
+https://www.linkedin.com/posts/onalenna-mtezuka-669a2843_realestate-realestatedevelopment-propertymanagement-activity-6889157292143587329-GVAU?utm_source=linkedin_share&utm_medium=member_desktop_web
+
+
+JavaScript
+Python
+Django
+DRF Django
+Django Rest Framework
+Node.js
+SQL
+CSS
+PostgreSQL
+React.js
+REST API
+AWS
+Bootstrap
+MySQL
+HTML5
+Laravel
+Azure
+TypeScript
+Git
+CSS3
+Docker
+JIRA
+Object-Oriented Pragramming
+CI/CD
+API
+WordPress
+Test-Driven Development (TDD)
+JSON
+Postman
+GitHub
+Redux
+Unit Testing
+
+https://youtu.be/mUKvwoWGeQ0
+
+
+R-JA10
+
+Hi Ifeanyi,
+
+
+Your login details can be found below:
+
+
+Email: iomeata@drohealtch.com
+PW: Password1.

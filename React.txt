@@ -458,7 +458,7 @@ function App() {
 export default App;
 
 ####################################################
-REACT LINKS
+REACT LINK
 
 import { Link } from "react-router-dom";
 
