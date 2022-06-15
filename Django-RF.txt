@@ -20,12 +20,10 @@ DOCKERHUB_TOKEN - 602508f5-3986-412c-96af-0b45964aba47
 
 DOCKERHUB_USER - omeatai
 
-
-
-
-
 ###################################################
-DOCKER HUB
+DOCKER COMPOSE
+
+docker-compose run --rm app sh -c "python manage.py collectstatic"
 
 
 
