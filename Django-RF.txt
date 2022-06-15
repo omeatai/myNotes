@@ -2,11 +2,13 @@
 DOCKER VERSION
 
 docker --version
-
+git --version
 
 
 ###################################################
-DOCKER VERSION
+DOCKER HUB - REGISTER FOR AN ACCOUNT
+
+https://hub.docker.com/
 
 
 
