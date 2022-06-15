@@ -10,8 +10,22 @@ DOCKER HUB - REGISTER FOR AN ACCOUNT
 
 https://hub.docker.com/
 
+git clone https://github.com/omeatai/recipe-api-project.git
+
+1. Run docker login -u omeatai
+
+2. At the password prompt, enter the personal access token.
+
+DOCKERHUB_TOKEN - 602508f5-3986-412c-96af-0b45964aba47
+
+DOCKERHUB_USER - omeatai
 
 
+
+
+
+###################################################
+DOCKER HUB
 
 
 
