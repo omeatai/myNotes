@@ -1,0 +1,22 @@
+celery
+Jenkins
+centrix
+DJango Admin
+
+Unit-testing
+
+be298-2f3e413e07-0c4b69c5ce-3d3325eb21-526fa9a1e7-3c2c9616d6-e64bbb293e-cfa6b0d6f7-9741eea49d-fd42262c0b-ff68ca5425-7b485516ee-3dedda1c8b-8c78848a9d-ed69994916-a86af2bb62-2ba16
+
+
+
+
+
+
+
+
+
+
+
+
+
+

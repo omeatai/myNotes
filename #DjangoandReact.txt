@@ -2577,3 +2577,17 @@ Your login details can be found below:
 
 Email: iomeata@drohealtch.com
 PW: Password1.
+
+
+
+
+
+
+
+
+
+
+celery
+Jenkins
+centrix
+DJango Admin
