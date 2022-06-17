@@ -2,7 +2,6 @@
 myNotes
 
 
-
 What does this PR do
 This branch is responsible for the Collection Officer to accept and confirm the received item for recycling. The api accepts the status to be changed by the Collection officer, and also ensures that permissions apply for the Collection Officer to be authorised to view the endpoint.
 
@@ -46,9 +45,7 @@ Before submitting this PR, please make sure
  This PR template is completed.
 
 
-
-
- ### What does this PR do
+### What does this PR do
 This branch is responsible for the completion of the SignIn and SignUp pages.
 
 ### Tasks Completed
