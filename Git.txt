@@ -47,6 +47,268 @@ CodeBlock
 ```
 
 
+
+##########################################
+GIT BASICS
+
+1 Get Git Version
+
+git --version
+
+
+2. Set Global Configurations
+
+git config --global user.name "<Your Name>"
+git config --global user.email "<Your Email>"
+
+git config --list
+
+git config user.email
+
+
+3. Get Help
+
+git help <verb>
+git <verb> --help
+
+git help commit
+git commit --help
+
+
+4. List files
+
+ls
+ls -lrt
+ls -la
+
+
+5. Create new folder (mkdir)
+
+mkdir practice
+
+
+6. Initialize git from existing code
+
+git init
+
+
+7. Stop tracking/ remove git from code
+
+rm -rf .git
+
+
+8. View git status
+
+git status
+
+
+9. Create and add to .gitignore file
+
+touch .gitignore
+echo questions.py > .gitignore
+echo *.exe >> .gitignore
+echo libraries/ >> .gitignore
+
+cat .gitignore
+
+
+10. Add files to Staging Area
+
+git add -A
+git add --all
+git add .
+
+git add A.txt
+
+
+11. Remove files from Staging back to Working Directory
+
+git reset
+
+git reset A.txt
+git restore --staged A.txt
+
+
+12. Commit files from Staging Area to Repository
+
+git commit -m "Initial commit"
+git commit -am "Initial commit"
+
+
+13. View History of Commits
+
+git log
+
+
+14. Clone a Remote Repository
+
+git clone <url> <where-to-clone>
+git clone https://github.com/omeatai/practice-app.git ./cloud
+
+
+15. View Info about cloned Remote Repository
+
+git remote -v
+git branch -a
+
+
+16. View changes made to code
+
+git diff
+
+
+17. Pull updates from remote repository
+
+git branch -M main
+git remote add origin https://github.com/omeatai/practice-app.git
+
+git pull origin main
+<git pull origin master>
+<git pull origin question-1>
+
+
+18. Push updates from local to remote repository
+
+git remote add origin https://github.com/omeatai/practice-app.git (add remote repo)
+git remote set-url origin https://github.com/omeatai/practice-app.git (setting to a remote repo)
+git remote -v (check if repo is set)
+git branch -M main (set primary branch)
+
+git push --set-upstream origin main
+git push -u origin main
+git push origin main
+
+
+19. View existing branches
+
+git branch
+
+
+20. Create new branch
+
+git branch calc-divide
+
+
+21. Switch to Branch
+
+git checkout calc-divide
+
+
+22. Merge branch to Master and view merges
+
+git merge calc-divide 
+
+git branch --merged
+
+
+23. Delete branch
+
+git branch -d calc-divide
+git push origin --delete calc-divide
+
+
+24. Set Config Values and Push to remote:
+
+git clone https://gitexercises.fracz.com/git/exercises.git
+cd exercises
+git config user.name <your.name>
+git config user.email <your.email>
+
+git push -u origin question-1
+
+
+25. Abort merge during conflict
+
+git merge --abort
+
+
+26. Save Stash to background
+
+git stash
+git stash save "worked on functions"
+
+
+27. View Stash list
+
+git stash list
+git stash show
+
+
+28. Restore Stash from background
+
+git stash pop
+git stash apply stash@{0}
+
+
+29. Remove Stash from background
+
+git stash clear
+git stash drop stash@{0}
+
+
+30. Display git commit History
+
+git log
+git log --oneline
+git reflog
+
+
+31. View last two commits
+
+git log -2
+
+
+32. Change last commit
+
+git rebase -i
+#choose edit
+git commit --amend
+git rebase --continue
+
+git commit -a --amend
+
+
+33. Change date of last commit
+
+git commit --amend --date 1-1-1987
+
+
+34. Change old typo
+
+git rebase -i HEAD~2
+#edit
+git add file.txt
+git rebase --continue
+
+git rebase -i HEAD^^
+# mark the first commit with "edit" command
+# fix the typo in the file
+git add file.txt
+git rebase --continue
+# fix the typo in the commit message
+
+
+35. Change to first version of commit
+
+git reflog
+git reset --hard HEAD@{1}
+
+
+36. Reset and split commits
+
+git reset HEAD^
+git add first.txt
+git commit -m "First.txt"
+git add second.txt
+git commit -m "Second.txt"
+
+git reset HEAD~1
+git add first.txt
+git commit -am "First commit"
+git add second.txt
+git commit -am "Second commit"
+
+
 ##########################################
 GIT DOCKER
 
@@ -322,8 +584,6 @@ You should replace fathomless-hamlet-26076 with the app name Heroku provides.
 ###########################
 
 
-###########################
-
 freeze > requirements.txt && pipenv install -r requirements.txt
 
 #PIPENV
@@ -492,7 +752,39 @@ pipenv --venv
 pipenv --rm
 rm -rf /Users/ifeanyiomeata/.local/share/virtualenvs/docker_drf-yNZHhWWe
 
-###########################
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
