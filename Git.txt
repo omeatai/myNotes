@@ -10,7 +10,21 @@ MARKDOWN
 
 --- Horizontal Line
 
-*Italicise*
+*Italicise* 
+_Italicise_
+
+**Bold**
+__Bold__
+
+
+Link to webpage
+[Google's Homepage](https://google.com)
+
+Link to Image
+![logo](./logo.png "mylogo")
+![-->Alt text](-->location -->hovertext)
+
+
 
 
 
