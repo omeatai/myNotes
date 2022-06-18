@@ -24,10 +24,27 @@ Link to Image
 ![logo](./logo.png "mylogo")
 ![-->Alt text](-->location -->hovertext)
 
+Ordered List
+1. Apple
+2. Orange
+3. Banana
 
+UnOrdered List
+* Apple
+* Orange
+* Banana
 
+Table
+| Name         | Item       | Price    |
+| ------------ |:----------:| --------:|
+| Mike         | audi       | $1400    |
+| Tedy         | sienna     | $2400    |
+| Hope         | volvo      | $5400    |
 
-
+CodeBlock
+```javascript
+  alert("Hello World!");
+```
 
 
 
