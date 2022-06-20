@@ -1,0 +1,804 @@
+##########################################
+MARKDOWN
+
+
+# Header 1
+
+### Header 3
+
+###### Header 6
+
+--- Horizontal Line
+
+*Italicise* 
+_Italicise_
+
+**Bold**
+__Bold__
+
+
+Link to webpage
+[Google's Homepage](https://google.com)
+
+Link to Image
+![logo](./logo.png "mylogo")
+![-->Alt text](-->location -->hovertext)
+
+Ordered List
+1. Apple
+2. Orange
+3. Banana
+
+UnOrdered List
+* Apple
+* Orange
+* Banana
+
+Table
+| Name         | Item       | Price    |
+| ------------ |:----------:| --------:|
+| Mike         | audi       | $1400    |
+| Tedy         | sienna     | $2400    |
+| Hope         | volvo      | $5400    |
+
+CodeBlock
+```javascript
+  alert("Hello World!");
+```
+
+
+
+##########################################
+GIT BASICS
+
+1 Get Git Version
+
+git --version
+
+
+2. Set Global Configurations
+
+git config --global user.name "<Your Name>"
+git config --global user.email "<Your Email>"
+
+git config --list
+
+git config user.email
+
+
+3. Get Help
+
+git help <verb>
+git <verb> --help
+
+git help commit
+git commit --help
+
+
+4. List files
+
+ls
+ls -lrt
+ls -la
+
+
+5. Create new folder (mkdir)
+
+mkdir practice
+
+
+6. Initialize git from existing code
+
+git init
+
+
+7. Stop tracking/ remove git from code
+
+rm -rf .git
+
+
+8. View git status
+
+git status
+
+
+9. Create and add to .gitignore file
+
+touch .gitignore
+echo questions.py > .gitignore
+echo *.exe >> .gitignore
+echo libraries/ >> .gitignore
+
+cat .gitignore
+
+
+10. Add files to Staging Area
+
+git add -A
+git add --all
+git add .
+
+git add A.txt
+
+
+11. Remove files from Staging back to Working Directory
+
+git reset
+
+git reset A.txt
+git restore --staged A.txt
+
+
+12. Commit files from Staging Area to Repository
+
+git commit -m "Initial commit"
+git commit -am "Initial commit"
+
+
+13. View History of Commits
+
+git log
+
+
+14. Clone a Remote Repository
+
+git clone <url> <where-to-clone>
+git clone https://github.com/omeatai/practice-app.git ./cloud
+
+
+15. View Info about cloned Remote Repository
+
+git remote -v
+git branch -a
+
+
+16. View changes made to code
+
+git diff
+
+
+17. Pull updates from remote repository
+
+git branch -M main
+git remote add origin https://github.com/omeatai/practice-app.git
+
+git pull origin main
+<git pull origin master>
+<git pull origin question-1>
+
+
+18. Push updates from local to remote repository
+
+git remote add origin https://github.com/omeatai/practice-app.git (add remote repo)
+git remote set-url origin https://github.com/omeatai/practice-app.git (setting to a remote repo)
+git remote -v (check if repo is set)
+git branch -M main (set primary branch)
+
+git push --set-upstream origin main
+git push -u origin main
+git push origin main
+
+
+19. View existing branches
+
+git branch
+
+
+20. Create new branch
+
+git branch calc-divide
+
+
+21. Switch to Branch
+
+git checkout calc-divide
+
+
+22. Merge branch to Master and view merges
+
+git merge calc-divide 
+
+git branch --merged
+
+
+23. Delete branch
+
+git branch -d calc-divide
+git push origin --delete calc-divide
+
+
+24. Set Config Values and Push to remote:
+
+git clone https://gitexercises.fracz.com/git/exercises.git
+cd exercises
+git config user.name <your.name>
+git config user.email <your.email>
+
+git push -u origin question-1
+
+
+25. Abort merge during conflict
+
+git merge --abort
+
+
+26. Save Stash to background
+
+git stash
+git stash save "worked on functions"
+
+
+27. View Stash list
+
+git stash list
+git stash show
+
+
+28. Restore Stash from background
+
+git stash pop
+git stash apply stash@{0}
+
+
+29. Remove Stash from background
+
+git stash clear
+git stash drop stash@{0}
+
+
+30. Display git commit History
+
+git log
+git log --oneline
+git reflog
+
+
+31. View last two commits
+
+git log -2
+
+
+32. Change last commit
+
+git rebase -i
+#choose edit
+git commit --amend
+git rebase --continue
+
+git commit -a --amend
+
+
+33. Change date of last commit
+
+git commit --amend --date 1-1-1987
+
+
+34. Change old typo
+
+git rebase -i HEAD~2
+#edit
+git add file.txt
+git rebase --continue
+
+git rebase -i HEAD^^
+# mark the first commit with "edit" command
+# fix the typo in the file
+git add file.txt
+git rebase --continue
+# fix the typo in the commit message
+
+
+35. Change to first version of commit
+
+git reflog
+git reset --hard HEAD@{1}
+
+
+36. Reset and split commits
+
+git reset HEAD^
+git add first.txt
+git commit -m "First.txt"
+git add second.txt
+git commit -m "Second.txt"
+
+git reset HEAD~1
+git add first.txt
+git commit -am "First commit"
+git add second.txt
+git commit -am "Second commit"
+
+
+##########################################
+GIT DOCKER
+
+docker-compose up
+git status
+git add .
+git commit -m ""
+git push
+git fetch
+git fetch --all
+git merge origin/main
+git merge --continue
+git status 
+
+
+
+1. git clone https://github.com/decadevs/recyclepay-api.git
+2. cd recyclepay-api
+3. docker build .
+4. docker-compose up
+5. docker-compose exec api python project/manage.py makemigrations
+6. docker-compose exec api python project/manage.py migrate
+
+docker-compose exec api python project/manage.py test project/
+
+
+npm i react-icons --save-prod
+
+
+npx json-server -p 3500 -w data/db.json
+
+
+
+docker-compose up
+git status
+git add .
+git commit -m ""
+git push
+git fetch
+git merge origin/main
+git merge --continue
+git status 
+
+
+VS CODE SHORTCUTS
+ctrl + shift + P = open command pallete
+ctrl + p = choose options
+ctrl + B = toggle sidebar
+ctrl + D = select multiple
+ctrl + shift + L = select multiple
+ctrl + ~ = open terminal
+ctrl + space = open suggestion box
+ctrl + shift + [ = open block of code
+ctrl + shift + ] = close block of code
+ctrl + , = open settings
+alt + up/down = move line of code
+alt + shift + up/down = copy lines of code and paste
+alt + click = multiple cursors
+ctrl + tab = select files
+ctrl + shift + T = reopen last closed tabs
+ctrl + W = close all tabs
+
+
+STORYBOOK
+npx create-react-app .
+npm uninstall --save react-scripts
+
+
+
+############################
+
+1. CREATE HEROKU APP
+(pages) $ heroku create
+Creating app... done, ฀ fathomless-hamlet-26076
+https://fathomless-hamlet-26076.herokuapp.com/ |
+https://git.heroku.com/fathomless-hamlet-26076git
+
+2. SET CREATED HEROKU APP AS REMOTE REPO
+(pages) $ heroku git:remote -a fathomless-hamlet-26076
+<You should replace fathomless-hamlet-26076 with the app name Heroku provides.>
+
+3. SET COLLECTSTATIC
+(pages) $ heroku config:set DISABLE_COLLECTSTATIC=1
+
+4. PUSH CODE TO HEROKU REMOTE APP
+(pages) $ git push heroku main
+
+5. SET PS SCALE
+(pages) $ heroku ps:scale web=1
+
+6. OPEN HEROKU APP
+(pages) $ heroku open
+
+7. RENAME HEROKU APP
+(pages) $ heroku apps:rename week9-team-a
+Renaming fathomless-hamlet-26076 to week9-team-a... done
+
+8. REOPEN HEROKU APP
+(pages) $ heroku open
+
+9. RUN MIGRATION ON HEROKU
+(pages) $ heroku run python manage.py migrate
+
+https://week9-team-a.herokuapp.com/api/v1/login/
+
+
+
+
+git remote add origin https://github.com/omeatai/DJANGO-DIVCCON-REGISTRATION-APP.git
+git remote
+git remote -v
+git pull --rebase origin main
+git push -u origin main
+
+
+###########################
+
+git pull --rebase origin main
+git push origin main
+
+pipenv install
+pipenv lock
+
+HER_API b0755129-75d7-43da-8b33-10927f4a4a52
+
+heroku login
+heroku create django-blog-ifeanyi-omeata
+heroku git:remote -a django-blog-ifeanyi-omeata
+
+HEROKU 
+(django-1) ➜ heroku login
+#Logging in... done
+#Logged in as omeatai@gmail.com
+
+(django-1) ➜ heroku create django-blog-ifeanyi-omeata
+#Creating ⬢ django-blog-ifeanyi-omeata... done
+#https://django-blog-ifeanyi-omeata.herokuapp.com/ | #https://git.heroku.com/django-blog-ifeanyi-omeata.git
+
+(django-1) ➜ heroku git:remote -a django-blog-ifeanyi-omeata
+#set git remote heroku to https://git.heroku.com/django-blog-ifeanyi-omeata.git
+
+#Use static files in Heroku
+pipenv install whitenoise
+..............
+
+heroku create django-blog-app-ifeanyi
+heroku git:remote -a django-blog-app-ifeanyi
+
+(blog) $ git add -A
+(blog) $ git commit -m 'Heroku config'
+(blog) $ git push origin main
+
+(blog) $ git push heroku main
+(blog) $ heroku ps:scale web=1
+
+###########################
+
+$ git config --list --show-origin
+
+$ git config --global user.name "John Doe"
+$ git config --global user.email johndoe@example.com
+
+git remote add origin https://omeatai@bitbucket.org/omeatai/pages-app.git
+git push -u origin main
+
+cdBXz9h5YQ47Eq44fFqj
+
+heroku login
+
+• updatePipfile.lock
+• make a new Procfile file
+• install gunicorn as our web server
+• make aone-line change to settings.py file
+
+[requires]
+python_version = "3.10"
+
+• updatePipfile.lock
+(pages) $ pipenv lock
+
+• make a new Procfile file
+(pages) $ touch Procfile
+web: gunicorn pages_project.wsgi --log-file -
+
+• install gunicorn as our web server
+pipenv install gunicorn==19.9.0
+
+(pages) $ git status
+(pages) $ git add -A
+(pages) $ git commit -m "New updates for Heroku deployment"
+
+• create a new app on Heroku and push our code to it
+• add a git remote “hook” for Heroku
+• configure the app to ignore static files, 
+which we’ll cover in later chapters • start the Heroku server so the app is live
+• visit the app on Heroku’s provided URL
+
+(pages) $ heroku create
+agile-bastion-21993
+https://agile-bastion-21993.herokuapp.com/ | 
+https://git.heroku.com/agile-bastion-21993.git
+
+(pages) $ heroku git:remote -a agile-bastion-21993
+set git remote heroku to https://git.heroku.com/agile-bastion-21993.git
+
+(pages) $ heroku config:set DISABLE_COLLECTSTATIC=1
+
+(pages) $ git push heroku main
+(pages) $ git push origin main
+
+(pages) $ heroku ps:scale web=􏰇
+
+(pages) $ heroku open
+
+
+###########################
+
+(pages) $ git remote add origin git@bitbucket.org:wsvincent/pages-app.git
+(pages) $ git push -u origin master
+
+rm -fr $(brew --repo homebrew/core)  # because you can't `brew untap homebrew/core`
+brew tap homebrew/core
+
+$ brew tap heroku/brew && brew install heroku
+$ brew install heroku
+
+• updatePipfile.lock
+• make a new Procfile file
+• install gunicorn as our web server
+• make aone-line change to settings.py file
+
+[requires]
+python_version = "3.7"
+
+(pages) $ pipenv lock
+
+(pages) $ touch Procfile
+web: gunicorn pages_project.wsgi --log-file -
+
+(pages) $ pipenv install gunicorn==19.9.0
+
+# pages_project/settings.py
+ALLOWED_HOSTS = ['*']
+
+(pages) $ git status
+(pages) $ git add -A
+(pages) $ git commit -m "New updates for Heroku deployment"
+
+(pages) $ git push -u origin master
+
+• create a new app on Heroku and push our code to it
+• add a git remote “hook” for Heroku
+• configure the app to ignore static files, which we’ll cover in later chapters • start the Heroku server so the app is live
+• visit the app on Heroku’s provided URL
+
+(pages) $ heroku create
+Creating app... done, ฀ fathomless-hamlet-26076
+https://fathomless-hamlet-26076.herokuapp.com/ |
+https://git.heroku.com/fathomless-hamlet-26076git
+
+(pages) $ heroku git:remote -a fathomless-hamlet-26076
+
+You should replace fathomless-hamlet-26076 with the app name Heroku provides.
+
+(pages) $ heroku config:set DISABLE_COLLECTSTATIC=1
+
+(pages) $ git push heroku main
+
+(pages) $ heroku ps:scale web=1
+
+(pages) $ heroku open
+
+###########################
+
+
+freeze > requirements.txt && pipenv install -r requirements.txt
+
+#PIPENV
+pip install pipenv
+pipenv --python 3.10.3
+
+pipenv shell
+source $(pipenv --venv)/bin/activate
+
+pipenv install
+pipenv install --ignore-pipfile
+
+exit
+
+#View location of the virtualenv:
+pipenv --venv
+
+pipenv --rm
+rm -rf /Users/ifeanyiomeata/.local/share/virtualenvs/docker_drf-yNZHhWWe
+
+Commands:
+  check      Checks for PyUp Safety security vulnerabilities and against PEP
+             508 markers provided in Pipfile.
+  clean      Uninstalls all packages not specified in Pipfile.lock.
+  graph      Displays currently-installed dependency graph information.
+  install    Installs provided packages and adds them to Pipfile, or (if no
+             packages are given), installs all packages from Pipfile.
+  lock       Generates Pipfile.lock.
+  open       View a given module in your editor.
+  run        Spawns a command installed into the virtualenv.
+  scripts    Lists scripts in current environment config.
+  shell      Spawns a shell within the virtualenv.
+  sync       Installs all packages specified in Pipfile.lock.
+  uninstall  Uninstalls a provided package and removes it from Pipfile.
+  update     Runs lock, then sync.
+  verify     Verify the hash in Pipfile.lock is up-to-date.
+
+###########################
+
+git remote add origin git@bitbucket.org:<USER>/hello-world.git
+git push -u origin main
+
+python -m venv venv
+
+
+###########################
+
+.gitignore
+
+python manage.py test
+
+pip install coverage
+
+coverage run manage.py test && coverage report && coverage html
+
+.coveragerc:
+[run]
+source=authentication/,todos/,
+omit=
+    venv
+    */migrations/*
+    */tests/*
+    */__init__.py
+
+###########################
+
+Upgrade requirements.txt file
+
+pip install pip-upgrader
+
+pip-upgrade requirements.txt
+
+pip freeze > requirements.txt
+
+pip3 install -r requirements.txt
+
+pip3 install -U -r requirements.txt
+
+# capture requirements to install
+pip freeze > requirements.txt
+
+# install requirements from requirements.txt
+pip install -r requirements.txt
+
+# Now to remove one by one
+pip uninstall -r requirements.txt
+
+# If we want to remove all at once then
+pip uninstall -r requirements.txt -y
+
+pip freeze or pip list
+
+$ python manage.py makemigrations
+
+$ python manage.py migrate
+
+$ python manage.py sqlmigrate weblog 0001
+
+$ python manage.py shell
+
+$ pip install django django-shortcuts
+
+pip install django-shortcuts
+
+#PIPENV
+pip install pipenv
+pipenv --python 3.10.3
+
+pipenv shell
+source $(pipenv --venv)/bin/activate
+
+exit
+
+#View location of the virtualenv:
+pipenv --venv
+
+pipenv --rm
+rm -rf /Users/ifeanyiomeata/.local/share/virtualenvs/docker_drf-yNZHhWWe
+
+
+
+curl http://127.0.0.1:8000/api/
+
+###########################
+
+###########################
+
+# capture requirements to install
+pip freeze > requirements.txt
+
+# install requirements from requirements.txt
+pip install -r requirements.txt
+
+# Now to remove one by one
+pip uninstall -r requirements.txt
+
+# If we want to remove all at once then
+pip uninstall -r requirements.txt -y
+
+pip freeze or pip list
+
+$ python manage.py makemigrations
+
+$ python manage.py migrate
+
+$ python manage.py sqlmigrate weblog 0001
+
+$ python manage.py shell
+
+$ pip install django django-shortcuts
+
+pip install django-shortcuts
+
+#PIPENV
+pip install pipenv
+pipenv --python 3.10.3
+
+pipenv shell
+source $(pipenv --venv)/bin/activate
+
+exit
+
+#View location of the virtualenv:
+pipenv --venv
+
+pipenv --rm
+rm -rf /Users/ifeanyiomeata/.local/share/virtualenvs/docker_drf-yNZHhWWe
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

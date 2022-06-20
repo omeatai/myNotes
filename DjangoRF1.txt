@@ -1554,6 +1554,863 @@ python manage.py inspectdb > models.py
 
 
 
+El Secreto
+Thunder
+Believe
+
+
+https://ifeanyiomeata.hashnode.dev
+https://ifeanyiomeata.com
+
+
+
+DJANGO RF TUTORIAL -  1. Install Django Rest Framework and Dependencies
+https://youtu.be/LSWFdUujmi0
+#React #Reactjs #100DaysOfCode #100daysofcodechallenge #DEVCommunity #100daysofreact #python #django #developer #100DaysOfCode  #100daysofpython #database #sql #mySQL #postgresql #Software #sqlite 
+
+
+DJANGO RF TUTORIAL -  1. Install Django Rest Framework and Dependencies
+By Ifeanyi Omeata
+https://ifeanyiomeata.hashnode.dev
+https://ifeanyiomeata.com
+#django #djangorestframework #React #Reactjs #100DaysOfCode #100daysofcodechallenge #DEVCommunity #100daysofreact #python #django #developer #100DaysOfCode  #100daysofpython #database #sql #mySQL #postgresql #Software #sqlite 
+
+
+django, djangorestframework, React,Reactjs,Software,100DaysOfCode,100daysofcodechallenge,developer,DEVCommunity,100daysofreact,python,django
+
+
+https://accounts.google.com/b/0/DisplayUnlockCaptcha
+
+isort 
+black formatter
+each line less than 100 characters
+
+
+
+public_html/divccon.com/app
+
+/home/mbneppre/public_html/divccon.com/registration/divcconproject/wsgi.py
+
+
+
+###########################
+
+import os
+import sys
+
+
+sys.path.insert(0, os.path.dirname(__file__))
+
+
+def application(environ, start_response):
+    start_response('200 OK', [('Content-Type', 'text/plain')])
+    message = 'It works!\n'
+    version = 'Python %s\n' % sys.version.split()[0]
+    response = '\n'.join([message, version])
+    return [response.encode()]
+
+
+from myproject.wsgi import application
+
+
+#######################
+1 - INSTALL DJANGO REST FRAMEWORK AND DEPENDENCIES
+
+Welcome
+1. Create a Project file - drf
+mk drf
+Enter into Project file
+cd drf
+2. Install virtual machine
+pipenv shell
+3. Install drf dependencies - django, djangorestframework
+django-admin
+4. Create the drf project 
+django-admin startproject drf_project .
+code .
+5. Run the django Internal server
+
+#######################
+
+#Create your models here.
+#models.CharField(max length=255)
+#models. TextField()
+#models. IntegerField()
+#models.BigIntegerField()
+#models.PositiveIntegerField()
+#models.FloatField()
+#models.BooleanField()
+#models.ManyTOManyField()
+#models.oneTo0neField()
+#models. ForeignKey() OneToManyField
+
+#######################
+
+Welcome
+1. Let's continue from our last video and create an app for our project - drf_app.
+2. Next, lets put our app under the INSTALLED_APPS option in settings.py.
+3. Next, let's create our model which we would call "Driver" which will represent our drivers table in our database.
+Let's enter the field(column) names of our driver table.
+We will set our nickname to be hidden but it will accept values which we will assign to it.
+4. Next, let's create a string for our model.
+5. Let's run makemigration and migrate to see the created database table.
+6. Next, let's create a super user to allow us have access to django's default admin panel.
+7. Next, let's login to the admin panel to have access to the database table.
+8. Notice our Model(table) is not showing on our admin panel. Let's add it to the admin.py file.
+Nice.
+Now let's enter a driver into our database.
+
+
+
+
+
+RATE_CHOICES = ((x, x) for x in range(1,6)) 
+
+
+from django.db import models
+from .choices import RATE_CHOICES
+
+
+class Driver(models.Model):
+    username = models.CharField(max_length=200, unique=True, null=False, blank=False)
+    password = models.CharField(max_length=200, null=False, blank=False)
+    first_name = models.CharField(max_length=200, null=False, blank=False)
+    last_name = models.CharField(max_length=200, null=False, blank=False)
+    nick_name = models.CharField(max_length=200, editable=False, default='null')
+    description = models.TextField(verbose_name='About Driver')
+    rating = models.PositiveIntegerField(choices=RATE_CHOICES, default=0)
+    is_available = models.BooleanField(default=True)
+    salary = models.FloatField()
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+    
+    def __str__(self) -> str:
+        return f"{self.first_name.title()} {self.last_name.title()} - {self.nick_name}-{self.rating}"
+    
+    class Meta:
+        ordering = ("rating",)
+        verbose_name_plural = "F1 Driver"
+        
+    def save(self, *args, **kwargs):
+        self.nick_name = f"{self.last_name[0].lower()}{self.first_name.lower()}"
+        super().save(*args, **kwargs)
+
+
+
+#######################
+
+
+
+class Driver(models.Model):
+    username = models.CharField(max_length=200, unique=True, null=False, blank=False)
+    password = models.CharField(max_length=200, null=False, blank=False )
+    first_name = models.CharField(max_length=200, null=False, blank=False)
+    last_name = models.CharField(max_length=200, null=False, blank=False)
+    nickname = models.CharField(max_length=200, editable=False, null=False, blank=False)
+    description = models.TextField(verbose_name = "About Driver")
+    rating = models.PositiveIntegerField(choices=RATE_CHOICES, default=0)
+    is_available = models.BooleanField(default=True)
+    salary = models.FloatField()
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+    
+    def __str__(self):
+        return f"{self.first_name.title()} {self.last_name.title()} - {self.nickname} - {str(self.rating)}"
+    
+    class Meta:
+        verbose_name_plural = "F1 Drivers"
+        ordering = ("rating",)
+    
+    def save(self, *args, **kwargs):
+        self.nickname = f"{self.last_name[0].lower()}{self.first_name.lower()}"
+        super().save(*args, **kwargs)
+    
+    
+class Car(models.Model):
+    driver_id = models.ForeignKey(Driver, on_delete=models.CASCADE, related_name="driver_id")
+    car_name = models.CharField(max_length=200, null=True, blank=True)
+    manufacturer = models.CharField(max_length=200, null=True, blank=True)
+    color = models.CharField(max_length=50, null=True, blank=True)    
+    mileage = models.FloatField(default=0)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+    
+    def __str__(self):
+        return f"{self.driver_id.first_name.title()}-{self.car_name}-{self.manufacturer}"
+    
+    class Meta:
+        verbose_name_plural = "F1 Cars"
+        ordering = ("manufacturer",)
+
+
+
+mitsubishi l200
+jaguar xf
+Volvo
+mercedes
+chevrolet camaro
+
+
+from django.contrib import admin
+from .models import Driver, Car
+
+ALL_MODELS = (Driver, Car)
+admin.site.register(ALL_MODELS)
+
+
+#######################
+
+
+from django.http import JsonResponse
+
+def simple(request):
+    #perform operations
+    method=request.method.lower()
+    if method -- "get":
+        return JsonResponse ({"data": [1, 3, 4, 4, 51})
+   elif method == "post":
+        return JsonResponse ({"data": "Added data successfully"})
+    elif method ==
+        return JsonResponse ({"data": "Updated data success fully"})
+    return JsonResponse ("error": "method not allowed")
+                    "put":
+
+#######################
+
+
+from django.shortcuts import render
+from django.http import HttpResponse, JsonResponse
+
+
+def home(request):
+    if request.method == "GET":
+        data = { 'nums' : [1,2,3,4,5]}
+        return JsonResponse(data)
+
+
+
+from django.urls import path
+from .views import home
+
+urlpatterns = [
+    path('', home, name='home')
+]
+
+
+
+#######################
+
+
+from django.shortcuts import render
+from django.http import HttpResponse, JsonResponse
+from django.views.decorators.csrf import csrf_exempt
+from django.forms.models import model_to_dict
+
+@csrf_exempt
+def home(request):
+    if request.method == 'GET':
+        return JsonResponse({"data": "Hello, this is Home!", "method": request.method})
+        # return JsonResponse("Hello, this is Home!", safe=False)
+    elif request.method == 'POST':
+        return JsonResponse({"data":"Added Data successfully!", "method": request.method})
+    elif request.method == 'PUT':
+        return JsonResponse({"data":"Updated Data successfully!", "method": request.method})
+    elif request.method == 'DELETE':
+        return JsonResponse({"data":"Data Deleted successfully!", "method": request.method}) 
+    else:
+        return JsonResponse({"data":"Method not allowed!", "method": request.method}) 
+    
+
+
+
+Models
+Views
+Serializers
+Tools Setup
+Custom user
+Authentication
+Authorization
+Exception Handling
+File Upload
+
+
+class DriverSerializer(serializers.Serializer):
+  id = serializers.IntegerField(read_only=True)
+  username = serializers.CharField()
+  password = serializers.CharField()
+  first_name = serializers.CharField()
+  last_name = serializers.CharField()
+  nickname = serializers.CharField(read_only=True)
+  description = serializers.CharField(read_only=True)
+  rating = serializers.IntegerField(read_only=True)
+  is_available = serializers.BooleanField(read_only=True)
+  salary = serializers.FloatField(read_only=True)
+  created_at = serializers.DateTimeField(read_only=True)
+  updated_at = serializers.DateTimeField(read_only=True)
+  
+  def create(self, validated_data):
+      return Driver.objects.create(**validated_data)
+  
+  def update(self, instance, validated_data):
+      Driver.objects.filter(id=instance.id).update(**validated_data)
+      return Driver.objects.get(id=instance.id)
+
+
+
+class CarSerializer(serializers.Serializer):
+    driver_id = serializers.ReadOnlyField(source='driver.id')
+    car_name = serializers.CharField()
+    manufacturer = serializers.CharField()  
+    color = serializers.CharField()   
+    mileage = serializers.FloatField()
+    created_at = serializers.DateTimeField(read_only=True)
+    updated_at = serializers.DateTimeField(read_only=True)   
+
+    
+    def create(self, validated_data):
+        return Car.objects.create(**validated_data) 
+
+
+
+
+
+from django.shortcuts import render
+from rest_framework import status
+from rest_framework.response import Response
+from rest_framework.views import APIView
+from rest_framework import generics
+from .models import Driver, Car
+from .serializers import DriverSerializer, CarSerializer
+
+
+class HomeAPIView(APIView):
+    def get(self, request):
+        query_drivers = Driver.objects.all()
+        query_cars = Car.objects.all()
+        context = {
+            "drivers": DriverSerializer(query_drivers, many=True).data,
+            "cars": CarSerializer(query_cars, many=True).data
+        }
+        return Response(context)
+        
+    def post(self, request):  
+        if request.data.get('object') == "driver":
+            serializer = DriverSerializer(data=request.data)
+            serializer.is_valid(raise_exception=True)
+            serializer.save()
+        elif request.data.get('object') == "car":  
+            driver = Driver.objects.get(username=request.data.get('driver'))
+            serializer = CarSerializer(data=request.data)
+            serializer.is_valid()
+            Car.objects.create(
+                driver_id=driver,
+                **serializer.data
+            ) 
+        context = {"data": serializer.data}
+        return Response(context)
+    
+    def put(self, request, *args, **kwargs):
+        model_id = kwargs.get("id", None)
+        if not model_id:
+            return Response({"error": "method /PUT/ not allowed. No id exists."})  
+        try:
+            instance = Driver.objects.get(id=model_id)  
+        except Exception:
+            return Response({"error": "Object does not exist."})    
+        
+        serializer = DriverSerializer(data=request.data, instance=instance)
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+        return Response({"data": serializer.data})
+
+    
+    def delete(self, request):
+        driver = Driver.objects.get(username=request.data.get('driver'))
+        driver.delete()
+        context = {"data": request.data}
+        return Response(context)
+
+        
+# driver = Driver.objects.get(username=request.data.get('driver'))
+# driver.username=request.data.get('username') or driver.username
+# driver.password=request.data.get('password') or driver.password
+# driver.first_name=request.data.get('first_name') or driver.first_name
+# driver.last_name=request.data.get('last_name') or driver.last_name
+# driver.description=request.data.get('description') or driver.description
+# driver.rating=request.data.get('rating') or driver.rating
+# driver.is_available=request.data.get('is_available') or driver.is_available
+# driver.salary=request.data.get('salary') or driver.salary
+# driver.save()
+# context = {"data": request.data}
+# return Response(context)
+
+
+# @csrf_exempt
+# def home(request):
+#     if request.method == 'GET':
+#         return JsonResponse({"data": "Hello, this is Home!", "method": request.method})
+#         # return JsonResponse("Hello, this is Home!", safe=False)
+#     elif request.method == 'POST':
+#         return JsonResponse({"data":"Added Data successfully!", "method": request.method})
+#     elif request.method == 'PUT':
+#         return JsonResponse({"data":"Updated Data successfully!", "method": request.method})
+#     elif request.method == 'DELETE':
+#         return JsonResponse({"data":"Data Deleted successfully!", "method": request.method}) 
+#     else:
+#         return JsonResponse({"data":"Method not allowed!", "method": request.method})     
+    
+
+
+
+
+from django.shortcuts import render
+from rest_framework import status
+from rest_framework.response import Response
+from rest_framework.views import APIView
+from rest_framework import generics
+from rest_framework import viewsets
+from .models import Driver, Car
+from .serializers import DriverSerializer, CarSerializer
+
+
+class DriverListCreateAPIView(generics.ListCreateAPIView):
+    queryset = Driver.objects.all()
+    serializer_class = DriverSerializer
+
+class DriverUpdateAPIView(generics.UpdateAPIView):
+    queryset = Driver.objects.all()
+    serializer_class = DriverSerializer
+    lockup_field = "id"    
+    
+class CarListCreateAPIView(generics.ListCreateAPIView):
+    queryset = Car.objects.all()
+    serializer_class = CarSerializer    
+    
+class CarUpdateAPIView(generics.UpdateAPIView):
+    queryset = Car.objects.all()
+    serializer_class = CarSerializer
+    lockup_field = "id"
+
+
+
+
+from rest_framework import generics, serializers
+from rest_framework.permissions import IsAuthenticated
+
+class TicketFormView(generics.CreateAPIView):
+    serializer_class = TicketSerializer
+    queryset = Ticket.objects.all()
+    permission_classes = ( IsAuthenticated, )
+
+    def perform_create(self, serializer):
+        serializer.save(created_by=self.request.user)
+
+
+
+
+class TicketFormView(APIView):
+    def post(self, request, format=None):
+        serializer = TicketSerializer(data=request.data)
+        if serializer.is_valid():
+            # Here is my problem. I need to set the created_by field before save.
+            serializer.save()
+
+            return Response(
+                serializer.data,
+                status=status.HTTP_200_OK,
+            )
+
+        return Response(
+            serializer.errors,
+            status=status.HTTP_400_BAD_REQUEST,
+        )
+
+
+
+class UserSerializer(ModelSerializer):
+
+    class Meta:
+        model = User
+        fields = ('id', 'email', 'first_name', 'last_name' ,'security_question', 'security_question_answer', 'password', 'is_active', 'is_staff')
+        read_only_fields = ('is_active', 'is_staff')
+        extra_kwargs = {
+            'security_question': {'write_only': True},
+            'security_question_answer': {'write_only': True},
+            'password': {'write_only': True}
+        }
+
+
+
+def test_patient_detail_api_opens(self):
+    factory = APIRequestFactory()
+    view =PatientDetailApi.as_view()
+    request = factory.get(reverse('api_pacjent', kwargs={'pk' :1}))
+    force_authenticate(request, user=self.user)
+    response = view(request, pk=1)
+    self.assertEqual(response.status_code, 200)
+
+
+
+from rest_framework.response import Response
+from rest_framework import generics
+from db.models import (order_model, user_model)
+from rest_framework.permissions import AllowAny
+from api.serializers.confirm_item_serializer import (RequestPickupOrderSerializer,
+                    ConfirmItemOrderSerializer, CompleteProcessOrderSerializer)
+
+
+class RequestPickup(generics.ListCreateAPIView):
+    queryset = order_model.Order.objects.all()
+    serializer_class = RequestPickupOrderSerializer
+    authentication_classes = []
+    permission_classes = [AllowAny]
+    
+    def perform_create(self, serializer):
+        user_id = user_model.User.objects.get(pk=1)
+        title = serializer.validated_data.get("title").upper()
+        location = serializer.validated_data.get("location").upper()
+        serializer.save(
+            title=title,
+            location=location,
+            weight_in_kg=0,
+            requested_by=user_id,)
+        
+#serializer.save(created_by=self.request.user)
+
+class ConfirmItem(generics.RetrieveUpdateAPIView):
+    queryset = order_model.Order.objects.all()
+    serializer_class = ConfirmItemOrderSerializer
+    lookup_field = "id"
+    authentication_classes = []
+    permission_classes = [AllowAny]
+    
+    def perform_update(self, serializer):
+        user_id = user_model.User.objects.get(pk=1)
+        serializer.save(
+            picked_by=user_id,)
+    
+    
+class CompleteProcess(generics.RetrieveUpdateAPIView):
+    queryset = order_model.Order.objects.all()
+    serializer_class = CompleteProcessOrderSerializer
+    lookup_field = "id"
+    authentication_classes = []
+    permission_classes = [AllowAny]
+    
+    def perform_update(self, serializer):
+        serializer.save(status="completed",)
+
+
+
+
+
+
+
+from rest_framework import serializers
+from db.models import (order_model, user_model)
+
+
+class RequestPickupOrderSerializer(serializers.ModelSerializer):
+    
+    class Meta:
+        model = order_model.Order
+        exclude = ('created_at','updated_at',)
+        read_only_fields = ('status','weight_in_kg','requested_by', 'picked_by',) 
+
+class ConfirmItemOrderSerializer(serializers.ModelSerializer):
+    
+    class Meta:
+        model = order_model.Order
+        exclude = ('created_at','updated_at',)
+        read_only_fields = ('title','location','weight_in_kg','category','requested_by','picked_by',)
+
+class CompleteProcessOrderSerializer(serializers.ModelSerializer):
+    
+    class Meta:
+        model = order_model.Order
+        fields = ("weight_in_kg",)
+        read_only_fields = ('status',)
+        # exclude = ('created_at','updated_at',)
+        # read_only_fields = ('title','location','category','requested_by','picked_by',)
+
+
+
+python manage.py drf_create_token ifeanyi
+
+'rest_framework',
+'rest_framework.authtoken',
+'api_app.apps.ApiAppConfig',
+
+
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.TokenAuthentication',
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+        # 'rest_framework.authentication.BasicAuthentication',
+        # 'rest_framework.authentication.SessionAuthentication',
+    ]
+}
+
+
+
+
+#serializer.save(created_by=self.request.user)
+
+
+
+docker-compose up
+git status
+git add .
+git commit -m ""
+git push
+git fetch
+git fetch --all
+git merge origin/main
+git merge --continue
+git status 
+
+
+
+
+
+
+1. git clone https://github.com/decadevs/recyclepay-api.git
+2. cd recyclepay-api
+3. docker build .
+4. docker-compose up
+5. docker-compose exec api python project/manage.py makemigrations
+6. docker-compose exec api python project/manage.py migrate
+
+docker-compose exec api python project/manage.py test project/
+
+
+npm i react-icons --save-prod
+
+
+npx json-server -p 3500 -w data/db.json
+
+
+###################################################
+
+
+from django.db import models
+from django.contrib.auth.models import AbstractUser
+
+
+class User(AbstractUser):
+    first_name = models.CharField(max_length=255)
+    last_name = models.CharField(max_length=255)
+    email = models.EmailField(max_length=255, unique=True)
+    password = models.CharField(max_length=255)
+    username = None
+
+    USERNAME_FIELD = 'email'
+    REQUIRED_FIELDS = []
+
+###################################################
+
+pipenv install pyMySQL
+
+import pymysql
+pymysql.install_as_MySQLdb()
+
+
+from dotenv import load_dotenv
+load_dotenv()
+
+###################################################
+
+pipenv install PyJWT
+
+
+pipenv install django-cors-headers
+
+INSTALLED_APPS = [
+    ...,
+    "corsheaders",
+    ...,
+]
+
+MIDDLEWARE = [
+    ...,
+    "corsheaders.middleware.CorsMiddleware",
+    "django.middleware.common.CommonMiddleware",
+    ...,
+]
+
+CORS_ALLOW_ALL_ORIGINS: True
+CORS_ALLOW_CREDENTIALS: True
+
+
+CORS_ALLOWED_ORIGINS = [
+    "https://example.com",
+    "https://sub.example.com",
+    "http://localhost:8080",
+    "http://127.0.0.1:9000",
+]
+
+CORS_ALLOWED_ORIGINS = [
+    "http://read.only.com",
+    "http://change.allowed.com",
+]
+
+CSRF_TRUSTED_ORIGINS = [
+    "http://change.allowed.com",
+]
+
+CORS_ALLOW_METHODS = [
+    "DELETE",
+    "GET",
+    "OPTIONS",
+    "PATCH",
+    "POST",
+    "PUT",
+]
+
+###################################################
+
+mailhog
+brew update && brew install mailhog
+Then, start MailHog by running mailhog in the command line.
+
+
+EMAIL_HOST = " 0.0.0.0"
+EMAIL_PORT = 1025
+
+
+REST_FRAMEWORK = {
+    'EXCEPTION_HANDLER': 'core_app.exceptions.status_code_handler',
+}
+
+
+
+################################
+
+npx create-react-app my-app
+cd my-app
+npm start
+
+################################
+
+#Function Based
+export const Header = () => {
+  return (
+    <div>
+      <h1>My Header</h1>
+    </div>
+  )  
+}
+
+#Class Based
+export default class Header extends React.Component {
+  render() {
+    return (
+      <div>
+        <h1>My Header</h1>
+      </div>
+    )
+  }
+} 
+
+################################
+
+npx create-react-app frontend --template typescript
+
+
+#Production - 
+npm run build
+
+npm i react-router-dom
+npm i -D @types/react-router-dom
+
+npm i axios
+npm i -D @types/axios
+
+
+###################################################
+
+YARN
+
+npm install --global yarn
+yarn --version
+yarn init
+#Installing all the dependencies of project
+yarn
+yarn install
+
+#Adding a dependency
+
+yarn add [package]
+yarn add [package]@[version]
+yarn add [package]@[tag]
+yarn add [package] --dev
+
+#Upgrading a dependency
+
+yarn upgrade [package]
+yarn upgrade [package]@[version]
+yarn upgrade [package]@[tag]
+
+#Removing a dependency
+
+yarn remove [package]
+
+git pull origin main --no-rebase
+
+yarn add react-icons --save
+
+
+
+color	undefined (inherit)	
+size	1em	
+className	undefined	
+style	undefined	Can overwrite size and color
+attr	undefined	Overwritten by other attributes
+title	undefined	Icon description for accessibility
+
+
+ <PlusCircleOutlined  style={{
+        fontSize: "50px",
+         color: "#408021",
+         strokeWidth: "30", // --> higher value === more thickness the filled area
+         stroke: "white" 
+  }}/>
+
+
+docker-compose up
+git status
+git add .
+git commit -m ""
+git push
+git fetch
+git merge origin/main
+git merge --continue
+git status 
+
+
+VS CODE SHORTCUTS
+ctrl + shift + P = open command pallete
+ctrl + p = choose options
+ctrl + B = toggle sidebar
+ctrl + D = select multiple
+ctrl + shift + L = select multiple
+ctrl + ~ = open terminal
+ctrl + space = open suggestion box
+ctrl + shift + [ = open block of code
+ctrl + shift + ] = close block of code
+ctrl + , = open settings
+alt + up/down = move line of code
+alt + shift + up/down = copy lines of code and paste
+alt + click = multiple cursors
+ctrl + tab = select files
+ctrl + shift + T = reopen last closed tabs
+ctrl + W = close all tabs
+
+
+STORYBOOK
+npx create-react-app .
+npm uninstall --save react-scripts
 
 
 
@@ -1576,4 +2433,165 @@ python manage.py inspectdb > models.py
 
 
 
-###########################################################################################################################################################################
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+################################################################################################################################################
+
+El Secreto
+Thunder
+Believe
+
+
+https://ifeanyiomeata.hashnode.dev
+https://ifeanyiomeata.com
+
+
+Check out my Expanding Card Slider for my React Project
+https://ifeanyiomeata.com
+Netlify: http://expanding-card-slider.netlify.app
+Github: https://github.com/omeatai/Expanding-Cards-Slider
+Watch: https://youtu.be/8wWIuY1t4-k
+#React #Reactjs #100DaysOfCode #100daysofcodechallenge #DEVCommunity #100daysofreact #python #django #developer #100DaysOfCode 
+
+
+
+DJANGO RF TUTORIAL -  5 - MODEL FOREIGN KEY RELATIONSHIP
+https://youtu.be/mYLhnzMNqvY
+
+DJANGO RF TUTORIAL -  5 - MODEL FOREIGN KEY RELATIONSHIP
+https://youtu.be/mYLhnzMNqvY
+#django #djangorestframework #React #Reactjs #100DaysOfCode #100daysofcodechallenge #DEVCommunity #100daysofreact #python #django #developer #100DaysOfCode  #100daysofpython #database #sql #mySQL #postgresql #Software #sqlite 
+
+
+DJANGO RF TUTORIAL -  2 - CREATE DJANGO APP
+By Ifeanyi Omeata
+https://ifeanyiomeata.hashnode.dev
+https://ifeanyiomeata.com
+#django #djangorestframework #React #Reactjs #100DaysOfCode #100daysofcodechallenge #DEVCommunity #100daysofreact #python #django #developer #100DaysOfCode  #100daysofpython #database #sql #mySQL #postgresql #Software #sqlite 
+
+
+django, djangorestframework, React,Reactjs,Software,100DaysOfCode,100daysofcodechallenge,developer,DEVCommunity,100daysofreact,python,django
+
+
+https://accounts.google.com/b/0/DisplayUnlockCaptcha
+
+isort 
+black formatter
+each line less than 100 characters
+flake8
+
+
+################################################################################################################################################
+
+
+https://andela.com/join-andela/
+
+https://www.crossover.com/
+
+https://insquad.com/
+
+https://developers.remotebase.com/tests
+
+https://www.remotetechjobs.com/python/105384/junior-software-and-applications-programmer%7C-aiml
+
+https://boards.greenhouse.io/cobblestoneenergy/jobs/5130460003?gh_src=d6764f953us#app
+
+https://jobs.lever.co/Yassir/5bc88abb-f40f-4227-ba4f-b176669dc3f1
+
+https://bradfrost.com/blog/post/atomic-web-design/
+
+https://reactjs.org/docs/typechecking-with-proptypes.html
+
+https://www.conventionalcommits.org/en/v1.0.0/
+
+https://app.usebraintrust.com/r/akorede2/?job_id=3507
+
+
+###############################################################################
+
+
+
+There was an Error - (535, b'5.7.8 Username and Password not accepted. Learn more at\n5.7.8 https://support.google.com/mail/?p=BadCredentials j1-20020a05620a410100b006a65c58db99sm2124556qko.64 - gsmtp')
+
+
+
+
+https://www.linkedin.com/posts/onalenna-mtezuka-669a2843_realestate-realestatedevelopment-propertymanagement-activity-6889157292143587329-GVAU?utm_source=linkedin_share&utm_medium=member_desktop_web
+
+
+JavaScript
+Python
+Django
+DRF Django
+Django Rest Framework
+Node.js
+SQL
+CSS
+PostgreSQL
+React.js
+REST API
+AWS
+Bootstrap
+MySQL
+HTML5
+Laravel
+Azure
+TypeScript
+Git
+CSS3
+Docker
+JIRA
+Object-Oriented Pragramming
+CI/CD
+API
+WordPress
+Test-Driven Development (TDD)
+JSON
+Postman
+GitHub
+Redux
+Unit Testing
+
+https://youtu.be/mUKvwoWGeQ0
+
+
+R-JA10
+
+Hi Ifeanyi,
+
+
+Your login details can be found below:
+
+
+Email: iomeata@drohealtch.com
+PW: Password1.
+
+
+
+
+Email : - omeatai@gmail.com 
+Password : - &B3$A24C#56
+
+
+
+
+
+
+
+
+celery
+Jenkins
+centrix
+DJango Admin

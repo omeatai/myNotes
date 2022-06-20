@@ -1,0 +1,513 @@
+
+node -v
+
+const myinterval = global.setInterval(()=>{
+    count += 1;
+    console.log(`Your number is ${count}`);
+}, 2000)
+
+global.setTimeout(()=>{
+    clearInterval(myinterval);
+}, 10000)
+
+
+console.log(__dirname);
+console.log(__filename);
+
+####################################################
+EXPORT -
+
+const men = ['Ben','Jamie','Sam'];
+const women = ['Alice','Mary','Shade'];
+
+module.exports = {
+    men,
+    women
+}
+
+####################################################
+IMPORT -
+
+const {men, women} = require("./people.js")
+console.log(men, women)
+
+const os = require("os")
+console.log(os.platform(), os.homedir())
+
+####################################################
+READ -
+
+const fs = require('fs');
+
+fs.readFile("./books/thesage.txt", "utf8", (err, data) => {
+    if (err) {
+    console.log(err);
+    } else {
+    console.log(data);
+    }
+})
+
+####################################################
+WRITE -
+
+const fs = require('fs');
+
+fs.writeFile("./books/thesage.txt", "The Sage has been replaced.", (err) => {
+    if (err) {
+    console.log(err);
+    } else {
+    console.log("File written successfully");
+    }
+})
+
+####################################################
+DELETE AND CREATE FILE -
+
+if(fs.existsSync("./books/thesage.txt")) {
+    fs.unlink("./books/thesage.txt", (err) => {
+        if (err) {
+        console.log(err);
+        } else {
+        console.log("File deleted successfully");
+        }
+    })
+}else{
+    fs.writeFile("./books/thesage.txt", "The Sage has been created.", (err) => {
+        if (err) {
+        console.log(err);
+        } else {
+        console.log("File created successfully");
+        }
+    })
+}
+
+####################################################
+DELETE AND CREATE FOLDER -
+
+if(!fs.existsSync("./books")) {
+    fs.mkdir("./books", (err) => {
+        if (err) {
+        console.log(err);
+        } else {
+        console.log("Folder created successfully");
+        }
+    })
+}else {
+    fs.rmdir("./books", (err) => {
+        if (err) {
+        console.log(err);
+        } else {
+        console.log("Folder deleted successfully");
+        }
+    })
+}
+
+####################################################
+STREAMS AND BUFFER/ READ, COPY AND WRITE -
+
+const fs = require("fs");
+const readStream = fs.createReadStream("./books/thesage.txt", "utf8");
+const writeStream = fs.createWriteStream("./books/thesage2.txt", "utf8");
+
+// readStream.pipe(writeStream);
+// const readStream = fs.createReadStream("./books/thesage.txt").pipe(fs.createWriteStream("./books/thesage2.txt"));
+
+readStream.on('data', (chunk) => {
+    console.log("---- New Stream -----")
+    console.log(chunk);
+    writeStream.write("\n---- New Stream -----\n");
+    writeStream.write(chunk);
+})
+
+####################################################
+CREATE SERVER FOR REQUEST AND RESPONSE
+
+const http = require('http')
+
+const server = http.createServer((req, res) => {
+    console.log(req.url, req.method)
+
+    res.setHeader('Content-Type', 'text/plain');
+    res.write('Hello World');
+    res.end();
+})
+
+server.listen(3000, 'localhost', () => {
+    console.log('listening on port 3000')
+})
+
+
+####################################################
+RAW HTML REQUEST AND RESPONSE
+
+const http = require('http')
+
+const server = http.createServer((req, res) => {
+    console.log(req.url, req.method)
+
+    res.setHeader('Content-Type', 'text/html');
+    res.write('<h1>The Beginning</h1>')
+    res.write('<h2>This is the first</h2>');
+    res.write('<p>This is the paragraph</p>');
+    res.end();
+})
+
+server.listen(3000, 'localhost', () => {
+    console.log('listening on port 3000')
+})
+
+####################################################
+HTML FILE REQUEST AND RESPONSE
+
+const http = require('http');
+const fs = require('fs');
+
+const server = http.createServer((req, res) => {
+    console.log(req.url, req.method)
+
+    fs.readFile('./views/index.html', 'utf8', (err, html) => {
+        res.writeHead(200, { 'Content-Type': 'text/html' });
+        //res.write(html);
+        res.end(html);
+    })
+});
+
+server.listen(3000, 'localhost', () => {
+    console.log('listening on port 3000')
+})
+
+####################################################
+ROUTING RESPONSE
+
+const http = require('http');
+const fs = require('fs');
+
+//res.setHeader(200, { 'Content-Type': 'text/html' });
+
+const server = http.createServer((req, res) => {
+    path = "./views/";
+
+    switch(req.url){
+        case '/':
+            path += 'index.html';
+            break;
+        case '/about':
+            path += 'about.html';
+            break;
+        default:
+            path += '404.html';
+            break;
+    }
+
+    fs.readFile(path, 'utf8', (err, html) => {
+        res.writeHead(200, { 'Content-Type': 'text/html' });
+        //res.write(html);
+        res.end(html);
+    })
+});
+
+server.listen(3000, 'localhost', () => {
+    console.log('listening on port 3000')
+})
+
+
+####################################################
+STATUS CODES
+
+const http = require('http');
+const fs = require('fs');
+
+const server = http.createServer((req, res) => {
+    path = "./views/";
+    res.setHeader('Content-Type', 'text/html' );
+
+    switch(req.url){
+        case '/':
+            path += 'index.html';
+            res.statusCode = 200;
+            break;
+        case '/about':
+            path += 'about.html';
+            res.statusCode = 200;
+            break;
+        default:
+            path += '404.html';
+            res.statusCode = 404;
+            break;
+    }
+
+    fs.readFile(path, 'utf8', (err, html) => {
+        //res.write(html);
+        res.end(html);
+    })
+});
+
+
+server.listen(3000, 'localhost', () => {
+    console.log('listening on port 3000')
+})
+
+####################################################
+REDIRECTS
+
+const http = require('http');
+const fs = require('fs');
+
+const server = http.createServer((req, res) => {
+    path = "./views/";
+    res.setHeader('Content-Type', 'text/html' );
+
+    switch(req.url){
+        case '/':
+            path += 'index.html';
+            res.statusCode = 200;
+            break;
+        case '/about':
+            path += 'about.html';
+            res.statusCode = 200;
+            break;
+        case '/about-us':
+            res.setHeader('Location', '/about');
+            res.statusCode = 301;
+            break;    
+        default:
+            path += '404.html';
+            res.statusCode = 404;
+            break;
+    }
+
+    fs.readFile(path, 'utf8', (err, html) => {
+        //res.write(html);
+        res.end(html);
+    })
+});
+
+server.listen(3000, 'localhost', () => {
+    console.log('listening on port 3000')
+})
+
+####################################################
+NPM NODEMON
+
+sudo npm install -g nodemon
+nodemon server.js
+
+npm init
+
+####################################################
+_LODASH
+https://lodash.com/docs/
+
+$ npm i --save lodash
+
+//lodash
+const _ = require('lodash');
+  const arr = [1,2,3,4,5];
+  const arr2 = _.chunk(arr, 2);
+  console.log(arr2);
+  const random = _.random(0, 10);
+  console.log(random);
+
+  const greeting = _.once(() => {
+      console.log(_.upperCase('hello world'));
+  })
+  greeting();
+  greeting();
+
+
+####################################################
+INSTALL NPM PACKAGES
+
+npm install
+
+####################################################
+EXPRESS
+
+npm install express
+
+
+const express = require('express');
+const app = express();
+
+
+app.get('/', (req, res) => {
+    // res.send('<h1>Hello World</h1>');
+    res.sendFile("./views/index.html", {root: __dirname});
+})
+
+app.get('/about', (req, res) => {
+    // res.send('<h1>About Page</h1>');
+    res.sendFile("./views/about.html", {root: __dirname});
+})
+
+//redirect to about page
+app.get('/about-us', (req, res) => {
+    res.redirect('/about');
+})
+
+//404 error
+app.use((req, res) => {
+    res.status(404).sendFile("./views/404.html", {root: __dirname});
+})
+
+
+app.listen(3000, 'localhost', () => {
+    console.log('listening on port 3000')
+})
+
+
+####################################################
+EJS
+
+- Express HandleBars
+- Pug
+- EJS
+
+$ npm install ejs
+
+
+//Deploy Express App
+const express = require('express');
+const app = express();
+
+//Set View Engine
+app.set('view engine', 'ejs');
+// app.set('views', 'views');
+
+const students = [
+    // {name: 'John', age: 25, course: 'Physics'}, 
+    // {name: 'Jane', age: 23, course: 'Biology'}, 
+    // {name: 'Bob', age: 22, course: 'Maths'}
+];
+
+//index.html
+app.get('/', (req, res) => {
+    // res.send('<h1>Hello World</h1>');
+    // res.sendFile("./views/index.html", {root: __dirname});
+    res.render('index', {title: 'HomePage', students: students});
+})
+
+//about.html
+app.get('/about', (req, res) => {
+    // res.send('<h1>About Page</h1>');
+    // res.sendFile("./views/about.html", {root: __dirname});
+    res.render('about', {title: 'About us'});
+})
+
+//redirect to about page
+app.get('/about-us', (req, res) => {
+    res.redirect('/about');
+})
+
+//404 error
+app.use((req, res) => {
+    // res.status(404).sendFile("./views/404.html", {root: __dirname});
+    res.status(404).render('404', {title: '404'});
+})
+
+
+app.listen(3000, 'localhost', () => {
+    console.log('listening on port 3000')
+})
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Node Class | <%= title %>
+    </title>
+</head>
+
+<body>
+    <h1>Welcome to the Node Class Newbies!</h1>
+    <p>Let's see how HTML works with Node!</p>
+    <% const content="This is a dynamic text inside HTML." %>
+    <nav>
+        <a href="/">Home</a>
+        <a href="/about">About</a>
+        <br />
+        <p>
+            <%= content %>
+        </p>
+    </nav>
+
+    <% if(students.length> 0) { %>
+    <% students.forEach((student)=> { %>
+    <ul>
+        <li>
+            <%= student.name %>
+        </li>
+        <li>
+            <%= student.age %>
+        </li>
+        <li>
+            <%= student.course %>
+        </li>
+    </ul>
+    <% }); %>
+    <% } else { %>
+    <p>No students found</p>
+    <% } %>
+</body>
+
+</html>
+
+
+
+####################################################
+INCLUDE
+
+<%- include('./partials/header.ejs') %>
+
+<%- include('./partials/nav.ejs') %>
+
+
+####################################################
+MIDDLEWARE
+
+app.use((req, res, next) => {
+    console.log('New request made.');
+    console.log('Request URL:', req.url);
+    console.log('Hostname:', req.hostname);
+    console.log('Path:', req.path);
+    console.log('Method:', req.method);
+    next();
+});
+
+
+####################################################
+THIRD PARTY - MIDDLEWARE (MORGAN)
+
+npm install morgan
+
+const morgan = require('morgan');
+
+app.use(morgan('dev'));
+app.use(morgan('tiny'));
+
+GET /about 304 16.316 ms - -
+GET /about 304 - - 16.316 ms
+
+####################################################
+STYLES.CSS
+
+app.use(express.static('public'));
+
+<link rel="stylesheet" href="styles.css">
+
+
+
+
+
+
+
+
+
+
+
+

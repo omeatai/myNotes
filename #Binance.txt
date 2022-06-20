@@ -1,0 +1,1127 @@
+FUTURES BULL
+
+#
+# GENERAL SETTINGS
+#
+# Define the market we are trading (BTC, ETH, XMR, BNB or USDT)
+market = USDT
+# This will enable trading for any pairs that you have defined
+enabled_pairs = BTC, ETH, BCH, XRP, EOS, LTC, TRX, ETC, LINK, XLM, ADA, XMR, DASH, ZEC, XTZ, ATOM, ONT, IOTA, BAT, VET, NEO, QTUM, IOST
+
+# Enable trading (buying,selling and orders) using defined strategies for all pairs
+DEFAULT_trading_enabled = false
+# This will hide any pairs that you have disabled
+hidden_pairs = ALL
+# DCA is a method for averaging down the price of a losing trade, hoping the price will come up to your lower average buy price.
+DEFAULT_DCA_enabled = false
+# Choose to combine pending orders for the same coin into one item in the pending log or keep them as separate items.
+DEFAULT_combine_pending_orders = false
+# Define your starting balance from the exchange
+start_balance = 4000
+# Only buy coins if the buy cost will not let your balance go below specified amount
+keep_balance = 0.0
+# Only buy coins if the buy cost will not let your balance go below specified amount in %
+keep_balance_percentage = 0
+# An alternative to the fixed initial cost above, set the percentage of your TCV (Total Current Value) to be used for each initial purchase.
+
+DEFAULT_buy_leverage = 2
+DEFAULT_buy_margin_type = CROSSED
+shorting = false
+
+#
+# POSSIBLE BUY LOG FILTERING
+#
+# Only buy coins with a minimum volume of specified amount.
+# Set the depth of the orderbook to look back and identify the largest sell order.
+#DEFAULT_sell_wall_orderbook_depth = 50
+# Set the maximum difference allowed from the average order size within the DEFAULT_sell_wall_orderbook_depth.
+# If this difference is exceeded then the coin will not be bought.
+#DEFAULT_sell_wall_diff_percentage = 5000
+# Adjust trading pairs based on server capability and trading budget
+max_trading_pairs = 23
+# Set the amount of the market currency (BTC, ETH, XMR, BNB, or USDT) we will use to buy a pair. This amount is spent for EACH initial purchase.
+DEFAULT_initial_cost = 0
+DEFAULT_initial_cost_percentage = 4
+#
+# Rule 2. The trading pair must have high volume;
+#
+DEFAULT_min_buy_volume = 20
+# Set to ignore low satoshi coins.
+DEFAULT_min_buy_price = 0.000000060
+# Max spread % between lowest ask and highest bid to allow a new buy order.
+DEFAULT_max_buy_spread = 3
+# Allow initial buys if there is enough volume in order book to fill the order.
+#DEFAULT_min_orderbook_volume_percentage = 100
+# Set the amount of minutes that the bot is not allowed to buy a coin after it was sold.
+DEFAULT_rebuy_timeout = 3
+#
+# Rule 6. The trading pairs price must be down at least a defined percentage;
+#
+# Only purchase a pair if the 24 hour percentage change is above the min price increase.
+# Note: You may need to adjust this to suit market conditions, setting this to 0.01 will only pick positive pairs.
+DEFAULT_buy_min_change_percentage = -300
+# Only purchase a pair if the 24 hour percentage change is below the max price increase.
+DEFAULT_buy_max_change_percentage = 300
+# coin_min_age is defined in days, it is used to allow the bot to trade only with coins which are older than x days,
+pair_min_listed_days = 10
+# Rule 4. The trading pair must be in a long term uptrend according to the 200 day moving average;
+#
+# BUY SETTINGS
+#
+# Rule 5. The trading pair must be in a long term uptrend according to the 200 day moving average;
+# *************************************************************************
+#
+#       CONNORS RSI - BUY STRATEGY - ProfitTrailer 2.1.x
+#
+# This strategy implements the Connors 2 Period RSI Pullback strategy.
+#
+#
+#                       FEWER TRADES, BETTER QUALITY
+# *************************************************************************
+#
+# Rule 1. The trading pair must be in a long term uptrend according to the 200 day moving average;
+#
+DEFAULT_A_buy_strategy_label = 1WCONNORSRSI
+DEFAULT_A_buy_strategy = RSI
+DEFAULT_A_buy_value = 100.1
+DEFAULT_A_buy_value_limit = 40
+#
+# Rule 2. The trading pair must be in a long term uptrend according to the 200 day moving average;
+#
+DEFAULT_B_buy_strategy_label = 1DCONNORSRSI
+DEFAULT_B_buy_strategy = RSI
+DEFAULT_B_buy_value = 100.1
+DEFAULT_B_buy_value_limit = 40
+#
+#
+# Rule 3. The trading pair must be in a long term uptrend according to the 200 day moving average;
+#
+DEFAULT_C_buy_strategy_label = 4HCONNORSRSI
+DEFAULT_C_buy_strategy = RSI
+DEFAULT_C_buy_value = 100.1
+DEFAULT_C_buy_value_limit = 40
+#
+#
+DEFAULT_D_buy_strategy_label = 1HCONNORSRSI
+DEFAULT_D_buy_strategy = RSI
+DEFAULT_D_buy_value = 100.1
+DEFAULT_D_buy_value_limit = 40
+#
+#
+#
+DEFAULT_E_buy_strategy_label = 15MCONNORSRSI
+DEFAULT_E_buy_strategy = RSI
+DEFAULT_E_buy_value = 100.1
+DEFAULT_E_buy_value_limit = 40
+#
+# Rule 7. The trading pair must be in a long term uptrend according to the 200 day moving average;
+DEFAULT_F_buy_strategy_label = 4HMACDSMALL
+DEFAULT_F_buy_strategy = MACD
+DEFAULT_F_buy_value = 0.00000002
+
+# Rule 8. The trading pair must be in a long term uptrend according to the 200 day moving average;
+DEFAULT_G_buy_strategy_label = 1HMACDSMALL
+DEFAULT_G_buy_strategy = MACD
+DEFAULT_G_buy_value = 0.00000002
+
+# Rule 9. The trading pair must be in a long term uptrend according to the 200 day moving average;
+DEFAULT_H_buy_strategy_label = 15MMACDSMALL
+DEFAULT_H_buy_strategy = MACD
+DEFAULT_H_buy_value = 0.00000002
+
+#
+#
+# Trailing is turned off as we are following an upward trend
+#
+DEFAULT_trailing_buy = 0
+#
+# *********************************************************************
+#        CONNORS 2RSI - SELL STRATEGY - ProfitTrailer 2.1.x
+#
+# This strategy implements the Connors 2 Period RSI Pullback strategy.
+#
+#                       FEWER TRADES, BETTER QUALITY
+# *********************************************************************
+#
+# What is the minimum profit we want to make on this trade?
+#
+DEFAULT_A_sell_strategy = GAIN
+DEFAULT_A_sell_value = -200
+#DEFAULT_A_sell_value_limit = 5
+
+DEFAULT_B_sell_strategy_label = 15MMACDSMALL
+DEFAULT_B_sell_strategy = MACD
+DEFAULT_B_sell_value = -0.00000002
+#
+#
+#
+DEFAULT_C_sell_strategy_label = 1HMACDSMALL
+DEFAULT_C_sell_strategy = MACD
+DEFAULT_C_sell_value = -0.00000002
+#
+#
+DEFAULT_D_sell_strategy_label = 15MEMASPREAD
+DEFAULT_D_sell_strategy = EMASPREAD
+DEFAULT_D_sell_value = -0.1
+#
+# Trailing is turned off to sell based on the rules above
+#
+# Set the type of trailing you want to use DEFAULT, GROW, SHRINK
+DEFAULT_trailing_profit_type = DEFAULT
+# Once all sell strategies are true, the bot will make note of the current bid price and begin watching.
+# The price needs to rise and then fall by at least the percentage specified in order for a sell to be attempted.
+DEFAULT_trailing_profit = 0
+# Set the number of times you want to see the price fluctuate into and out of a good trail before making the buy.
+DEFAULT_trailing_profit_rebound_count = 0
+# If set to true, it will look at the highest bid order with enough volume rather than just the highest bid order.
+orderbook_profit_calculation = false
+# This will sell a pair regardless of other settings if max profit is reached
+DEFAULT_max_profit = 0
+# The time period to wait define in munutes while the profit percentage remains above xx percent, defined on the line below this, but has not yet sold.
+#DEFAULT_take_profit_wait_time = 20
+# The profit percentage above which the bot will attempt to sell a pair if it has not sold for xx minutes, defined on the line above this.
+#DEFAULT_take_profit_percentage = 10
+# The percentage of price deviation allowed from the DEFAULT_take_profit_percentage before resetting the DEFAULT_take_profit_wait_time.
+#DEFAULT_take_profit_reset_percentage_move = 0.25
+# If x amount of time in minutes has passed since you bought a coin, create a pending order for that pair
+#DEFAULT_pending_order_wait_time = 0
+# If the price has dropped x% since we bought a coin and we have not sold it (and it's still in the pairs log),
+# create limit sell order for that pair at a price equivalent to your GAIN strategy sell_value.
+DEFAULT_pending_order_price_drop_trigger = -1000
+# Cancel pending order for specified coin if avg profit reaches specified amount
+DEFAULT_pending_gain_percentage = 1000
+DEFAULT_cancel_pending_trigger = 600
+DEFAULT_combined_cancel_pending_trigger = 600
+
+DEFAULT_take_profit_safety_arm = 3
+DEFAULT_take_profit_safety_fire = 1.25
+# Set the value that will trigger a stop loss order If the value of a coin drops below stop loss trigger, it will be automatically sold
+DEFAULT_stop_loss_trigger = 0
+# Set the amount of minutes that the bot is not allowed to buy a coin after if was sold by stop loss trigger
+DEFAULT_stop_loss_timeout = 60
+# Set to true to sell all of your coins with a balance for current market prices
+DEFAULT_panic_sell_enabled = false
+
+#
+# SELL ONLY MODE
+#
+
+# Manually enable Sell Only Mode (SOM) for all your coins. No more purchases will be made. The bot will continue to make sales.
+DEFAULT_sell_only_mode_enabled = false
+# Protect against large market swings by turning on sell only mode.
+#consecutive_buy_trigger = 16
+# Turn off sell only mode if we got x consecutive sells with no buys in between
+#consecutive_sell_trigger = 2
+# This is to protect against Bitcoin rising (aka mooning) or dropping automatically turns on / off SOM as required.
+#price_trigger_market = BTC
+#price_drop_trigger_action = SOM
+# Turn on sell only mode (SOM) if the price drops by the set percentage.
+#price_drop_trigger = 10
+# Turn off sell only mode if it was activated by a price drop the price change is now back above the set threshold.
+#price_drop_recover_trigger = 4
+# Turn on sell only mode if the price rises by the set percentage.
+#price_rise_trigger = 7
+# Turn off sell only mode if it was activated by price rise and the price change is now back below the set threshold.
+#price_rise_recover_trigger = 6
+
+# Coin Specific Settings
+#
+
+# This is for the pairs you do not wish to trade, examples only below,
+# you need to add your own list here. Make sure none of your enabled pairs
+# above is appearing below or that pair wont trade.
+# BNB fees are not yet supported in Binance, so dont buy BNB until you disable the setting
+BNB_trading_enabled = false
+BNB_reserve_amount = 0
+
+
+#
+# Pairs I want to HODL
+#
+#NEO_trading_enabled = false
+#NEO_DCA_enabled = false
+#ETH_trading_enabled = false
+#ETH_DCA_enabled = false
+#LTC_trading_enabled = false
+#LTC_DCA_enabled = false
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+DCA
+#
+# GENERAL SETTINGS
+#
+
+# DCA is a method for averaging down the price of a losing trade, hoping the price will come up to your lower average buy price.
+DEFAULT_DCA_max_cost = 10
+# Define max amount of times DCA is allowed to buy a pair.
+DEFAULT_DCA_max_buy_times = 5
+#
+# Set the maximum number of coins that are permitted to DCA at any given time.
+# If not set (including missing from the file completely) then there is no limit and all coins can be DCA'd.
+# DCA_max_trading_pairs = 6
+#
+# Only buy coins if the buy cost will not let your balance go below specified amount
+DCA_keep_balance = 0
+# Only buy coins if the buy cost will not let your balance go below specified amount in %
+DCA_keep_balance_percentage = 0
+
+#
+# BUY FILTER SETTINGS
+#
+
+# Allow DCA to buy if there's enough volume in order book to fill the order.
+DEFAULT_DCA_min_buy_volume = 10
+# Max spread % between lowest ask and highest bid to allow a new buy order.
+DEFAULT_DCA_max_buy_spread = 3
+# Only place a buy order if there's enough volume in order book to fill the order.
+DEFAULT_DCA_min_orderbook_volume_percentage = 120
+# The timeout period (in minutes) that the bot is not allowed to buy a coin after it was last DCA'ed.
+DEFAULT_DCA_rebuy_timeout = 10
+# Only purchase a pair if the 24 hour percentage change is above the min price increase.
+DEFAULT_DCA_buy_min_change_percentage = 0
+# Only purchase a pair if the 24 hour percentage change is below the max price increase.
+DEFAULT_DCA_buy_max_change_percentage = 50
+# Set this value to true to allow DCA to continue buying even if no new buys are allowed as the bot is in Sell Only Mode.
+DEFAULT_DCA_ignore_sell_only_mode = false
+# Set the depth of the orderbook to look back and identify the largest sell order.
+DEFAULT_DCA_sell_wall_orderbook_depth = 50
+# Set the maximum difference allowed from the average order size within the DEFAULT_DCA_sell_wall_orderbook_depth.
+# If this difference is exceeded then the coin will not be bought.
+DEFAULT_DCA_sell_wall_diff_percentage = 5000
+
+#
+# BUY SETTINGS
+#
+
+# *************************************************************************
+#
+#       CONNORS RSI - BUY STRATEGY - ProfitTrailer 2.1.x
+#
+# This strategy implements the Connors 2 Period RSI Pullback strategy.
+#
+# Pullback trading is one of the most popular forms of trading amongst traders.
+# It has been used in the Forex, Options, Equity and Commodities markets for many
+# years by both Day Traders and Swing Traders alike.
+#
+# A pullback, also referred to as a retracement or consolidation, is a small temporary
+# fall in a trading pairs price from its peak in a prevailing upward trend.
+#
+# This strategy is based on 20 years of backtesting data done in the financial markets by
+# Laurence A. Connors in his book titled How Markets Work - a quantitive guide to
+# Stock Market behaviour. In his susbsequent books entitled the Connors Research
+# Trading Strategy Series he describes the 2 Period RSI Pullback strategy.
+#
+# The strategy consists of 9 basic rules, some of which we cannot directly reproduce,
+# so I have had to adapt these rules to suit ProfitTrailer's current capabilities and for
+# intraday trading as follows:
+#
+# 1. The trading pair must be in a long term uptrend according to the 200 day moving average;
+# 2. The trading pair must have high volume;
+# 3. The trading pair must have good volatility according to the 100 day moving average;
+# 4. The trading pair must be in a strong uptrend;
+# 5. The trading pair is currently down in price;
+# 6. The trading pairs price must be down at least a defined percentage;
+# 7. The 2 period RSI must be below 20;
+# 8. Buy on a lower intraday price opportunity;
+# 9. Exit the trade when the 2 period RSI is over 70.
+#
+# You will need to purchase his books to see the original rules if you want to compare these.
+#
+# This is an advanced strategy best suited to a Bear or oscillating / sideways market
+# but will work in all market conditions.
+#
+#                       FEWER TRADES, BETTER QUALITY
+# *************************************************************************
+#
+# Are we overbought or close to being overbought right now?
+#
+DEFAULT_DCA_A_buy_strategy_label = CONNORSMACD
+DEFAULT_DCA_A_buy_strategy = MACD
+DEFAULT_DCA_A_buy_value = 0.00000001
+DEFAULT_DCA_A_buy_value_limit = 1
+#
+# Is the price rising?
+#
+DEFAULT_DCA_B_buy_strategy_label = CONNORSRSI
+DEFAULT_DCA_B_buy_strategy = RSI
+DEFAULT_DCA_B_buy_value = 29.9
+DEFAULT_DCA_B_buy_value_limit = 0
+
+# Set the loss percentage required before a DCA buy can take place.
+DEFAULT_DCA_buy_trigger = 5
+# Set the loss % required before a DCA buy can take place when SOM is on.
+# All configured buy strategies must be true and you must have lost at least this amount from your average bought price.
+SOM_DCA_buy_trigger = 5
+
+#
+# Trailing is turned off as we are following an upward trend
+#
+# Once all buy strategies are true, the bot will make note of the current ask price and begin watching.
+# The price needs to fall and then rise by at least the percentage specified in order for a buy to be attempted.
+DEFAULT_DCA_trailing_buy = 0
+# Set the number of times you want to see the price fluctuate into and out of a good trail before making the buy.
+DEFAULT_DCA_trailing_buy_rebound_count = 0
+# Set the percentage of TCV purchased when making a DCA buy.
+DEFAULT_DCA_buy_percentage = 100
+# Set the buy percentage to be used instead of DEFAULT_DCA_buy_percentage when sell only mode (SOM) is on
+SOM_DCA_buy_percentage = 100
+
+# Sets the per trigger level percentage of TCV to purchase when making a DCA buy.
+# Purchase the same number of coins at each DCA level effectively doubling down.
+DEFAULT_DCA_buy_percentage_1 = 100
+DEFAULT_DCA_buy_percentage_2 = 50
+DEFAULT_DCA_buy_percentage_3 = 33.3333333333333
+DEFAULT_DCA_buy_percentage_4 = 25
+DEFAULT_DCA_buy_percentage_5 = 20
+DEFAULT_DCA_buy_percentage_6 = 16.6666666666667
+DEFAULT_DCA_buy_percentage_7 = 14.2857142857143
+DEFAULT_DCA_buy_percentage_8 = 12.5
+DEFAULT_DCA_buy_percentage_9 = 11.1111111111111
+DEFAULT_DCA_buy_percentage_10 = 10
+DEFAULT_DCA_buy_percentage_11 = 9.09090909090909
+DEFAULT_DCA_buy_percentage_12 = 8.33333333333333
+DEFAULT_DCA_buy_percentage_13 = 7.69230769230769
+DEFAULT_DCA_buy_percentage_14 = 7.14285714285714
+DEFAULT_DCA_buy_percentage_15 = 6.66666666666667
+DEFAULT_DCA_buy_percentage_16 = 6.25
+DEFAULT_DCA_buy_percentage_17 = 5.88235294117647
+DEFAULT_DCA_buy_percentage_18 = 5.55555555555556
+DEFAULT_DCA_buy_percentage_19 = 5.26315789473684
+DEFAULT_DCA_buy_percentage_20 = 5
+DEFAULT_DCA_buy_percentage_21 = 4.76190476190476
+DEFAULT_DCA_buy_percentage_22 = 4.54545454545455
+DEFAULT_DCA_buy_percentage_23 = 4.34782608695652
+DEFAULT_DCA_buy_percentage_24 = 4.16666666666667
+DEFAULT_DCA_buy_percentage_25 = 4
+DEFAULT_DCA_buy_percentage_26 = 3.84615384615385
+DEFAULT_DCA_buy_percentage_27 = 3.7037037037037
+DEFAULT_DCA_buy_percentage_28 = 3.57142857142857
+DEFAULT_DCA_buy_percentage_29 = 3.44827586206897
+DEFAULT_DCA_buy_percentage_30 = 3.33333333333333
+DEFAULT_DCA_buy_percentage_31 = 3.2258064516129
+DEFAULT_DCA_buy_percentage_32 = 3.125
+DEFAULT_DCA_buy_percentage_33 = 3.03030303030303
+DEFAULT_DCA_buy_percentage_34 = 2.94117647058824
+DEFAULT_DCA_buy_percentage_35 = 2.85714285714286
+DEFAULT_DCA_buy_percentage_36 = 2.77777777777778
+DEFAULT_DCA_buy_percentage_37 = 2.7027027027027
+DEFAULT_DCA_buy_percentage_38 = 2.63157894736842
+DEFAULT_DCA_buy_percentage_39 = 2.56410256410256
+DEFAULT_DCA_buy_percentage_40 = 2.5
+DEFAULT_DCA_buy_percentage_41 = 2.4390243902439
+DEFAULT_DCA_buy_percentage_42 = 2.38095238095238
+DEFAULT_DCA_buy_percentage_43 = 2.32558139534884
+DEFAULT_DCA_buy_percentage_44 = 2.27272727272727
+DEFAULT_DCA_buy_percentage_45 = 2.22222222222222
+DEFAULT_DCA_buy_percentage_46 = 2.17391304347826
+DEFAULT_DCA_buy_percentage_47 = 2.12765957446808
+DEFAULT_DCA_buy_percentage_48 = 2.08333333333333
+DEFAULT_DCA_buy_percentage_49 = 2.04081632653061
+DEFAULT_DCA_buy_percentage_50 = 2
+DEFAULT_DCA_buy_percentage_51 = 1.96078431372549
+DEFAULT_DCA_buy_percentage_52 = 1.92307692307692
+DEFAULT_DCA_buy_percentage_53 = 1.88679245283019
+DEFAULT_DCA_buy_percentage_54 = 1.85185185185185
+DEFAULT_DCA_buy_percentage_55 = 1.81818181818182
+DEFAULT_DCA_buy_percentage_56 = 1.78571428571429
+DEFAULT_DCA_buy_percentage_57 = 1.75438596491228
+DEFAULT_DCA_buy_percentage_58 = 1.72413793103448
+DEFAULT_DCA_buy_percentage_59 = 1.69491525423729
+DEFAULT_DCA_buy_percentage_60 = 1.66666666666667
+DEFAULT_DCA_buy_percentage_61 = 1.63934426229508
+DEFAULT_DCA_buy_percentage_62 = 1.61290322580645
+DEFAULT_DCA_buy_percentage_63 = 1.58730158730159
+DEFAULT_DCA_buy_percentage_64 = 1.5625
+DEFAULT_DCA_buy_percentage_65 = 1.53846153846154
+DEFAULT_DCA_buy_percentage_66 = 1.51515151515151
+DEFAULT_DCA_buy_percentage_67 = 1.49253731343284
+DEFAULT_DCA_buy_percentage_68 = 1.47058823529412
+DEFAULT_DCA_buy_percentage_69 = 1.44927536231884
+DEFAULT_DCA_buy_percentage_70 = 1.42857142857143
+DEFAULT_DCA_buy_percentage_71 = 1.40845070422535
+DEFAULT_DCA_buy_percentage_72 = 1.38888888888889
+DEFAULT_DCA_buy_percentage_73 = 1.36986301369863
+DEFAULT_DCA_buy_percentage_74 = 1.35135135135135
+DEFAULT_DCA_buy_percentage_75 = 1.33333333333333
+DEFAULT_DCA_buy_percentage_76 = 1.31578947368421
+DEFAULT_DCA_buy_percentage_77 = 1.2987012987013
+DEFAULT_DCA_buy_percentage_78 = 1.28205128205128
+DEFAULT_DCA_buy_percentage_79 = 1.26582278481013
+DEFAULT_DCA_buy_percentage_80 = 1.25
+DEFAULT_DCA_buy_percentage_81 = 1.23456790123457
+DEFAULT_DCA_buy_percentage_82 = 1.21951219512195
+DEFAULT_DCA_buy_percentage_83 = 1.20481927710843
+DEFAULT_DCA_buy_percentage_84 = 1.19047619047619
+DEFAULT_DCA_buy_percentage_85 = 1.17647058823529
+DEFAULT_DCA_buy_percentage_86 = 1.16279069767442
+DEFAULT_DCA_buy_percentage_87 = 1.14942528735632
+DEFAULT_DCA_buy_percentage_88 = 1.13636363636364
+DEFAULT_DCA_buy_percentage_89 = 1.12359550561798
+DEFAULT_DCA_buy_percentage_90 = 1.11111111111111
+DEFAULT_DCA_buy_percentage_91 = 1.0989010989011
+DEFAULT_DCA_buy_percentage_92 = 1.08695652173913
+DEFAULT_DCA_buy_percentage_93 = 1.0752688172043
+DEFAULT_DCA_buy_percentage_94 = 1.06382978723404
+DEFAULT_DCA_buy_percentage_95 = 1.05263157894737
+DEFAULT_DCA_buy_percentage_96 = 1.04166666666667
+DEFAULT_DCA_buy_percentage_97 = 1.03092783505155
+DEFAULT_DCA_buy_percentage_98 = 1.02040816326531
+DEFAULT_DCA_buy_percentage_99 = 1.01010101010101
+DEFAULT_DCA_buy_percentage_100 = 1
+
+#
+# SELL SETTINGS
+#
+
+# *********************************************************************
+#        CONNORS 2RSI - SELL STRATEGY - ProfitTrailer 2.1.x
+#
+# This strategy implements the Connors 2 Period RSI Pullback strategy.
+#
+# Pullback trading is one of the most popular forms of trading amongst traders.
+# It has been used in the Forex, Options, Equity and Commodities markets for many
+# years by both Day Traders and Swing Traders alike.
+#
+# A pullback, also referred to as a retracement or consolidation, is a small temporary
+# fall in a trading pairs price from its peak in a prevailing upward trend.
+#
+# This strategy is based on 20 years of backtesting data done in the financial markets by
+# Laurence A. Connors in his book titled How Markets Work - a quantitive guide to
+# Stock Market behaviour. In his susbsequent books entitled the Connors Research
+# Trading Strategy Series he describes the 2 Period RSI Pullback strategy.
+#
+# The strategy consists of 9 basic rules, some of which we cannot directly reproduce,
+# so I have had to adapt these rules to suit ProfitTrailer's current capabilities and for
+# intraday trading as follows:
+#
+# 1. The trading pair must be in a long term uptrend according to the 200 day moving average;
+# 2. The trading pair must have high volume;
+# 3. The trading pair must have good volatility according to the 100 day moving average;
+# 4. The trading pair must be in a strong uptrend;
+# 5. The trading pair is currently down in price;
+# 6. The trading pairs price must be down at least a defined percentage;
+# 7. The 2 period RSI must be below 20;
+# 8. Buy on a lower intraday price opportunity;
+# 9. Exit the trade when the 2 period RSI is over 70.
+#
+# You will need to purchase his books to see the original rules if you want to compare these.
+#
+# This is an advanced strategy best suited to a Bear or oscillating / sideways market
+# but will work in all market conditions.
+#
+#                       FEWER TRADES, BETTER QUALITY
+# *********************************************************************
+#
+# What is the minimum profit we want to make on this trade?
+#
+DEFAULT_DCA_A_sell_strategy = GAIN
+DEFAULT_DCA_A_sell_value = 2.0
+#
+# Are we overbought or close to being overbought right now?
+#
+DEFAULT_DCA_B_sell_strategy_label = CONNORSMACD
+DEFAULT_DCA_B_sell_strategy = MACD
+DEFAULT_DCA_B_sell_value = -0.000000001
+DEFAULT_DCA_B_sell_value_limit = -1
+#
+# Rule 9. Exit the trade when the 2 period RSI is over 70.
+#
+DEFAULT_DCA_C_sell_strategy_label = CONNORSRSI
+DEFAULT_DCA_C_sell_strategy = RSI
+DEFAULT_DCA_C_sell_value = 69.9
+DEFAULT_DCA_C_sell_value_limit = 100.1
+#
+# Trailing should take us to the peak of the trade cycle
+#
+DEFAULT_DCA_trailing_profit_type = GROW
+DEFAULT_DCA_trailing_profit = 0.25
+DEFAULT_DCA_trailing_profit_rebound_count = 0
+#
+# Profits
+#
+# If set to true, Profit Trailer will look at the highest bid order with enough volume rather than just the highest bid order.
+DCA_orderbook_profit_calculation = true
+# Sell the trading pair if profit reaches the set percentage regardless of all sell strategies being true.
+DEFAULT_DCA_max_profit = 0
+# The profit percentage above which the bot will attempt to sell a pair if it has not sold for xx minutes, defined on the line above this.
+DEFAULT_DCA_take_profit_percentage = 10
+# The percentage of price deviation allowed from the DEFAULT_take_profit_percentage before resetting the DEFAULT_take_profit_wait_time.
+DEFAULT_DCA_take_profit_reset_percentage_move = 0.5
+# The time period to wait define in minutes while the profit percentage remains above xx percent, defined on the line below this, but has not yet sold.
+DEFAULT_DCA_take_profit_wait_time = 10
+#
+# Pending Orders
+#
+# If x amount of time in minutes has passed since you bought a coin, create a pending order for that pair
+DEFAULT_DCA_pending_order_wait_time = 0
+# Cancel pending order for specified coin if avg profit reaches specified amount
+DEFAULT_DCA_combined_cancel_pending_trigger = -2
+# If the price has dropped x% since we bought a coin and we have not sold it (and it's in the dca log),
+# create limit sell order for that pair at a price equivalent to your GAIN strategy sell_value.
+DEFAULT_DCA_pending_order_price_drop_trigger = -5
+# Choose to combine pending orders for the same coin into one item in the pending log or keep them as separate items.
+DEFAULT_DCA_combine_pending_orders = true
+#
+# Stop loss triggers
+#
+# Set the value that will trigger a stop loss order. If the value of a coin drops below the set percentage it will be automatically sold for a loss.
+DEFAULT_DCA_stop_loss_trigger = 0
+# Set the amount of minutes that the bot is not allowed to buy a coin after it was sold by stop loss trigger.
+DEFAULT_DCA_stop_loss_timeout = 60
+# If set to true, Stoploss in DCA will behave the same as in pairs. once the set percentage is reached, the coin will sell as a stoploss.
+# If set to false, stoploss will not occur until DCA is complete.
+DCA_stop_before_complete = false
+# Set to true to sell all of your coins in the DCA Log IMMEDIATELY for current market prices.
+DEFAULT_DCA_panic_sell_enabled = false
+
+
+
+
+
+
+
+#
+# CONNORS 2RSI INDICATORS
+#
+# Always uses 5 minute candles
+SOM_trigger_length = 288
+
+
+PTADXTREND_candle_period = 14400
+PTADXTREND_length = 40
+PTADXTREND_di_length = 8
+PTADXTREND_only_closed_candles = false
+
+# Define how many candles back to look and see if the EMA lines just crossed.
+15MEMASPREAD_cross_candles = 80
+# Define the period (in seconds) used to calculate the EMA lines, note exchange API must support this timing
+15MEMASPREAD_candle_period = 900
+# Define the EMA time frame (in candles) used to calculate the fast EMA line. (Max 500)
+15MEMASPREAD_fast_length = 20
+# Define the EMA time frame (in candles) used to calculate the slow EMA line. (Max 500)
+15MEMASPREAD_slow_length = 100
+
+# Define how many candles back to look and see if the EMA lines just crossed.
+1HEMASPREAD_cross_candles = 80
+# Define the period (in seconds) used to calculate the EMA lines, note exchange API must support this timing
+1HEMASPREAD_candle_period = 3600
+# Define the EMA time frame (in candles) used to calculate the fast EMA line. (Max 500)
+1HEMASPREAD_fast_length = 20
+# Define the EMA time frame (in candles) used to calculate the slow EMA line. (Max 500)
+1HEMASPREAD_slow_length = 100
+
+# Define how many candles back to look and see if the EMA lines just crossed.
+4HEMASPREAD_cross_candles = 80
+# Define the period (in seconds) used to calculate the EMA lines, note exchange API must support this timing
+4HEMASPREAD_candle_period = 14400
+# Define the EMA time frame (in candles) used to calculate the fast EMA line. (Max 500)
+4HEMASPREAD_fast_length = 20
+# Define the EMA time frame (in candles) used to calculate the slow EMA line. (Max 500)
+4HEMASPREAD_slow_length = 100
+
+15MMACDSMALL_candle_period = 900
+15MMACDSMALL_fast_length = 14
+15MMACDSMALL_slow_length = 144
+15MMACDSMALL_signal = 50
+
+15MMACDWIDE_candle_period = 900
+15MMACDWIDE_fast_length = 144
+15MMACDWIDE_slow_length = 233
+15MMACDWIDE_signal = 50
+
+1HMACDSMALL_candle_period = 3600
+1HMACDSMALL_fast_length = 14
+1HMACDSMALL_slow_length = 144
+1HMACDSMALL_signal = 50
+
+1HMACDWIDE_candle_period = 3600
+1HMACDWIDE_fast_length = 144
+1HMACDWIDE_slow_length = 233
+1HMACDWIDE_signal = 50
+
+
+4HMACDSMALL_candle_period = 14400
+4HMACDSMALL_fast_length = 14
+4HMACDSMALL_slow_length = 144
+4HMACDSMALL_signal = 50
+
+4HMACDWIDE_candle_period = 14400
+4HMACDWIDE_fast_length = 144
+4HMACDWIDE_slow_length = 233
+4HMACDWIDE_signal = 50
+
+
+1DMACDSMALL_candle_period = 86400
+1DMACDSMALL_fast_length = 14
+1DMACDSMALL_slow_length = 144
+1DMACDSMALL_signal = 50
+
+1DMACDWIDE_candle_period = 86400
+1DMACDWIDE_fast_length = 144
+1DMACDWIDE_slow_length = 233
+1DMACDWIDE_signal = 50
+
+12,26,9
+MACD_candle_period = 14400
+MACD_fast_length = 12
+MACD_slow_length = 144
+MACD_signal = 50
+#
+#
+# Define the period (in seconds) used to calculate the RSI lines.
+1WCONNORSRSI_candle_period = 604800
+# Define the RSI time frame (in candles) used by all RSI calculations
+1WCONNORSRSI_length = 2
+# Define the period (in seconds) used to calculate the RSI lines.
+1DCONNORSRSI_candle_period = 86400
+# Define the RSI time frame (in candles) used by all RSI calculations
+1DCONNORSRSI_length = 2
+#
+# Define the period (in seconds) used to calculate the RSI lines.
+4HCONNORSRSI_candle_period = 14400
+# Define the RSI time frame (in candles) used by all RSI calculations
+4HCONNORSRSI_length = 2
+#
+# Define the period (in seconds) used to calculate the RSI lines.
+1HCONNORSRSI_candle_period = 3600
+# Define the RSI time frame (in candles) used by all RSI calculations
+1HCONNORSRSI_length = 2
+#
+15MCONNORSRSI_candle_period = 900
+# Define the RSI time frame (in candles) used by all RSI calculations
+15MCONNORSRSI_length = 2
+#
+# Define the period (in seconds) used to calculate the RSI lines.
+5MCONNORSRSI_candle_period = 300
+# Define the RSI time frame (in candles) used by all RSI calculations
+5MCONNORSRSI_length = 2
+# Define the period (in seconds) used to calculate the RSI lines.
+1MCONNORSRSI_candle_period = 60
+# Define the RSI time frame (in candles) used by all RSI calculations
+1MCONNORSRSI_length = 2
+#
+# Define the period (in seconds) used to calculate the RSI lines.
+CONNORSRSI_candle_period = 300
+# Define the RSI time frame (in candles) used by all RSI calculations
+CONNORSRSI_length = 2
+#
+#
+# Rule 1. The trading pair must be in a long term uptrend according to the 200 day moving average;
+# Define the EMA time frame (in candles) used to calculate the slow EMA line.
+# Define how many candles back to look and see if the EMA lines just crossed.
+GOLDENCROSS_cross_candles = 500
+# Define the period (in seconds) used to calculate the EMA lines.
+GOLDENCROSS_candle_period = 300
+# Define the EMA time frame (in candles) used to calculate the fast EMA line.
+GOLDENCROSS_fast_length = 50
+GOLDENCROSS_slow_length = 200
+# Rule 3. The trading pair must have good volatility according to teh 100 day moving average;
+#
+# Rule 2. The trading pair must have high volume;
+#
+# Define the candle size (in seconds) used to calculate STOCHRSIK
+STOCHRSIK_candle_period = 300
+# Define the RSI time frame (in candles) used to calculate the STOCHRSIK (Max 500)
+STOCHRSIK_rsi_length = 2
+# Define the stoch time frame (in candles) used to calculate the STOCHRSIK (Max 500)
+STOCHRSIK_stoch_length = 5
+# Define the time period to be used to calculate the K divergence when using STOCHRSIK
+STOCHRSIK_K = 3
+#Define the period (in seconds) used to calculate the EMA lines.
+#
+#
+# Rule 5. The trading pair is currently down in price;
+#
+# Define how many candles back to look and see if the EMA lines just crossed.
+DEATHCROSS_cross_candles = 500
+# Define the period (in seconds) used to calculate the EMA lines.
+DEATHCROSS_candle_period = 14400
+# Define the EMA time frame (in candles) used to calculate the fast EMA line.
+DEATHCROSS_fast_length = 20
+# Define the EMA time frame (in candles) used to calculate the slow EMA line.
+DEATHCROSS_slow_length = 200
+#
+
+#
+# Rule 4. The trading pair must be in a strong uptrend;
+#
+#
+#
+#Define how many candles back to look and see if the EMA lines just crossed.
+CONNORSCROSS_cross_candles = 500
+CONNORSCROSS_candle_period = 300
+#Define the EMA time frame (in candles) used to calculate the fast EMA line.
+CONNORSCROSS_fast_length = 20
+#Define the EMA time frame (in candles) used to calculate the slow EMA line.
+CONNORSCROSS_slow_length = 50
+# Define the period (in seconds) used to calculate the RSI lines.
+#
+# Rule 6. The trading pairs price must be down at least a defined percentage;
+#
+#
+# Define how many candles back to look and see if the EMA lines just crossed.
+EMA_cross_candles = 80
+# Define the period (in seconds) used to calculate the EMA lines, note exchange API must support this timing
+EMA_candle_period = 300
+# Define the EMA time frame (in candles) used to calculate the fast EMA line. (Max 500)
+EMA_fast_length = 8
+# Define the EMA time frame (in candles) used to calculate the slow EMA line. (Max 500)
+EMA_slow_length = 13
+#
+#
+# Rule 7. The 2 period RSI must be below 20
+# Rule 9. Exit the trade when the 2 period RSI is over 70.
+# Define the time period to be used to calculate the D divergence
+
+#
+# Rule 8. Buy on a lower intraday price opportunity;
+# Define the period (in seconds) used to calculate the STOCHRSI.
+STOCHRSID_candle_period = 300
+# Define the RSI time frame (in candles) used to calculate the STOCHRSI strategies. (Max 500)
+STOCHRSID_rsi_length = 2
+# Define the stoch time frame (in candles) used to calculate the STOCHRSI strategies. (Max 500)
+STOCHRSID_stoch_length = 5
+# Define the time period to be used to calculate the K divergence
+STOCHRSID_K = 3
+STOCHRSID_D = 3
+
+#
+# Supporting the Rules
+#
+
+#
+# Define the period (in seconds) used to calculate the MACD lines.
+CONNORSMACD_candle_period = 300
+# Define the MA time frame (in candles) used to calculate the fast MACD line.
+CONNORSMACD_fast_length = 13
+# Define the MA time frame (in candles) used to calculate the slow MACD line.
+CONNORSMACD_slow_length = 21
+# Define the time frame (in days) of the EMA (Exponential Moving Average) of the MACD
+CONNORSMACD_signal = 3
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#
+# GENERAL SETTINGS
+#
+# Define the market we are trading (BTC, ETH, XMR, BNB or USDT)
+market = USDT
+# This will enable trading for any pairs that you have defined
+enabled_pairs = ALL
+#ADA, AION, ALGO, ANKR, ARPA, ATOM, BAND, BAT, BCH, BEAM, BNT, BTC, BTS, BTT, CELR, CHZ, COCOS, COS, COTI, CTX, CVC, DASH, DATA, DENT, DOCK, DOGE, DREP, DUSK, ENJ, EOS, ERD, ETC, ETH, FET, FTM, FTT, FUN, GTO, HBAR, HC, HOT, ICX, IOST, IOTA, IOTX, KAVA, KEY, LINK, LSK, LTC, LTO, MATIC, MBL, MCO, MFT, MITH, MTL, NANO, NEO, NKN, NPXS, NULS, OGN, OMG, ONE, ONG, ONT, PERL, QTUM, REN, RLC, RVN, STORM, STPT, STRAT, STX, TCT, TFUEL, THETA, TOMO, TROY, TRX, VET, VITE, WAN, WAVES, WIN, WRX, WTC, XLM, XMR, XRP, XTZ, XZC, ZEC, ZIL, ZRX
+
+# Enable trading (buying,selling and orders) using defined strategies for all pairs
+DEFAULT_trading_enabled = false
+# This will hide any pairs that you have disabled
+hidden_pairs = ALL
+# DCA is a method for averaging down the price of a losing trade, hoping the price will come up to your lower average buy price.
+DEFAULT_DCA_enabled = 8
+# Choose to combine pending orders for the same coin into one item in the pending log or keep them as separate items.
+DEFAULT_combine_pending_orders = false
+# Define your starting balance from the exchange
+start_balance = 4709.087
+# Only buy coins if the buy cost will not let your balance go below specified amount
+keep_balance = 0.0
+# Only buy coins if the buy cost will not let your balance go below specified amount in %
+keep_balance_percentage = 0
+# An alternative to the fixed initial cost above, set the percentage of your TCV (Total Current Value) to be used for each initial purchase.
+
+#
+# POSSIBLE BUY LOG FILTERING
+#
+# Only buy coins with a minimum volume of specified amount.
+# Set the depth of the orderbook to look back and identify the largest sell order.
+#DEFAULT_sell_wall_orderbook_depth = 50
+# Set the maximum difference allowed from the average order size within the DEFAULT_sell_wall_orderbook_depth.
+# If this difference is exceeded then the coin will not be bought.
+#DEFAULT_sell_wall_diff_percentage = 5000
+# Adjust trading pairs based on server capability and trading budget
+max_trading_pairs = 100
+# Set the amount of the market currency (BTC, ETH, XMR, BNB, or USDT) we will use to buy a pair. This amount is spent for EACH initial purchase.
+
+DEFAULT_initial_cost = 12
+ETH_initial_cost = 24
+BTC_initial_cost = 48
+DEFAULT_initial_cost_percentage = 0
+
+
+#
+# Rule 2. The trading pair must have high volume;
+#
+DEFAULT_min_buy_volume = 20
+# Set to ignore low satoshi coins.
+DEFAULT_min_buy_price = 0.000000060
+# Max spread % between lowest ask and highest bid to allow a new buy order.
+DEFAULT_max_buy_spread = 3
+# Allow initial buys if there is enough volume in order book to fill the order.
+#DEFAULT_min_orderbook_volume_percentage = 100
+# Set the amount of minutes that the bot is not allowed to buy a coin after it was sold.
+DEFAULT_rebuy_timeout = 3
+#
+# Rule 6. The trading pairs price must be down at least a defined percentage;
+#
+# Only purchase a pair if the 24 hour percentage change is above the min price increase.
+# Note: You may need to adjust this to suit market conditions, setting this to 0.01 will only pick positive pairs.
+DEFAULT_buy_min_change_percentage = -300
+# Only purchase a pair if the 24 hour percentage change is below the max price increase.
+DEFAULT_buy_max_change_percentage = 300
+# coin_min_age is defined in days, it is used to allow the bot to trade only with coins which are older than x days,
+pair_min_listed_days = 10
+# Rule 4. The trading pair must be in a long term uptrend according to the 200 day moving average;
+#
+# BUY SETTINGS
+#
+# Rule 5. The trading pair must be in a long term uptrend according to the 200 day moving average;
+# *************************************************************************
+#
+#       CONNORS RSI - BUY STRATEGY - ProfitTrailer 2.1.x
+#
+# This strategy implements the Connors 2 Period RSI Pullback strategy.
+#
+#
+#                       FEWER TRADES, BETTER QUALITY
+# *************************************************************************
+#
+# Rule 1. The trading pair must be in a long term uptrend according to the 200 day moving average;
+#
+DEFAULT_A_buy_strategy_label = 1WCONNORSRSI
+DEFAULT_A_buy_strategy = RSI
+DEFAULT_A_buy_value = 100.1
+DEFAULT_A_buy_value_limit = 40
+#
+# Rule 2. The trading pair must be in a long term uptrend according to the 200 day moving average;
+#
+DEFAULT_B_buy_strategy_label = 1DCONNORSRSI
+DEFAULT_B_buy_strategy = RSI
+DEFAULT_B_buy_value = 100.1
+DEFAULT_B_buy_value_limit = 40
+#
+#
+# Rule 3. The trading pair must be in a long term uptrend according to the 200 day moving average;
+#
+DEFAULT_C_buy_strategy_label = 4HCONNORSRSI
+DEFAULT_C_buy_strategy = RSI
+DEFAULT_C_buy_value = 100.1
+DEFAULT_C_buy_value_limit = 40
+#
+#
+DEFAULT_D_buy_strategy_label = 1HCONNORSRSI
+DEFAULT_D_buy_strategy = RSI
+DEFAULT_D_buy_value = 100.1
+DEFAULT_D_buy_value_limit = 40
+#
+#
+#
+DEFAULT_E_buy_strategy_label = 15MCONNORSRSI
+DEFAULT_E_buy_strategy = RSI
+DEFAULT_E_buy_value = 100.1
+DEFAULT_E_buy_value_limit = 40
+#
+# Rule 7. The trading pair must be in a long term uptrend according to the 200 day moving average;
+DEFAULT_F_buy_strategy_label = 4HMACDSMALL
+DEFAULT_F_buy_strategy = MACD
+DEFAULT_F_buy_value = 0.00000002
+
+# Rule 8. The trading pair must be in a long term uptrend according to the 200 day moving average;
+DEFAULT_G_buy_strategy_label = 1HMACDSMALL
+DEFAULT_G_buy_strategy = MACD
+DEFAULT_G_buy_value = 0.00000002
+
+# Rule 9. The trading pair must be in a long term uptrend according to the 200 day moving average;
+DEFAULT_H_buy_strategy_label = 15MMACDSMALL
+DEFAULT_H_buy_strategy = MACD
+DEFAULT_H_buy_value = 0.00000002
+
+# Rule 9. The trading pair must be in a long term uptrend according to the 200 day moving average;
+DEFAULT_I_buy_strategy_label = 1DMACDSMALL
+DEFAULT_I_buy_strategy = MACD
+DEFAULT_I_buy_value = 0.00000002
+
+
+#
+#
+# Trailing is turned off as we are following an upward trend
+#
+DEFAULT_trailing_buy = 0
+#
+# *********************************************************************
+#        CONNORS 2RSI - SELL STRATEGY - ProfitTrailer 2.1.x
+#
+# This strategy implements the Connors 2 Period RSI Pullback strategy.
+#
+#                       FEWER TRADES, BETTER QUALITY
+# *********************************************************************
+#
+# What is the minimum profit we want to make on this trade?
+#
+DEFAULT_A_sell_strategy = GAIN
+DEFAULT_A_sell_value = 0.2
+DEFAULT_A_sell_value_limit = 4
+#
+#
+DEFAULT_B_sell_strategy_label = 15MMACDSMALL
+DEFAULT_B_sell_strategy = MACD
+DEFAULT_B_sell_value = -0.00000002
+#
+#
+#
+DEFAULT_C_sell_strategy_label = 1HMACDSMALL
+DEFAULT_C_sell_strategy = MACD
+DEFAULT_C_sell_value = -0.00000002
+#
+#
+DEFAULT_D_sell_strategy_label = 15MEMASPREAD
+DEFAULT_D_sell_strategy = EMASPREAD
+DEFAULT_D_sell_value = -0.1
+#
+# Trailing is turned off to sell based on the rules above
+#
+# Set the type of trailing you want to use DEFAULT, GROW, SHRINK
+DEFAULT_trailing_profit_type = DEFAULT
+# Once all sell strategies are true, the bot will make note of the current bid price and begin watching.
+# The price needs to rise and then fall by at least the percentage specified in order for a sell to be attempted.
+DEFAULT_trailing_profit = 0
+# Set the number of times you want to see the price fluctuate into and out of a good trail before making the buy.
+DEFAULT_trailing_profit_rebound_count = 0
+# If set to true, it will look at the highest bid order with enough volume rather than just the highest bid order.
+orderbook_profit_calculation = false
+# This will sell a pair regardless of other settings if max profit is reached
+DEFAULT_max_profit = 0
+# The time period to wait define in munutes while the profit percentage remains above xx percent, defined on the line below this, but has not yet sold.
+#DEFAULT_take_profit_wait_time = 20
+# The profit percentage above which the bot will attempt to sell a pair if it has not sold for xx minutes, defined on the line above this.
+#DEFAULT_take_profit_percentage = 10
+# The percentage of price deviation allowed from the DEFAULT_take_profit_percentage before resetting the DEFAULT_take_profit_wait_time.
+#DEFAULT_take_profit_reset_percentage_move = 0.25
+# If x amount of time in minutes has passed since you bought a coin, create a pending order for that pair
+#DEFAULT_pending_order_wait_time = 0
+# If the price has dropped x% since we bought a coin and we have not sold it (and it's still in the pairs log),
+# create limit sell order for that pair at a price equivalent to your GAIN strategy sell_value.
+DEFAULT_pending_order_price_drop_trigger = -8
+# Cancel pending order for specified coin if avg profit reaches specified amount
+DEFAULT_pending_gain_percentage = 8
+DEFAULT_cancel_pending_trigger = 3
+DEFAULT_combined_cancel_pending_trigger = 3
+
+DEFAULT_take_profit_safety_arm = 5
+DEFAULT_take_profit_safety_fire = 3
+# Set the value that will trigger a stop loss order If the value of a coin drops below stop loss trigger, it will be automatically sold
+DEFAULT_stop_loss_trigger = 0
+# Set the amount of minutes that the bot is not allowed to buy a coin after if was sold by stop loss trigger
+DEFAULT_stop_loss_timeout = 60
+# Set to true to sell all of your coins with a balance for current market prices
+DEFAULT_panic_sell_enabled = true
+
+#
+# SELL ONLY MODE
+#
+
+# Manually enable Sell Only Mode (SOM) for all your coins. No more purchases will be made. The bot will continue to make sales.
+DEFAULT_sell_only_mode_enabled = true
+##BTC_sell_only_mode_enabled = false
+#ETH_sell_only_mode_enabled = false
+#BAND_sell_only_mode_enabled = false
+#XLM_sell_only_mode_enabled = false
+#ZIL_sell_only_mode_enabled = false
+#ADA_sell_only_mode_enabled = false
+#MATIC_sell_only_mode_enabled = false
+#ENJ_sell_only_mode_enabled = false
+#ICX_sell_only_mode_enabled = false
+# Protect against large market swings by turning on sell only mode.
+#consecutive_buy_trigger = 16
+# Turn off sell only mode if we got x consecutive sells with no buys in between
+#consecutive_sell_trigger = 2
+# This is to protect against Bitcoin rising (aka mooning) or dropping automatically turns on / off SOM as required.
+price_trigger_market = BTC
+price_drop_trigger_action = SOM
+# Turn on sell only mode (SOM) if the price drops by the set percentage.
+price_drop_trigger = 10
+# Turn off sell only mode if it was activated by a price drop the price change is now back above the set threshold.
+price_drop_recover_trigger = 4
+# Turn on sell only mode if the price rises by the set percentage.
+#price_rise_trigger = 7
+# Turn off sell only mode if it was activated by price rise and the price change is now back below the set threshold.
+#price_rise_recover_trigger = 6
+
+# Coin Specific Settings
+#
+
+# This is for the pairs you do not wish to trade, examples only below,
+# you need to add your own list here. Make sure none of your enabled pairs
+# above is appearing below or that pair wont trade.
+# BNB fees are not yet supported in Binance, so dont buy BNB until you disable the setting
+BNB_trading_enabled = false
+BNB_reserve_amount = 0
+
+
+#
+# Pairs I want to HODL
+#
+#NEO_trading_enabled = false
+#NEO_DCA_enabled = false
+#ETH_trading_enabled = false
+#ETH_DCA_enabled = false
+#LTC_trading_enabled = false
+#LTC_DCA_enabled = false
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

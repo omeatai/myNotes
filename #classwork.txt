@@ -40,3 +40,31 @@ https://docs.djangoproject.com/en/4.0/topics/class-based-views/
 
 
 
+
+
+PT
+
+Your license key is:
+180835db8fa4b337c8a8e377e7afa190
+
+API
+y3BjKB2YzNLSI0WlfVV1YaCSjMj3ieYFkf2H56trKlZTpyxyICoEO9cL2qfarwz3
+
+Secret Key
+myUJzjmn4t6ikvOHKfYsoVPJsXiNgYiLzXHvDykAkfORewbpiPXtvgFLALBgSXQ0
+
+
+
+
+
+To activate your API Key just talk to @PT Assistant on Discord.
+*Note: Say Hello to display a list of possible commands.
+
+If you have lost or changed your API Key/Secret,
+you can easily talk to @PT Assistant and change them there.
+
+
+Billing - Binance API Key	qj03rilxdYwCNpV9eRLAN9EDl3jP4x1cUQYM7bypF2jJxzXmpY2bUX2dZGNZxztD
+
+Your Binance API key qj03rilxdYwCNpV9eRLAN9EDl3jP4x1cUQYM7bypF2jJxzXmpY2bUX2dZGNZxztD has been activated.
+

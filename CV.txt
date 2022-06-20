@@ -1,0 +1,64 @@
+Hello,
+My name is Ifeanyi Omeata. I am a Software Engineer with more than 3 years experience programming in python, Django, RestAPI, React, PostgreSQL and many other technology stack. I completed my Masters in Computer Engineering from the University of Greenwich, London, and I have had quite some experience since then. I have worked for a few companies which you will see in my resume. 
+I am passionate about software Engineering. I have trained a couple of people and I have also done quite a number of projects in various stacks.
+I am part of the team that built the Divccon conference application along with the Recycle Pay App.
+The Divccon conference hosts about 9000 people within the city of Abuja, Nigeria, and I am glad to have made a difference in making it easy to register attendees, to print their tags and get out conference statistics from the dashboard. Our application was all inclusive and very robust. We built the Divccon registration App with Django, MySQL and python, and it took us 6 weeks to build.
+The Recycle Pay App was built for one of the state governments within the country. it was used for coordinating the process of waste management within the state. We built the application with Django Rest Framework, React, PostgreSQL and Docker.
+My 3 strongest professional areas are: 
+Python with Django and Django-Rest-Framework (3 years)
+React (2 years) for the front end, and
+Javascript and Nodejs (3 years+)/HTML5 and CSS3, TailwindCSS/WordPress
+Others Include:
+SQL,PostgreSQL/MySQL (3+ years)
+Laravel/PHP (3+ years)
+TypeScript/NextJs (ongoing...)
+
+I would like to work for a company that is motivated towards excellence, good product and service delivery, and provides a conducive and healthy environment for its staff. For more information about me, you can look through my profile and resume.
+
+
+A remote team is a good one when the team is self-coordinating, motivated and able to work together in Sprints to achieve the desired product within a short period of time. The end goal is efficiency in product delivery.
+
+
+
+
+
+
+I am Ifeanyi Omeata, a Software Engineer with more than 3 years experience programming in python, Django, RestAPI, React, Node, PostgreSQL, MySQL and many other technology stack. I completed my Masters in Computer Engineering from the University of Greenwich, London, and I have worked for a few companies which you will see in my resume. 
+I am passionate about software Engineering; I have trained with a couple of people and have also done quite a number of projects.
+I am part of the team that built the Divccon conference application along with the Recycle Pay App.
+The Divccon conference hosts about 9000 people within the city of Abuja, Nigeria, and I am glad to have made a difference by making it easier to register attendees, to print their tags and get out conference statistics from the dashboard. Our application was all inclusive and very robust. We built the Divccon registration App with Django, MySQL and python, and it took us 6 weeks to build.
+The Recycle Pay App was built for one of the state governments within the country. it was used for coordinating the process of waste management within the state. We built the application with Django Rest Framework, React, PostgreSQL and Docker.
+
+My 3 strongest professional areas are: 
+- Python with Django and Django-Rest-Framework (3 years experience)
+- React for Frontend (2 years experience) 
+- Javascript and Nodejs (3 years+ experience)
+
+Others Include:
+
+HTML5 and CSS3, TailwindCSS, WordPress, SQL, PostgreSQL, MySQL, Laravel, TypeScript, NextJs
+
+In my spare time I love going out for walks and participating in sports. My most favorite sport is Football.
+
+I would like to work for a company that is motivated towards excellence, good product and service delivery, and provides a conducive and healthy environment for its staff. 
+
+For more information about me, you can look through my profile and resume.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>CSS Grid</title>
+</head>
+<body>
+    <main class="container">
+        <div class="box">1</div>
+        <div class="box">2</div>
+        <div class="box">3</div>
+        <div class="box">4</div>
+        <div class="box">5</div>
+        <div class="box">6</div>
+    </main>
+</body>
+</html>
+
+
+##############################################
+
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+/* font-family: 'Roboto', sans-serif; */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+    min-height: 100vh;
+
+    display: grid;
+    grid-template-columns: repeat(9, 1fr);
+    grid-auto-rows: 75px auto 75px;
+    grid-template-areas: 
+        "hd hd hd hd hd hd hd hd hd"
+        "mn mn mn mn mn mn mn sb sb"
+        "ft ft ft ft ft ft ft ft ft";
+    gap: 1rem;    
+}
+
+.el {
+    background-color: #400;
+    color: #fff;
+    display: grid;
+    place-content: center;
+}
+
+.header {
+    grid-area: hd;
+}
+
+.aside {
+    grid-area: sb;
+    background-color: #044;
+}
+
+.footer {
+    grid-area: ft;
+}
+
+.box {
+    background-color: #000;
+    color: #fff;
+    font-size: 2rem;
+    padding: 0.5rem;
+}
+
+.container {
+    grid-area: mn;
+    min-height: 400px;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr 2fr);
+    grid-auto-rows: minmax(150px, auto);
+    gap: 1rem;
+}
+
+.box:first-child {
+    background-color: #00f;
+    grid-column: 1 / 4;
+    grid-row: 1 / 3;
+
+    display: grid;
+    place-content: center;
+}
+
+.box:nth-child(2) {
+    background-color: purple;
+    grid-column: 1 / 5;
+    grid-row: 3/ 4;
+}
+
+
+.others{
+    grid-auto-flow: column;
+    grid-auto-flow: row;
+    grid-template-columns: 200px 100px 200px;
+    grid-template-columns: 2fr 1fr 1fr;
+    grid-template-columns: 200px 1fr 1fr;
+    grid-template-columns: repeat(4, 1fr);
+    grid-auto-rows: 250px;
+    row-gap: 1rem;
+    column-gap: 1rem;
+    gap: 1rem 0.5rem;
+
+    grid-column-start: 1;
+    grid-column-end: 4;
+    grid-row-start: 1;
+    grid-row-end: 3;
+
+    grid-column: 1 / 5;
+    grid-row: 3/ 4;
+
+    display: grid;
+    align-content: end;
+    align-content: center;
+    align-content: start;
+
+    display: grid;
+    justify-content: end;
+    justify-content: center;
+    justify-content: start;
+
+    place-content: end center;
+
+    place-content: center;
+
+    display: grid;
+    grid-template-columns: 20% 20% 20% 20% 20%;
+    grid-template-rows: 20% 20% 20% 20% 20%;
+
+    grid-area:  grid-row-start / grid-column-start / grid-row-end / grid-column-end
+
+}
+
+
+
+##############################################
+
+1c3144
+
+F1BB87
+ECE4B7
+EABE7C
+
+B8B3E9
+0F1113
+
+FFFACC
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

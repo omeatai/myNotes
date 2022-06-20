@@ -1,0 +1,347 @@
+###################################################
+DOCKER VERSION
+
+docker --version
+git --version
+
+
+###################################################
+DOCKER HUB - REGISTER FOR AN ACCOUNT
+
+https://hub.docker.com/
+
+git clone https://github.com/omeatai/recipe-api-project.git
+
+1. Run docker login -u omeatai
+
+2. At the password prompt, enter the personal access token.
+
+DOCKERHUB_TOKEN - 602508f5-3986-412c-96af-0b45964aba47
+
+DOCKERHUB_USER - omeatai
+
+###################################################
+DOCKER COMPOSE
+
+docker-compose run --rm app sh -c "python manage.py collectstatic"
+
+###################################################
+REQUIREMENTS.TXT
+
+Django>=3.2.4,<3.3 
+djangorestframework>=3.12.4,<3.13
+
+
+###################################################
+DOCKER FILE
+
+FROM python:3.9-alpine3.13
+LABEL maintainer="omeatai"
+
+ENV PYTHONUNBUFFERED 1
+
+COPY ./requirements.txt /tmp/requirements.txt
+COPY ./app /app
+WORKDIR /app
+EXPOSE 8000
+
+RUN python -m venv /py && \
+    /py/bin/pip install --upgrade pip && \
+    /py/bin/pip install -r /tmp/requirements.txt && \
+    rm -rf /tmp && \
+    adduser \
+    --disabled-password \
+    --no-create-home \
+    django-user
+
+ENV PATH="/py/bin:$PATH"
+
+USER django-user
+
+
+
+docker build .
+
+###################################################
+DOCKER COMPOSE
+
+version: "3.9"
+
+services:
+  app:
+    build:
+      context: .
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./app:/app
+    command: >
+      sh -c "python manage.py runserver 0.0.0.0:8000"
+
+
+###################################################
+FLAKE 8 - LINTING
+
+
+docker-compose run --rm app sh -c "python manage.py test"
+
+docker-compose build
+
+docker-compose run --rm app sh -c "flake8"
+
+
+###################################################
+CREATE DJANGO APP
+
+docker-compose run --rm app sh -c "django-admin startproject app ."
+
+docker-compose up
+
+
+###################################################
+GITHUB ACTIONS
+
+.github/workflows/checks.yml
+
+docker login
+
+
+---
+name: Checks
+
+on: [push]
+
+jobs:
+  test-lint:
+    name: Test and Lint
+    runs-on: ubuntu-20.04
+    steps:
+      - name: Login to Docker Hub
+        uses: docker/login-action@v1
+        with:
+          username: ${{ secrets.DOCKERHUB_USER }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Test
+        run: docker-compose run --rm app sh -c "python manage.py test"
+      - name: Lint
+        run: docker-compose run --rm app sh -c "flake8"
+
+
+###################################################
+FLAKE 8
+
+docker-compose run --rm app sh -c "flake8"
+
+python -m pip install flake8
+
+
+###################################################
+DJANGO TESTS
+
+python manage.py test
+docker-compose run --rm app sh -c "python manage.py test"
+
+####
+def is_unique(string):
+    return string
+
+def add(x, y):
+    return x + y
+
+def subtract(x, y):
+    return x - y
+
+####
+from django.test import SimpleTestCase
+from rest_framework.test import APIClient
+
+from myapp import views, calc
+
+
+class ViewsTests(SimpleTestCase):
+
+    def test_is_unique(self):
+        """Test if value is unique"""
+        res = views.is_unique('unique')
+        self.assertEqual(res, 'unique')
+
+
+class CalcTests(SimpleTestCase):
+
+    def test_check_add(self):
+        """Test the add function"""
+        res = calc.add(1, 2)
+        self.assertEqual(res, 3)
+
+    def test_check_subtract(self):
+        """Test the subtract function"""
+        res = calc.subtract(6, 2)
+        self.assertEqual(res, 4)
+
+
+class TestViews(SimpleTestCase):
+    def setUp(self):
+        self.client = APIClient()
+
+    def test_get_greetings(self):
+        """Test getting greetings"""
+        res = self.client.get('/greetings/')
+
+        self.assertEqual(res.status_code, 200)
+        self.assertEqual(res.data, 'Hello, world!')
+
+
+###################################################
+DOCKER COMPOSE YAML - ADD POSTGRES
+
+version: "3.9"
+
+services:
+  app:
+    build:
+      context: .
+      args:
+        - DEV=true
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./app:/app
+    command: >
+      sh -c "python manage.py runserver 0.0.0.0:8000"
+    environment:
+      - DB_HOST=db
+      - DB_NAME=devdb
+      - DB_USER=devuser
+      - DB_PASS=changeme
+    depends_on:
+      - db
+
+  db:
+    image: postgres:13-alpine
+    volumes:
+      - dev-db-data:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_DB=devdb
+      - POSTGRES_USER=devuser
+      - POSTGRES_PASSWORD=changeme
+
+volumes:
+  dev-db-data:
+
+
+
+###################################################
+DOCKER FILE - INSTALL PSYCOPG2 ADAPTOR
+
+docker-compose down
+docker-compose build
+
+
+FROM python:3.9-alpine3.13
+LABEL maintainer="omeatai"
+
+ENV PYTHONUNBUFFERED 1
+
+COPY ./requirements.txt /tmp/requirements.txt
+COPY ./requirements.dev.txt /tmp/requirements.dev.txt
+COPY ./app /app
+WORKDIR /app
+EXPOSE 8000
+
+ARG DEV=false
+RUN python -m venv /py && \
+    /py/bin/pip install --upgrade pip && \
+    apk add --update --no-cache postgresql-client && \
+    apk add --update --no-cache --virtual .tmp-build-deps \
+    build-base postgresql-dev musl-dev && \
+    /py/bin/pip install -r /tmp/requirements.txt && \
+    if [ $DEV = "true" ]; \
+    then /py/bin/pip install -r /tmp/requirements.dev.txt ; \
+    fi && \
+    rm -rf /tmp && \
+    apk del .tmp-build-deps && \
+    adduser \
+    --disabled-password \
+    --no-create-home \
+    django-user
+
+ENV PATH="/py/bin:$PATH"
+
+USER django-user
+
+
+
+requirements.txt
+Django>=3.2.4,<3.3 
+djangorestframework>=3.12.4,<3.13
+psycopg2>=2.8.6,<2.9
+
+
+
+###################################################
+DOCKER CREATE APP
+
+docker-compose run --rm app sh -c "python manage.py startapp core"
+
+docker-compose run --rm app sh -c "python manage.py test"
+
+#docker-compose run --rm app sh -c "python manage.py runserver"
+
+docker-compose down
+docker-compose up
+
+
+###################################################
+CUSTOM USER MODEL
+
+"""
+Tests for models.
+"""
+from django.test import TestCase
+from django.contrib.auth import get_user_model
+
+
+class ModelTests(TestCase):
+    """Test models."""
+
+    def test_create_user_with_email_successful(self):
+        """Test creating a user with an email is successful."""
+        email = 'test@example.com'
+        password = 'testpass123'
+        user = get_user_model().objects.create_user(
+            email=email,
+            password=password,
+        )
+
+        self.assertEqual(user.email, email)
+        self.assertTrue(user.check_password(password))
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

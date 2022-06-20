@@ -1,0 +1,581 @@
+node -v
+
+npx create-react-app dojoapp
+
+npm start
+
+npm install
+
+
+####################################################
+EVENTS
+
+const Home = () => {
+
+    const handleClick = (e) => {
+        console.log('clicked',e.target);
+    }
+
+    const handleClickAgain = (name,e) => {
+        console.log(`clicked again ${name}`,e.target);
+    }
+
+    return ( 
+        <div className="home">
+            <h2>Homepage</h2>
+            <button onClick={handleClick}>Click Me</button>
+            <button onClick={(e)=>{handleClickAgain("Andrew",e)}}>Click Me Again</button>
+        </div>
+     );
+}
+ 
+export default Home;
+
+####################################################
+USING STATE
+
+import { useState } from "react";   
+
+const Home = () => {
+
+    const [name, setName] = useState('mario');
+    const [age, setAge] = useState(20);
+
+    const handleClick = (e) => {
+        console.log('clicked',e.target);
+        const kid = "Franks"
+        const age = "24"
+        setName(kid);
+        setAge(age);
+        console.log(`${kid} is ${age} years old.`);
+    }
+
+    const handleClickAgain = (name,e) => {
+        console.log(`clicked again ${name}`,e.target);
+    }
+
+    return ( 
+        <div className="home">
+            <h2>Homepage</h2>
+            <h2>{name} is {age} years old</h2>
+            <button onClick={handleClick}>Click Me</button>
+            <button onClick={(e)=>{handleClickAgain("Andrew",e)}}>Click Me Again</button>
+        </div>
+     );
+}
+ 
+export default Home;
+
+####################################################
+OUTPUTING LISTS 
+
+import { useState } from "react";   
+
+const Home = () => {
+
+    const [posts, setPosts] = useState([
+        {title: "First Post", description: "This is the first post", author: "Ben Lewis", id: 1},
+        {title: "Second Post", description: "This is the second post", author: "George Franks", id: 2},
+        {title: "Third Post", description: "This is the third post", author: "Bello Ahmed", id: 3},
+    ]);
+
+    return ( 
+        <div className="home">
+            <h2>Homepage</h2>
+            {posts.map((post)=>(
+                <div key={post.id} className="blog-preview">
+                    <p>Id: {post.id}</p>
+                    <h2>Title: {post.title}</h2>
+                    <h3>Written by {post.author}</h3>
+                    <p>Description: {post.description}</p>
+                    <p>--------------------------------</p>
+                </div>
+                
+            ))}
+        </div>
+     );
+}
+ 
+export default Home;
+
+####################################################
+PROPS
+
+import { useState } from "react"; 
+import { BlogList } from "./BlogList";  
+
+const Home = () => {
+
+    const [posts, setPosts] = useState([
+        {title: "First Post", description: "This is the first post", author: "Ben Lewis", id: 1},
+        {title: "Second Post", description: "This is the second post", author: "George Franks", id: 2},
+        {title: "Third Post", description: "This is the third post", author: "Bello Ahmed", id: 3},
+    ]);
+
+    return ( 
+        <div className="home">
+            <h2>Homepage</h2>
+            <BlogList 
+                posts={posts} 
+                setPosts={setPosts} 
+                title="All Posts!"
+            />
+        </div>
+     );
+}
+ 
+export default Home;
+
+
+export const BlogList = ({posts, setPosts, title}) => {
+    return ( 
+        <div className="blog-list">
+            <h2>{title}</h2>
+            <hr />
+            {posts.map((post)=>(
+                <div key={post.id} className="blog-preview">
+                    <p>Id: {post.id}</p>
+                    <h2>Title: {post.title}</h2>
+                    <h3>Written by {post.author}</h3>
+                    <p>Description: {post.description}</p>
+                    <p>--------------------------------</p>
+                </div>
+                
+            ))}
+        </div>
+     );
+}
+
+
+####################################################
+FILTER COMPONENTS
+
+import { useState } from "react"; 
+import { BlogList } from "./BlogList";  
+
+const Home = () => {
+
+    const [posts, setPosts] = useState([
+        {title: "First Post", description: "This is the first post", author: "Ben Lewis", id: 1},
+        {title: "Second Post", description: "This is the second post", author: "George Franks", id: 2},
+        {title: "Third Post", description: "This is the third post", author: "Bello Ahmed", id: 3},
+    ]);
+
+    return ( 
+        <div className="home">
+            <h2>Homepage</h2>
+            <BlogList 
+                posts={posts} 
+                setPosts={setPosts} 
+                title="All Posts!"
+            />
+            <BlogList 
+                posts={posts.filter((post)=>post.author === "Bello Ahmed")}
+                setPosts={setPosts} 
+                title="Bello's Posts!"
+            />
+        </div>
+     );
+}
+ 
+export default Home;
+
+
+ {posts.filter((post)=>post.author === "Bello Ahmed").length > 0 ? 
+  <BlogList 
+      posts={posts.filter((post)=>post.author === "Bello Ahmed")}
+      handleDelete={handleDelete} 
+      title="Bello's Posts!"
+  />
+  : <p>No posts available for Bello Ahmed.</p>
+  }
+
+
+####################################################
+DELETE CONTENTS
+
+import { useState } from "react"; 
+import { BlogList } from "./BlogList";  
+
+const Home = () => {
+
+    const [posts, setPosts] = useState([
+        {title: "First Post", description: "This is the first post", author: "Ben Lewis", id: 1},
+        {title: "Second Post", description: "This is the second post", author: "George Franks", id: 2},
+        {title: "Third Post", description: "This is the third post", author: "Bello Ahmed", id: 3},
+    ]);
+
+    const handleDelete = (id) => {
+        setPosts(posts.filter(post => post.id !== id));
+        console.log(`Deleted post with id ${id}`);
+    }
+
+    return ( 
+        <div className="home">
+            <h2>Homepage</h2>
+            <BlogList 
+                posts={posts} 
+                handleDelete={handleDelete} 
+                title="All Posts!"
+            />
+            <BlogList 
+                posts={posts.filter((post)=>post.author === "Bello Ahmed")}
+                title="Bello's Posts!"
+            />
+        </div>
+     );
+}
+ 
+export default Home;
+
+
+export const BlogList = ({posts, title, handleDelete}) => {
+    return ( 
+        <div className="blog-list">
+            <h2>{title}</h2>
+            <hr />
+            {posts.map((post)=>(
+                <div key={post.id} className="blog-preview">
+                    <p>Id: {post.id}</p>
+                    <h2>Title: {post.title}</h2>
+                    <h3>Written by {post.author}</h3>
+                    <p>Description: {post.description}</p>
+                    <button onClick={()=>{handleDelete(post.id)}}>Delete Post</button>
+                </div>
+                
+            ))}
+        </div>
+     );
+}
+
+####################################################
+USEEFFECT
+
+import { useState, useEffect } from "react"; 
+
+ useEffect(() => {
+        console.log("Home component rendered");
+    }, []);
+
+####################################################
+JSON-SERVER
+
+{
+    "posts": [
+        {
+            "id": 1,
+            "title": "First Post", 
+            "description": "This is the first post", 
+            "author": "Ben Lewis"
+        },     
+        {
+            "id": 2, 
+            "title": "Second Post", 
+            "description": "This is the second post", 
+            "author": "George Franks" },
+        {
+            "id": 3,
+            "title": "Third Post", 
+            "description": "This is the third post", 
+            "author": "Bello Ahmed"}
+    ]
+}
+
+
+npx json-server --watch data/db.json --port 7000
+
+####################################################
+ERROR HANDLING & CONDITIONAL RENDERING
+
+import { useState, useEffect } from "react"; 
+import { BlogList } from "./BlogList";
+
+const Home = () => {
+
+    const [posts, setPosts] = useState([]);
+    const [isLoading, setIsLoading] = useState(true);
+    const [error, setError] = useState(null);
+
+    const handleDelete = (id) => {
+        setPosts(posts.filter(post => post.id !== id));
+        console.log(`Deleted post with id ${id}`);
+    }
+
+    useEffect(() => {
+        fetch('http://localhost:7000/postss')
+            .then(res => {
+                if(!res.ok) {
+                    throw new Error("Error: Failed to fetch resource...");
+                    // throw new Error(res.statusText);
+                }
+                return res.json();
+            })
+            .then(data => {
+                setPosts(data);
+                setIsLoading(false);
+                setError(null);
+                console.log(data);
+            })
+            .catch((err) => {
+                setIsLoading(false);
+                setError(err.message);
+                // console.log("Error: ", err.message);
+            });
+    }, []);
+
+    return ( 
+        <div className="home">
+            <h2>Homepage</h2>
+
+            {error && <h3 style={{color: 'red'}}>{error}</h3>}
+
+            {isLoading ? <p>Loading...</p> 
+            : posts.length > 0 
+            ?<BlogList 
+            posts={posts} 
+            handleDelete={handleDelete} 
+            title="All Posts!"
+            /> 
+            :<p>No posts available.</p>}
+
+        </div>
+     );
+}
+ 
+export default Home;
+
+
+####################################################
+CUSTOM HOOKS
+
+import useFetch from "../hooks/useFetch";
+import { BlogList } from "./BlogList";
+
+const Home = () => {
+    const {
+        data: posts,
+        isLoading,
+        error,
+        setData,
+    } = useFetch("http://localhost:7000/posts");
+
+    const handleDelete = (id) => {
+        setData(posts.filter((post) => post.id !== id));
+        console.log(`Deleted post with id ${id}`);
+    };
+
+    return (
+        <div className="home">
+            <h2>Homepage</h2>
+
+            {error && <h3 style={{ color: "red" }}>{error}</h3>}
+
+            {isLoading ? (
+                <p>Loading...</p>
+            ) : posts.length > 0 ? (
+                <BlogList
+                    posts={posts}
+                    handleDelete={handleDelete}
+                    title="All Posts!"
+                />
+            ) : (
+                <p>No posts available.</p>
+            )}
+        </div>
+    );
+};
+
+export default Home;
+
+##############
+
+import { useState, useEffect } from "react"; 
+
+const useFetch = (url) => {
+
+    const [data, setData] = useState([]);
+    const [isLoading, setIsLoading] = useState(true);
+    const [error, setError] = useState(null);
+
+    useEffect(() => {
+        fetch(url)
+            .then(res => {
+                if(!res.ok) {
+                    throw new Error("Error: Failed to fetch resource...");
+                    // throw new Error(res.statusText);
+                }
+                return res.json();
+            })
+            .then(data => {
+                setData(data);
+                setIsLoading(false);
+                setError(null);
+                console.log(data);
+            })
+            .catch((err) => {
+                setIsLoading(false);
+                setError(err.message);
+                // console.log("Error: ", err.message);
+            });
+    }, [url]);
+
+    return ({data, isLoading, error, setData, setIsLoading, setError});
+}
+ 
+export default useFetch;
+
+
+####################################################
+REACT ROUTER
+
+npm install react-router-dom@5
+
+import Navbar from './components/Navbar';
+import Home from './components/Home';
+import Create from './components/Create';
+import { BrowserRouter, Switch, Route } from 'react-router-dom';
+
+function App() {
+
+  const title = "The Maple city Blog."
+
+  return (
+    <BrowserRouter>
+      <div className="App">
+        <Navbar title={title} />
+        <div className="content">
+          <Switch>
+            <Route exact path="/" component={Home} />
+            <Route exact path="/create" component={Create} />
+          </Switch>
+        </div>
+      </div>
+    </BrowserRouter>
+    
+  );
+}
+
+export default App;
+
+####################################################
+REACT LINK
+
+import { Link } from "react-router-dom";
+
+const Navbar = ({title}) => {
+    return (  
+        <nav className="navbar">
+            <header>
+                <h1>{title}</h1>
+            </header>
+            <div className="links">
+                <Link to="/">Home</Link>
+                <Link to="/create" style={{
+                    backgroundColor: '#f1356d',
+                    color: '#fff',
+                    padding: '10px 20px',
+                    borderRadius: '5px',
+                }}>New Blog</Link>
+            </div>
+        </nav>
+    );
+}
+ 
+export default Navbar;
+
+
+####################################################
+USE EFFECT CLEANUP
+
+import { useState, useEffect } from "react"; 
+
+const useFetch = (url) => {
+
+    const [data, setData] = useState([]);
+    const [isLoading, setIsLoading] = useState(true);
+    const [error, setError] = useState(null);
+
+    useEffect(() => {
+        const abortController = new AbortController();
+
+        fetch(url, { signal: abortController.signal })
+            .then(res => {
+                if(!res.ok) {
+                    throw new Error("Error: Failed to fetch resource...");
+                    // throw new Error(res.statusText);
+                }
+                return res.json();
+            })
+            .then(data => {
+                setData(data);
+                setIsLoading(false);
+                setError(null);
+                console.log(data);
+            })
+            .catch((err) => {
+                if (err.name === 'AbortError') {
+                    console.log('Fetch aborted');
+                } else {    
+                    setIsLoading(false);
+                    setError(err.message);
+                    // console.log("Error: ", err.message);
+                }    
+            });
+
+        return () => abortController.abort();
+    }, [url]);
+
+    return ({data, isLoading, error, setData, setIsLoading, setError});
+}
+ 
+export default useFetch;
+
+
+####################################################
+ROUTE ID
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
