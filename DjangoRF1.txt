@@ -1392,6 +1392,9 @@ heroku git:remote -a django-blog-app-ifeanyi
 (blog) $ git push heroku main
 (blog) $ heroku ps:scale web=1
 
+project.wsgi
+
+
 ###########################
 
 pipenv install django-environ

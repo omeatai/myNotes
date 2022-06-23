@@ -7,6 +7,43 @@ Unit-testing
 
 be298-2f3e413e07-0c4b69c5ce-3d3325eb21-526fa9a1e7-3c2c9616d6-e64bbb293e-cfa6b0d6f7-9741eea49d-fd42262c0b-ff68ca5425-7b485516ee-3dedda1c8b-8c78848a9d-ed69994916-a86af2bb62-2ba16
 
+Username: rain1, 2, 3, 4, 5
+
+Password: Apple12345!
+
+
+
+username count be rain1 or rain2 or rain3 etc
+
+
+alias pym="python3 manage.py"
+alias djm="django-admin"
+alias pym:mm='python3 manage.py makemigrations'
+alias pym:m='python3 manage.py migrate'
+alias pym:r='python3 manage.py runserver'
+alias pym:app='python3 manage.py startapp'
+alias s:env='source env/bin/activate'
+alias ga*='git add *'
+alias gcm='git commit -m'
+
+pip install -r requirements.txt
+
+-sudo -u postgres psql # ubuntu command to access the postgres terminal
+-CREATE DATABASE drohealth;
+-CREATE USER myprojectuser WITH PASSWORD 'password';
+-ALTER ROLE myprojectuser SET client_encoding TO 'utf8';
+-ALTER ROLE myprojectuser SET default_transaction_isolation TO 'read committed';
+-ALTER ROLE myprojectuser SET timezone TO 'Africa/Lagos';
+-CREATE EXTENSION pg_trgm; # for full text search - evaluate the similarity of two strings by the number of “trigrams” they share.
+-CREATE EXTENSION unaccent; # search without worrying about accented characters, useful in different languages
+-GRANT ALL PRIVILEGES ON DATABASE drohealth TO myprojectuser;
+
+
+-python manage.py makemigrations
+-python manage.py migrate
+-python manage.py createsuperuser # create a user with d details
+-python manage.py collectstatic
+-python manage.py runserver
 
 
 
@@ -14,9 +51,23 @@ be298-2f3e413e07-0c4b69c5ce-3d3325eb21-526fa9a1e7-3c2c9616d6-e64bbb293e-cfa6b0d6
 
 
 
+admin/
+api/v1/ auth/login/ [name='login']
+api/v1/ auth/logout/ [name='logout']
+api/v1/ auth/forgot-password [name='forgot-password']
+api/v1/ auth/verify/<str:encoded_email> [name='verify_email']
+api/v1/ auth/register/ [name='api-register']
+api/v1/ auth/reset-password/<str:encoded_email> [name='reset-password']
+api/v1/ pickups/request [name='pickup_request']
+api/v1/ auth/reset-password/<str:encoded_email> [name='reset-password']
+api/v1/ pickups/accept/<int:id>/ [name='accept_item']
+api/v1/ pickups/update/<int:id>/ [name='pickups-update']
 
 
 
 
+http://127.0.0.1:18000/api/v1/auth/login/
 
 
+admin@example.com
+123456
