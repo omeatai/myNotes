@@ -397,3 +397,13 @@ instance = PostBookingFeedback.objects.get(user=request.user)
         serializer.save(user=request.user)
         headers = self.get_success_headers(serializer.data)
         return Response(serializer.data, status=status.HTTP_201_CREATED, headers=headers)
+
+
+cd repo2
+git checkout master
+git remote add r1remote **url-of-repo1**
+git fetch r1remote
+git merge r1remote/master --allow-unrelated-histories
+git remote rm r1remote
+
+
