@@ -38,6 +38,8 @@ pip install -r requirements.txt
 -CREATE EXTENSION unaccent; # search without worrying about accented characters, useful in different languages
 -GRANT ALL PRIVILEGES ON DATABASE drohealth TO myprojectuser;
 
+ALTER USER myprojectuser CREATEDB;
+
 
 -python manage.py makemigrations
 -python manage.py migrate
@@ -46,10 +48,81 @@ pip install -r requirements.txt
 -python manage.py runserver
 
 
+SENDY_HOST=None
+SENDY_API_KEY=None
+SENDY_LIST_ID=None
+SWYS_BASE_URL=None
+
+
+pip install --upgrade numpy
+
+pip uninstall numpy
+pip install numpy 
+pip install numpy<1.23.0,>=1.16.5
+pip install numpy==1.22.0
+
+pip install virtualenv
+
+alias python=python3 
+
+sudo nano ~/.bash_profile
+source ~/.bash_profile
+
+sudo nano /etc/paths
+
+PYTHONPATH="/Me/Documents/mydir:$PYTHONPATH"
+export PYTHONPATH
+
+
+virtualenv env --python=/Library/Frameworks/Python.framework/Versions/3.9/bin/python3.9
+export PYTHONPATH=/Library/Frameworks/Python.framework/Versions/3.9/bin/python3.9
+
+/Library/Frameworks/Python.framework/Versions/3.9/bin/python3.9
+/Library/Frameworks/Python.framework/Versions/3.10/bin/python3
+
+
+On MAC OS you can simply find the location of python/python3 by using the command which python or which python3. (works for Linux too)
+
+And it should give something like:
+
+For python
+
+/usr/local/bin/python
+For python3
+
+/Library/Frameworks/Python.framework/Versions/3.9/bin/python3
+Export the path to your bash_profile
+
+
+
+In your terminal type
+
+sudo nano ~/.bash_profile
+
+Enter your password and paste the following lines
+
+PYTHONPATH="/Library/Frameworks/Python.framework/Versions/3.9/bin/python3"
+export PYTHONPATH
+
+Press control + x to exit, and press y for saving on being asked to save
+
+Press `enter' to return to terminal window
+
+Source it using the following command in terminal, run
+
+source ~/.bash_profile
+
+Path to python3 should be updated now!!
 
 
 
 
+
+echo "alias python=/Library/Frameworks/Python.framework/Versions/3.9/bin/python3" >> ~/.zshrc
+echo "alias python=/Library/Frameworks/Python.framework/Versions/3.10/bin/python3" >> ~/.zshrc
+ln -s -f /usr/bin/python3 /Library/Frameworks/Python.framework/Versions/3.10/bin/python3
+
+ln -s -f /usr/local/bin/python3.9 /usr/local/bin/python
 
 admin/
 api/v1/ auth/login/ [name='login']
@@ -71,3 +144,256 @@ http://127.0.0.1:18000/api/v1/auth/login/
 
 admin@example.com
 123456
+
+
+class CustomNotification(models.Model):
+    """Create and Enforce your placholder variable names to be used in the messages and subject fields
+    - Reocurring flag should only work on custom messages only
+    - (Target date) and (weekdays and time) are mutually exclusive fields
+    """
+    
+    name = models.CharField(_("Name"), max_length=255)
+    notification_type = models.CharField(_("Notification Type"), choices=[("system", "System"), ("custom", "Custom")], 
+        default="custom", max_length=15)
+    system_notification = models.CharField(choices=SYSTEM_NOTIFICATIONS, max_length=255, null=True, blank=True)
+    message = models.TextField(verbose_name=_("Message"), help_text="""Use the following placeholder variables in your 
+                               message content. [first_name]: User First name, [last_name]: Last Name etc.""")
+    subject = models.CharField(_("Subject"), max_length=255, help_text="""Use the following placeholder variables in your 
+                               message content. [first_name]: User First name, [last_name]: Last Name etc.""")
+    reocurring = models.BooleanField(default=False)
+    target_date = models.DateTimeField(null=True, blank=True)
+    weekdays = ArrayField(models.CharField(choices=WEEKDAYS, max_length=25), null=True, blank=True)
+    time = models.TimeField(null=True, blank=True)
+    channel = ArrayField(models.CharField(choices=[("push", "Push"), ("sms", "SMS"), ("email", "Email")], max_length=10))
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+    
+    
+class RecipientConfiguration(models.Model):
+    """Recipient Configuration are not compulsory when it's system notification
+    You can also filter recipient of a system notification with this configuration.
+    Use other recievers when the email or sms recipient is not a registered user.
+    """
+    custom_notification = models.OneToOneField(CustomNotification, on_delete=models.CASCADE)
+    gender = ArrayField(models.CharField(choices=[("male", "Male"), ("female", "Female")], max_length=10), null=True, blank=True)
+    user_type = ArrayField(
+        models.CharField(
+            choices=[("patient", "Patient"),("doctor", "Doctor"),("partner","Partner"),("pharmacy","Pharmacy")], max_length=15
+        ),
+        null=True, blank=True
+    )
+    country = ArrayField(CountryField(), null=True, blank=True)
+    state = ArrayField(models.CharField(choices=STATE_CHOICES, max_length=255), null=True, blank=True)
+    age_group = ArrayField(models.PositiveIntegerField(), size=2, null=True, blank=True)
+    users = models.ManyToManyField(settings.AUTH_USER_MODEL)
+    other_email_receivers = ArrayField(models.EmailField(), null=True, blank=True)
+    other_sms_receivers = ArrayField(PhoneNumberField(), null=True, blank=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+
+
+
+
+
+
+
+
+var xsrfCookie = postman.getResponseCookie("csrftoken");
+postman.setEnvironmentVariable('csrftoken', xsrfCookie.value);
+
+
+
+Request Method:	GET
+Request URL:	http://127.0.0.1:8000/accounts/profile/
+Using the URLconf defined in drohealth.urls, Django tried these URL patterns, in this order:
+
+login/ [name='login']
+login-action/ [name='login-action']
+logout/ [name='logout']
+reset/ [name='password_reset']
+reset/done/ [name='password_reset_done']
+reset/<uidb64>/<token>/ [name='password_reset_confirm']
+reset/complete/ [name='password_reset_complete']
+settings/password/ [name='password_change']
+settings/password/done/ [name='password_change_done']
+api/
+.well-known/security.txt
+apple-app-site-association
+verify-email/<uidb64>/<email>/<token>/ [name='verify_email']
+doctor/
+partner/
+chat/
+myhealth/
+covid/
+admin/
+^chaining/
+patients/
+payment/
+coupon/
+notifications/
+appointments/
+drugs/
+announcements/
+messages/
+diagnostics/
+logistics/
+changelog/
+orders/
+pharmacies/
+invoices/
+analytics/
+community/
+diary/
+custom_subscription/
+subscription/
+diet_management/
+cvd/
+womens-health/
+mental_health/
+feedback/
+assessments/
+paygateplus/
+swys/
+special_services/
+^swagger(?P<format>\.json|\.yaml)$ [name='schema-json']
+^mobile/$ [name='schema-swagger-ui']
+^redoc/$ [name='schema-redoc']
+^ckeditor/
+^media/(?P<path>.*)$
+
+
+Doctor Rating Api List
+http://127.0.0.1:8000/feedback/api/patient/rate-doctor/
+
+
+http://127.0.0.1:8000/patients/api/login/
+{
+    "token": "f02acd6c3cdbbe1dce2fa01de4062c7fe81e779a"
+}
+
+
+
+
+
+
+from django.contrib.auth import authenticate, login
+
+def my_view(request):
+    username = request.POST['username']
+    password = request.POST['password']
+    user = authenticate(request, username=username, password=password)
+    if user is not None:
+        login(request, user)
+        # Redirect to a success page.
+        ...
+    else:
+        # Return an 'invalid login' error message.
+        ...
+
+
+from rest_framework import serializers
+from foo.models import FooBar
+
+class FooBarSerializer(serializers.ModelSerializer):
+    id = serializers.ReadOnlyField()
+
+    class Meta:
+        model = FooBar
+
+        fields = ('id','title')
+        read_only_fields = ['id']
+    def create(self, validated_data):
+        # Create the Foo instance
+        foo = FooBar.objects.create(title=validated_data['title'])
+        return foo
+    def update(self, instance, validated_data):
+        # Update the Foo instance
+        instance.title = validated_data['title']
+        instance.save()
+        return instance
+
+
+The perform_update method will be ran if you send a PUT or PATCH request. What you want to do is to mark messages as True whenever user gets the messages. So you can either override get_queryset or list and retrieve functions.
+
+For example you can try this:
+
+class MessagesViewSet(ModelViewSet):
+    """
+    A simple ViewSet for viewing and editing the messages
+    associated with the user.
+    """
+    authentication_classes = [TokenAuthentication, ]
+    permission_classes = [IsAuthenticated]
+    serializer_class = MessageSerializer
+    filter_backends = [DjangoFilterBackend, SearchFilter, OrderingFilter]
+    filterset_fields = FILTERS.FILTER_SET
+    search_fields = FILTERS.SEARCH_FIELDS
+    ordering_fields = FILTERS.ORDERING_FIELDS
+    ordering = [MessageFields.DATE, ]
+
+    def get_user(self):
+        user = self.request.user
+        return user
+
+    def get_queryset(self):
+        return Message.objects.filter(sent_to=self.get_user())
+
+    def list(self, request):
+        serializer = MessageSerializer(self.get_queryset(), many=True)
+        for instance in serializer.data:
+            instance['mark_read'] = True
+        serializer.save()
+        return Response(serializer.data)
+
+
+    def perform_update(self, serializer):
+        """Update the mental health feedback."""
+        serializer.save(user=self.request.user)
+
+
+
+python manage.py test --keepdb
+
+python manage.py test feedback/tests --keepdb
+
+
+rabbit qi
+celery
+
+127:0:0:1/mobile
+
+https://dev.drohealth.com/mobile/
+
+
+path('products/', include('product.urls')),
+
+
+from django.urls import path
+from . import views
+
+
+urlpatterns = [
+    path('productlist/', views.list_products, name='list-products'),
+]
+
+
+### 8. Apply Basic Authentication - [here]()
+
+
+# self.validate(self.context['request'].data)
+
+
+
+instance = PostBookingFeedback.objects.get(user=request.user)
+        if instance and request.method == 'POST':
+            return Response(
+                {'data': 'There exists a rating for this review. Use PATCH.',
+                 'id': instance.id}, status.HTTP_400_BAD_REQUEST)
+        request.data['user'] = request.user.id
+        request.data['appointment'] = Appointment.objects.get(user=request.user.id).id
+        serializer = self.get_serializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        serializer.save(user=request.user)
+        headers = self.get_success_headers(serializer.data)
+        return Response(serializer.data, status=status.HTTP_201_CREATED, headers=headers)
