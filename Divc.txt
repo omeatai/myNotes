@@ -1,0 +1,86 @@
+
+omeata
+omeata123#
+
+venowoeye
+venowoeye123#
+
+bishopakinlade
+bishopakinlade123#
+
+
+Port: 21 for FTP connection; 
+Port: 21098 for SSH/SFTP connection: 
+21098
+mbneppre
+Empirex123
+mbnetng.com
+198.54.126.141
+/home/mbneppre/
+
+ssh mbneppre@198.54.126.141
+
+Python version: 3.8.12
+Application root: divccon_registration
+Application URL: 
+Application startup file: passenger_wsgi.py
+Application Entry point: application
+
+source /home/mbneppre/virtualenv/divccon_registration/3.8/bin/activate && cd /home/mbneppre/divccon_registration
+
+registration2022.divccon.com
+divccon_registration
+
+stagingv2.divccon.com
+divccon_stagingv2
+
+
+from divcconproject.wsgi import application
+
+# import os
+# import sys
+
+
+# sys.path.insert(0, os.path.dirname(__file__))
+
+
+# def application(environ, start_response):
+#     start_response('200 OK', [('Content-Type', 'text/plain')])
+#     message = 'It works!\n'
+#     version = 'Python %s\n' % sys.version.split()[0]
+#     response = '\n'.join([message, version])
+#     return [response.encode()]
+
+
+
+
+"""
+WSGI config for divcconproject project.
+
+It exposes the WSGI callable as a module-level variable named ``application``.
+
+For more information on this file, see
+https://docs.djangoproject.com/en/4.0/howto/deployment/wsgi/
+"""
+
+import os
+
+from django.core.wsgi import get_wsgi_application
+
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'divcconproject.settings')
+
+application = get_wsgi_application()
+
+
+
+source /home/mbneppre/virtualenv/divccon_stagingv2/3.8/bin/activate && cd /home/mbneppre/divccon_stagingv2
+
+
+
+
+
+
+
+
+
+

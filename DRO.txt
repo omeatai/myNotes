@@ -1,3 +1,72 @@
+
+celery -A drohealth worker -l info
+
+python manage.py test feedback/tests --keepdb --verbosity=2
+
+iomeata
+ifeanyiomeata123
+
+
+python/django - "Cannot use ImageField because Pillow is not installed"
+
+https://pillow.readthedocs.io/en/latest/installation.html
+
+pip uninstall Pillow
+pip install Pillow==8.3.1
+
+python -m pip uninstall Pillow
+python -m pip install Pillow==8.3.1
+
+$ python -m pip install --upgrade pip
+$ python -m pip install --upgrade pillow
+$ python -m pip install --upgrade -r requirements.txt
+
+python -m pip uninstall -r requirements.txt
+
+pip install $(grep -ivE "pkg1|pkg2|pkg3" requirements.txt)
+python -m pip install --upgrade $(grep -ivE "pillow" requirements.txt)
+
+pip install --upgrade --force-reinstall Pillow==2.4.0
+
+
+
+
+
+I was able to solve mine by going to this link in the docs:
+https://pillow.readthedocs.io/en/latest/installation.html
+
+Answer: PILLOW VERSION WILL NOT WORK IN A PYTHON VERSION IT WAS NOT MADE FOR!
+
+So I had to check the chart. I was running django on python==3.9.13, so I needed to uninstall the pillow==7.2.0 to Install pillow==8.3.1 for my python version 3.9.13 and Boom it started working.
+
+[![enter image description here][1]][1]
+
+
+  [1]: https://i.stack.imgur.com/jSRn8.png
+
+ I did this:
+
+    pip uninstall Pillow
+    pip install Pillow==8.3.1
+
+OR
+
+    python -m pip uninstall Pillow
+    python -m pip install Pillow==8.3.1
+
+So it all depends on the python version you are running pillow on. 
+
+
+
+"""Fields
+  "id", "var_name", "display_name", "package_name", "package_literal", "price", "price_currency",
+  "is_free", "frequency", "initial_min_subscription", "min_subscription", "visibility", "max_subscriber", "features", "add_ons"
+"""
+
+celery -A drohealth worker -l info
+
+python manage.py test feedback/tests --keepdb --verbosity=2
+
 celery
 Jenkins
 centrix
@@ -25,7 +94,7 @@ alias pym:app='python3 manage.py startapp'
 alias s:env='source env/bin/activate'
 alias ga*='git add *'
 alias gcm='git commit -m'
-
+              
 pip install -r requirements.txt
 
 -sudo -u postgres psql # ubuntu command to access the postgres terminal
@@ -38,7 +107,28 @@ pip install -r requirements.txt
 -CREATE EXTENSION unaccent; # search without worrying about accented characters, useful in different languages
 -GRANT ALL PRIVILEGES ON DATABASE drohealth TO myprojectuser;
 
-ALTER USER myprojectuser CREATEDB;
+-ALTER USER myprojectuser CREATEDB;
+
+
+python manage.py test --keepdb
+
+python manage.py test feedback/tests --keepdb --verbosity=2
+
+python manage.py test --verbosity=2
+
+ALTER USER django CREATEDB;
+
+GRANT ALL PRIVILEGES ON test_finance.* TO 'django'@'localhost';
+
+python manage.py test --keepdb
+
+rabbit qi
+celery
+
+127:0:0:1/mobile
+
+https://dev.drohealth.com/mobile/
+
 
 
 -python manage.py makemigrations
@@ -95,6 +185,16 @@ Export the path to your bash_profile
 
 
 
+python -m venv venv
+venv\Scripts\activate.bat
+python -m pip install weasyprint
+python -m weasyprint --info
+
+pip install cairocffi
+pip install cairosvg
+
+
+
 In your terminal type
 
 sudo nano ~/.bash_profile
@@ -146,6 +246,68 @@ admin@example.com
 123456
 
 
+
+
+python manage.py test --keepdb
+
+python manage.py test feedback/tests --keepdb
+
+ALTER USER django CREATEDB;
+
+
+
+rabbit qi
+celery
+
+127:0:0:1/mobile
+
+https://dev.drohealth.com/mobile/
+
+
+path('products/', include('product.urls')),
+
+
+from django.urls import path
+from . import views
+
+
+urlpatterns = [
+    path('productlist/', views.list_products, name='list-products'),
+]
+
+
+### 8. Apply Basic Authentication - [here]()
+
+
+# self.validate(self.context['request'].data)
+
+
+cd repo2
+git checkout master
+git remote add r1remote **url-of-repo1**
+git fetch r1remote
+git merge r1remote/master --allow-unrelated-histories
+git remote rm r1remote
+
+cd <location of local repo.>
+git remote set-url origin <url>
+git push -u origin master
+
+
+C:\Users\Ifeanyi-PC\AppData\Local\Programs\Python
+
+
+
+
+
+
+
+####################################################################################################
+####################################################################################################
+####################################################################################################
+####################################################################################################
+
+
 class CustomNotification(models.Model):
     """Create and Enforce your placholder variable names to be used in the messages and subject fields
     - Reocurring flag should only work on custom messages only
@@ -192,16 +354,8 @@ class RecipientConfiguration(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
 
 
-
-
-
-
-
-
-
 var xsrfCookie = postman.getResponseCookie("csrftoken");
 postman.setEnvironmentVariable('csrftoken', xsrfCookie.value);
-
 
 
 Request Method:	GET
@@ -273,10 +427,6 @@ http://127.0.0.1:8000/patients/api/login/
 }
 
 
-
-
-
-
 from django.contrib.auth import authenticate, login
 
 def my_view(request):
@@ -290,7 +440,6 @@ def my_view(request):
     else:
         # Return an 'invalid login' error message.
         ...
-
 
 from rest_framework import serializers
 from foo.models import FooBar
@@ -352,39 +501,6 @@ class MessagesViewSet(ModelViewSet):
         serializer.save(user=self.request.user)
 
 
-
-python manage.py test --keepdb
-
-python manage.py test feedback/tests --keepdb
-
-
-rabbit qi
-celery
-
-127:0:0:1/mobile
-
-https://dev.drohealth.com/mobile/
-
-
-path('products/', include('product.urls')),
-
-
-from django.urls import path
-from . import views
-
-
-urlpatterns = [
-    path('productlist/', views.list_products, name='list-products'),
-]
-
-
-### 8. Apply Basic Authentication - [here]()
-
-
-# self.validate(self.context['request'].data)
-
-
-
 instance = PostBookingFeedback.objects.get(user=request.user)
         if instance and request.method == 'POST':
             return Response(
@@ -399,11 +515,311 @@ instance = PostBookingFeedback.objects.get(user=request.user)
         return Response(serializer.data, status=status.HTTP_201_CREATED, headers=headers)
 
 
-cd repo2
-git checkout master
-git remote add r1remote **url-of-repo1**
-git fetch r1remote
-git merge r1remote/master --allow-unrelated-histories
-git remote rm r1remote
+
+
+
+
+
+
+
+
+
+
+
+
+
+This is if you have both the versions installed.
+
+Go to This PC → Right-click → Click on Properties → Advanced System Settings.
+
+You will see the System Properties. From here navigate to the Advanced Tab -> Click on Environment Variables.
+
+You will see a top half for the user variables and the bottom half for System variables.
+
+Check the System Variables and double-click on the Path (to edit the Path).
+
+Check for the path of Python(which you wish to run i.e. Python 2.x or 3.x) and move it to the top of the Path list.
+
+Restart the Command Prompt, and now when you check the version of Python, it should correctly display the required version.
+
+
+
+
+
+
+class  MentalHealthSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model =  MentalHealthFeedback
+        exclude = ('user', 'subscription', 'is_complete')
+
+    def validate(self, validated_data):
+        user = self.context['request'].user.id,
+        user_search = MentalHealthFeedback.objects.filter(user=user)
+        if not user_search.exists():
+            return validated_data
+        raise serializers.ValidationError('You have already submitted your feedback!')
+
+    def create(self, validated_data):
+
+        try:
+            subscription = self.context['request'].user.patient.subscription
+        except:
+            subscription = None
+
+        if validated_data:
+            create = MentalHealthFeedback.objects.create(
+                session_rating=validated_data.get('session_rating'),
+                session_review=validated_data.get('session_review'),
+                follow_up=validated_data.get('follow_up'),
+                no_follow_up_review=validated_data.get('no_follow_up_review'),
+                nps_rating=validated_data.get('nps_rating'),
+                nps_review=validated_data.get('nps_review'),
+                is_complete=True,
+                user=self.context['request'].user,
+                subscription=subscription
+            )
+
+            return create
+
+
+
+
+from django.conf import settings
+from django.contrib.auth.models import User
+from accounts.serializers import CustomPasswordResetSerializer, SupportContactSerializer
+from patients.models import Patient
+from rest_framework import generics, status, viewsets
+from rest_framework.views import APIView
+from rest_framework.renderers import JSONRenderer
+from rest_framework.request import Request
+from rest_framework.permissions import IsAuthenticated
+from rest_framework.response import Response
+from django_countries import countries
+from django.template.loader import render_to_string
+from django.core.mail import EmailMessage
+from django.utils.encoding import force_bytes
+from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
+from django.contrib.sites.shortcuts import get_current_site
+from django.contrib.auth.tokens import default_token_generator
+from .utils import get_keys
+from . import models as m
+from accounts.otp import verifyOTP, generateOTP, check_email
+from rest_auth.views import PasswordResetView
+
+
+class CountryListAPI(APIView):
+    """ Returns the list of all countries """
+    renderer_classes = (JSONRenderer,)
+
+    def get(self, request):
+        country_lists = []
+
+        for country in countries:
+            individual_country = {}
+            individual_country['name'] = country[1]
+            individual_country['code'] = country[0]
+            country_lists.append(individual_country)
+        return Response(country_lists)
+
+
+class StateListAPI(APIView):
+    """ Returns the list of states based on a country
+    ?country=NG to filter by country - get all state of country code NG
+    """
+    renderer_classes = (JSONRenderer,)
+
+    def get(self, request):
+        country = request.GET.get('country')
+        states = []
+        if country:
+            states = m.State.objects.filter(country=country).values_list('name', flat=True).order_by('name')
+
+        return Response(states)
+
+
+class VerifyOTP(APIView):
+    """ Verify Patient OTP
+    """
+    permission_classes = (IsAuthenticated,)
+
+    def post(self, request):
+        otp = request.data.get("otp", None)
+        patient = Patient.objects.get(user=request.user.id)
+        if otp:
+            if verifyOTP(otp, request.user.id) and patient.email_verified == False:
+                patient.email_verified = True
+                patient.save()
+                return Response("Email verified", status=status.HTTP_200_OK)
+            return Response("Email Verification Failed. Email may be already verified or the otp is expire.",
+                            status=status.HTTP_400_BAD_REQUEST)
+        return Response("Enter OTP", status=status.HTTP_400_BAD_REQUEST)
+
+
+class ChangeEmail(APIView):
+    """ Change Patient email address
+    """
+    permission_classes = (IsAuthenticated,)
+
+    def post(self, request):
+        user = request.user
+        email = request.data.get("email", None)
+        if email and check_email(email):
+            user_check = User.objects.filter(email=email).first()
+            if user_check:
+                return Response("User with this email already exist", status=status.HTTP_400_BAD_REQUEST)
+            mail_subject = 'Verify your email'
+            message = render_to_string('partial/change_email.html', {
+                'user': user,
+                'domain': settings.BASE_URL,
+                'uid': urlsafe_base64_encode(force_bytes(user.id)),
+                'email': urlsafe_base64_encode(force_bytes(email)),
+                'token': default_token_generator.make_token(user),
+            })
+            to_email = user.email
+            email = EmailMessage(
+                mail_subject, message, to=[to_email]
+            )
+            email.send()
+            return Response("Email sent for verification", status=status.HTTP_200_OK)
+        return Response("Enter valid Email address", status=status.HTTP_400_BAD_REQUEST)
+
+
+class GenerateOTP(APIView):
+    """"Send OTP to Patient to verify Email"""
+
+    def post(self, request):
+        user = request.user
+        # Send Email for verification
+        mail_subject = 'Verify your email'
+        message = render_to_string('partial/verify_email.html', {
+            'user': user,
+            'otp': generateOTP(user.id),
+        })
+        to_email = user.email
+        email = EmailMessage(
+            mail_subject, message, to=[to_email]
+        )
+        email.send()
+        return Response("Email sent for verification", status=status.HTTP_200_OK)
+
+
+class APIKeyView(APIView):
+
+    def get(self, request, format=None):
+        service_name = request.query_params.get("service")
+        if service_name is None:
+            return Response({"message": "Please put in a service parameter"}, status=status.HTTP_400_BAD_REQUEST)
+
+        keys = get_keys(service_name)
+        if not keys:
+            return Response({"message": f"keys for {service_name} not found",
+                             "keys": None, "service": service_name}, status=status.HTTP_404_NOT_FOUND)
+        return Response({"message": "successful", "keys": keys, "service": service_name}, status=status.HTTP_200_OK)
+
+class CustomPasswordResetView(PasswordResetView):
+    serializer_class = CustomPasswordResetSerializer
+    
+    
+class SupportContactListAPI(APIView):
+    """"List Support Contacts"""
+    def get(self, request, format=None):
+        contacts = m.SupportContact.objects.all()
+        return Response(SupportContactSerializer(contacts, many=True).data, status=status.HTTP_200_OK)
+
+
+
+
+
+
+
+
+class CustomCreateFeedbackMixin(CreateModelMixin, GenericViewSet):
+    permission_classes = [IsAuthenticated]
+
+    def post(self, request, *args, **kwargs):
+        return self.create(request, *args, **kwargs)
+
+
+class MentalHealthFeedbackAPI(CustomCreateFeedbackMixin):
+    """API View for Mental Health Feedback."""
+    queryset = MentalHealthFeedback.objects.all()
+    serializer_class = MentalHealthFeedbackSerializer
+
+    def post(self, request, *args, **kwargs):
+        """[Create a new Mental Health Feedback]
+            :params:
+                - user (inherited) (required)
+                - subscription (required)
+                - session_rating (required) choice field - [1,2,3,4,5]
+                - session_review (optional) TEXT
+                - follow_up (optional) CHAR
+                - no_follow_up_review (optional) TEXT
+                - nps_rating (required) choice field - [1-10]
+                - nps_review (optional) TEXT
+                - is_complete (TRUE or FALSE) BOOLEAN
+            """
+        return super().post(request, *args, **kwargs)
+
+
+
+
+class MentalHealthFeedbackSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = MentalHealthFeedback
+        read_only_fields = ('user',)
+
+    def create(self, validated_data):
+        """Create and return Mental Health Feedback data."""
+        return MentalHealthFeedback.objects.create(user=self.context['request'].user,
+                                                   is_complete=True,
+                                                   **validated_data)
+
+
+class JoinRequestSerializer(serializers.ModelSerializer):
+    partner = serializers.PrimaryKeyRelatedField(queryset=Partner.objects.all(), required=True)
+    class Meta:
+        model = JoinRequest
+        fields = ('partner',)
+    def create(self, validated_data):
+        patient = self.context['request'].user.patient
+        data = {
+            "patient": patient,
+            **validated_data
+        }
+        existing_request = JoinRequest.objects.filter(**data)
+        # if last JoinRequest is True and patient.partner is None, it means the patient has left previous
+        # partnership with this partner. Therefore, a new JoinRequest can be created
+        if existing_request and existing_request.last().accepted is True or existing_request.last() is None:
+            join_request = JoinRequest.objects.create(**data)
+        else:
+            join_request = existing_request.last()
+        return join_request
+    def validate(self, attrs):
+        errors = {}
+        patient = self.context['request'].user.patient
+        if patient.partner:
+            errors['partner'] = [
+                f"Can't create another partnership join request till you leave current partnership with "
+                f"{patient.partner}"
+            ]
+        if errors:
+            raise serializers.ValidationError(errors)
+        return attrs
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
