@@ -1,3 +1,13 @@
+https://drohealth142.webhook.office.com/webhookb2/78321684-bf56-45fd-acf4-e936c21ddcef@b08bd131-7ae3-4440-a1b2-30d6220cf1b5/IncomingWebhook/a1a31b00b23941c48f1ed3c7e11030e8/23b139d9-2199-4e97-b12f-0dbd7bb047d1
+
+PROVIDUS_WEBHOOK
+https://drohealth142.webhook.office.com/webhookb2/78321684-bf56-45fd-acf4-e936c21ddcef@b08bd131-7ae3-4440-a1b2-30d6220cf1b5/IncomingWebhook/6d079f1e12e44c4c861bec3f0f4aa437/23b139d9-2199-4e97-b12f-0dbd7bb047d1
+
+admin	  admin@gmail.com	            Ifeanyi	Omeata	True	July 2, 2022, 9:45 p.m.
+admin2	jamesharrison@example.com	  James	Harrison	True	July 6, 2022, 9:44 a.m.
+admin3	tombradley@example.com	    Tom	Bradley	    True	July 24, 2022, 2 p.m. password123
+admin4	marycombs@example.com	      Mary	Combs	    True	July 24, 2022, 2:11 p.m.
+myadmin	petercambridge@example.com	Peter	Cambridge	True	July 18, 2022, 8:14 p.m.
 
 celery -A drohealth worker -l info
 
@@ -27,6 +37,115 @@ pip install $(grep -ivE "pkg1|pkg2|pkg3" requirements.txt)
 python -m pip install --upgrade $(grep -ivE "pillow" requirements.txt)
 
 pip install --upgrade --force-reinstall Pillow==2.4.0
+
+
+
+Teams notification for when Providus users sign up and join the partner.
+
+Teams notification for when Providus users completes a service.
+
+Teams notification for when users select Providus as response to "how heard about DRO Health"
+
+
+
+Django Update Methods:
+
+https://stackoverflow.com/questions/4108258/update-model-django-through-kwargs
+
+1.
+As long as the PK is the same, the existing row will be overwritten.
+obj = Object(index=id, **fields)
+obj.save()
+
+2.
+def update_object(obj, **kwargs):
+    for k, v in kwargs.items():
+        setattr(obj, k, v)
+    obj.save()
+
+3.
+model = Model.objects.filter(pk=pk)
+model.update(**kwargs)
+
+4.
+#If you know you want to create it:
+# Book.objects.create(**fields)
+#Assuming you need to check for an existing instance, you can find it with get or create:
+instance, created = Book.objects.get_or_create(slug=slug, defaults=fields)
+if not created:
+    for attr, value in fields.iteritems(): 
+        setattr(instance, attr, value)
+    instance.save()
+
+5.
+Book.objects.filter(id=id).update(**fields)
+
+6.
+obj, created = Object.objects.update_or_create(index=id, defaults={**fields})
+
+7.
+#you can simply update using methods after filter() query
+obj = Object.objects.filter(index=id).update(**fields) # fields your object(dict) may be **kwargs
+
+8.
+# if its a .get() method,
+obj = Object.objects.get(index=id)
+obj['key1'] = 'value1'
+obj.save()
+
+
+
+
+
+class UpdateName(generics.UpdateAPIView):
+    queryset = ClientUser.objects.all()
+    serializer_class = ClientNameSerializer
+    permission_classes = (permissions.IsAuthenticated,)
+
+    def update(self, request, *args, **kwargs):
+        instance = self.get_object()
+        instance.name = request.data.get("name")
+        instance.save()
+
+        serializer = self.get_serializer(instance)
+        serializer.is_valid(raise_exception=True)
+        self.perform_update(serializer)
+
+        return Response(serializer.data)
+
+
+from django.db import transaction
+
+with  transaction.atomic():
+    stories = Story.objects.filter(introtext='')
+    for story in stories:
+        introtext = story.content[0:(story.content.find('.'))] + ".</p>" 
+        Story.objects.filter(pk=story.pk).update(introtext=introtext)
+
+
+    def create(self, validated_data):
+        """Create and return Mental Health Feedback data."""
+        data = validated_data
+        existing_feedback = MentalHealthFeedback.objects.get(user=self.context['request'].user, subscription=data['subscription'])
+        if existing_feedback:
+            existing_feedback.subscription = data['subscription']
+            existing_feedback.session_rating = data['session_rating']
+            existing_feedback.session_review  = data['session_review']
+            existing_feedback.follow_up = data['follow_up']
+            existing_feedback.no_follow_up_review = data['no_follow_up_review']
+            existing_feedback.nps_rating = data['nps_rating']
+            existing_feedback.nps_review = data['nps_review']
+            existing_feedback.save()
+            return existing_feedback
+        return MentalHealthFeedback.objects.create(user=self.context['request'].user,
+                                                   is_complete=True,
+                                                   **validated_data)
+
+
+
+
+
+
 
 
 
