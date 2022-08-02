@@ -9,7 +9,13 @@ admin3	tombradley@example.com	    Tom	Bradley	    True	July 24, 2022, 2 p.m. pas
 admin4	marycombs@example.com	      Mary	Combs	    True	July 24, 2022, 2:11 p.m.
 myadmin	petercambridge@example.com	Peter	Cambridge	True	July 18, 2022, 8:14 p.m.
 
+touch tasks.py
+celery -A tasks worker --loglevel=info
+
+celery -A drohealth worker --loglevel=info
 celery -A drohealth worker -l info
+
+python manage.py runserver
 
 python manage.py test feedback/tests --keepdb --verbosity=2
 
@@ -42,9 +48,15 @@ pip install --upgrade --force-reinstall Pillow==2.4.0
 
 Teams notification for when Providus users sign up and join the partner.
 
+Teams notification for when users select Providus as response to "how heard about DRO Health"
+
 Teams notification for when Providus users completes a service.
 
-Teams notification for when users select Providus as response to "how heard about DRO Health"
+- When a partner user books and completes an appointment
+- When a partner user order drugs and 
+- When a partner user books a diagnostic test
+
+
 
 
 
@@ -93,6 +105,17 @@ obj = Object.objects.get(index=id)
 obj['key1'] = 'value1'
 obj.save()
 
+
+
+@receiver(pre_save, sender=MyModel)
+def do_something_if_changed(sender, instance, **kwargs):
+    try:
+        obj = sender.objects.get(pk=instance.pk)
+    except sender.DoesNotExist:
+        pass # Object is new, so field hasn't technically changed, but you may want to do something else here.
+    else:
+        if not obj.some_field == instance.some_field: # Field has changed
+            # do something
 
 
 

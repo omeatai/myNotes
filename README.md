@@ -76,15 +76,6 @@ Before submitting this PR, please make sure
 
 
 
-
-
-
-
-
-
-
-
-
 ### What does this PR do
 This branch is responsible for the completion of the Feedback Implementation for the following:
 - Mental Health
@@ -121,28 +112,6 @@ http://127.0.0.1:8000/feedback/api/nps/
 PostAppointment
 ```python
 http://127.0.0.1:8000/feedback/api/post-appointment/
-```
-
-#### -----> For PATCH REQUESTS
-Mental Health
-```python
-http://127.0.0.1:8000/feedback/api/mental-health/<int:id>/
-```
-Post Booking
-```python
-http://127.0.0.1:8000/feedback/api/post-booking/<int:id>/
-```
-Post Order
-```python
-http://127.0.0.1:8000/feedback/api/post-order/<int:id>/
-```
-Nps 
-```python
-http://127.0.0.1:8000/feedback/api/nps/<int:id>/
-```
-PostAppointment
-```python
-http://127.0.0.1:8000/feedback/api/post-appointment/<int:id>/
 ```
 
 #### -----> For Endpoint Fields
@@ -231,3 +200,35 @@ Before submitting this PR, I made sure:
 
 
 
+
+
+
+
+### What does this PR do
+This branch is responsible for the completion of the Feedback Implementation for the following.
+
+### Tasks Completed
+- [x] Completed the creation of the Models.
+- [x] Completed the creation of the Serializers and API Logic for the Endpoints.
+- [x] Setup URL Endpoints for access to create Feedback. 
+- [x] Refactored code to resolve any conflicts or Issues.
+
+### Dependencies
+None
+
+### Illustration/Screenshots
+None
+
+### Pledge
+Before submitting this PR, I made sure:
+- [x] My code builds clean without any errors or warnings
+- [x] I followed the documentation as required
+- [x] I have tested my code with postman or browser as necessary
+- [x] I have added unit tests and all tests are passing
+- [x] This PR template is completed.
+
+### Challenges
+None
+
+### Conclusion
+- I suggest that a review be done and recommendations be included in this review.
