@@ -1,3 +1,91 @@
+    elif feedback_type == "referral":
+        instance = ReferralFeedback.objects.get(pk=data)
+        MSTeamsNotificationHandler.send_referral_feedback_notification(instance)
+
+UPDATE_OR_CREATE
+
+https://docs.djangoproject.com/en/4.1/ref/models/querysets/#update-or-create
+#update_or_create can also be written in the following way -
+
+updated_values = {'gender': 'M', age=10}
+try:
+    obj = Profile.objects.get(first_name='Argo', last_name='Saha')
+    for key, value in updated_values.iteritems():
+        setattr(obj, key, value)
+    obj.save()
+except Profile.DoesNotExist:
+    obj = Profile(first_name='Argo', last_name='Saha', age=10, gender='M')
+    obj.save()
+
+OR
+
+defaults = {'first_name': 'Bob'}
+try:
+    obj = Person.objects.get(first_name='John', last_name='Lennon')
+    for key, value in defaults.items():
+        setattr(obj, key, value)
+    obj.save()
+except Person.DoesNotExist:
+    new_values = {'first_name': 'John', 'last_name': 'Lennon'}
+    new_values.update(defaults)
+    obj = Person(**new_values)
+    obj.save()
+
+#which can easily be simplified by:
+
+updated_values = {'gender': 'M', age=10}
+
+obj, created = Profile.objects.update_or_create(
+    first_name='Argo', last_name='Saha',
+    defaults=updated_values
+)
+
+OR
+
+obj, created = Person.objects.update_or_create(
+    first_name='John', last_name='Lennon',
+    defaults={'first_name': 'Bob'},
+)
+
+
+GET_OR_CREATE
+
+https://docs.djangoproject.com/en/4.1/ref/models/querysets/#django.db.models.query.QuerySet.get_or_create
+
+try:
+    obj = Person.objects.get(first_name='John', last_name='Lennon')
+except Person.DoesNotExist:
+    obj = Person(first_name='John', last_name='Lennon', birthday=date(1940, 10, 9))
+    obj.save()
+
+#which can easily be simplified by:
+
+obj, created = Person.objects.get_or_create(
+    first_name='John',
+    last_name='Lennon',
+    defaults={'birthday': date(1940, 10, 9)},
+)
+
+
+
+<img src="{{ post.image.url }}" alt="photo" />
+<img src="/media/images/default.jpg" alt="photo" />
+
+Username: rain1, 2, 3, 4, 5
+Password: Apple12345!
+
+wqhnbboxciinejsf
+
+import smtplib
+smtplib0bj = smtplib.SMTP("smtp.gmail.com", 587)
+smtplibObj.ehlo()
+smtplibObj.starttls()
+smtplibobj.login("shanjairaj777@gmail.com", "vqhxojhbshfsrrqb")
+smtplibObj.sendmail("shanjairaj777@gmail.com",
+"shanjairajvlogs@gmail.com", "Subject:Hello\nHow are you?")
+smtplibObj.quit()
+
+FEEDBACK_WEBHOOK
 https://drohealth142.webhook.office.com/webhookb2/78321684-bf56-45fd-acf4-e936c21ddcef@b08bd131-7ae3-4440-a1b2-30d6220cf1b5/IncomingWebhook/a1a31b00b23941c48f1ed3c7e11030e8/23b139d9-2199-4e97-b12f-0dbd7bb047d1
 
 PROVIDUS_WEBHOOK

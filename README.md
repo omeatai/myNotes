@@ -12,7 +12,7 @@ List of task completed
  Wrote permissions logic to allow only collectors
  Validate logged-in user as Collection Officer
  Enable the Collection Officer to change the status of the Order
- Written tests for the User auth and change of status
+ Written tests for the User auth and change of status 
 Specify what's left to be done
 None
 
@@ -224,7 +224,7 @@ Before submitting this PR, I made sure:
 - [x] My code builds clean without any errors or warnings
 - [x] I followed the documentation as required
 - [x] I have tested my code with postman or browser as necessary
-- [x] I have added unit tests and all tests are passing
+- [x] I have added required tests and all tests are passing
 - [x] This PR template is completed.
 
 ### Challenges
