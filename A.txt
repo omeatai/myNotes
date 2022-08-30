@@ -1,4 +1,61 @@
-    elif feedback_type == "referral":
+<div className="contact-card">
+                <img src="./images/fluffykins.png"/>
+                <h3>Fluffykins</h3>
+                <div className="info-group">
+                    <img src="./images/phone-icon.png" />
+                    <p>(212) 555-2345</p>
+                </div>
+                <div className="info-group">
+                    <img src="./images/mail-icon.png" />
+                    <p>fluff@me.com</p>
+                </div>
+            </div>
+            
+            <div className="contact-card">
+                <img src="./images/felix.png"/>
+                <h3>Felix</h3>
+                <div className="info-group">
+                    <img src="./images/phone-icon.png" />
+                    <p>(212) 555-4567</p>
+                </div>
+                <div className="info-group">
+                    <img src="./images/mail-icon.png" />
+                    <p>thecat@hotmail.com</p>
+                </div>
+            </div>
+            
+            <div className="contact-card">
+                <img src="./images/pumpkin.png"/>
+                <h3>Pumpkin</h3>
+                <div className="info-group">
+                    <img src="./images/phone-icon.png" />
+                    <p>(0800) CAT KING</p>
+                </div>
+                <div className="info-group">
+                    <img src="./images/mail-icon.png" />
+                    <p>pumpkin@scrimba.com</p>
+                </div>
+            </div>
+
+
+
+
+ls -l /usr/local/bin/python*
+ls -l /usr/local/bin/pip*
+
+ln -s -f /usr/local/bin/python3 /usr/local/bin/python
+alias python="python3"
+exec $SHELL -l
+which python
+
+ln -s -f /usr/local/bin/pip3 /usr/local/bin/pip
+alias pip="pip3"
+exec $SHELL -l
+which pip
+
+
+
+elif feedback_type == "referral":
         instance = ReferralFeedback.objects.get(pk=data)
         MSTeamsNotificationHandler.send_referral_feedback_notification(instance)
 
