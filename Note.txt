@@ -1,0 +1,160 @@
+{
+  "OTA_AirDetailsRS": {
+    "Success": "",
+    "FLSResponseFields": "",
+    "FlightDetails": [
+      {
+        "FlightLegDetails": {
+          "DepartureAirport": "",
+          "ArrivalAirport": "",
+          "MarketingAirline": "",
+          "Equipment": ""
+        }
+      },
+      {
+        "FlightLegDetails": {
+          "DepartureAirport": "",
+          "ArrivalAirport": "",
+          "MarketingAirline": "",
+          "Equipment": ""
+        }
+      },
+      {
+        "FlightLegDetails": {
+          "DepartureAirport": "",
+          "ArrivalAirport": "",
+          "MarketingAirline": "",
+          "Equipment": ""
+        }
+      },
+      {
+        "FlightLegDetails": {
+          "DepartureAirport": "",
+          "ArrivalAirport": "",
+          "MarketingAirline": "",
+          "Equipment": ""
+        }
+      },
+      {
+        "FlightLegDetails": [
+          {
+            "DepartureAirport": "",
+            "ArrivalAirport": "",
+            "MarketingAirline": "",
+            "Equipment": ""
+          },
+          {
+            "DepartureAirport": "",
+            "ArrivalAirport": "",
+            "MarketingAirline": "",
+            "Equipment": ""
+          }
+        ]
+      },
+      {
+        "FlightLegDetails": {
+          "DepartureAirport": "",
+          "ArrivalAirport": "",
+          "MarketingAirline": "",
+          "Equipment": ""
+        }
+      },
+      {
+        "FlightLegDetails": {
+          "DepartureAirport": "",
+          "ArrivalAirport": "",
+          "MarketingAirline": "",
+          "Equipment": ""
+        }
+      },
+      {
+        "FlightLegDetails": {
+          "DepartureAirport": "",
+          "ArrivalAirport": "",
+          "MarketingAirline": "",
+          "Equipment": ""
+        }
+      },
+      {
+        "FlightLegDetails": {
+          "DepartureAirport": "",
+          "ArrivalAirport": "",
+          "MarketingAirline": "",
+          "Equipment": ""
+        }
+      },
+      {
+        "FlightLegDetails": {
+          "DepartureAirport": "",
+          "ArrivalAirport": "",
+          "MarketingAirline": "",
+          "Equipment": ""
+        }
+      },
+      {
+        "FlightLegDetails": {
+          "DepartureAirport": "",
+          "ArrivalAirport": "",
+          "MarketingAirline": "",
+          "Equipment": ""
+        }
+      },
+      {
+        "FlightLegDetails": {
+          "DepartureAirport": "",
+          "ArrivalAirport": "",
+          "MarketingAirline": "",
+          "Equipment": ""
+        }
+      },
+      {
+        "FlightLegDetails": {
+          "DepartureAirport": "",
+          "ArrivalAirport": "",
+          "MarketingAirline": "",
+          "Equipment": ""
+        }
+      },
+      {
+        "FlightLegDetails": {
+          "DepartureAirport": "",
+          "ArrivalAirport": "",
+          "MarketingAirline": "",
+          "Equipment": ""
+        }
+      },
+      {
+        "FlightLegDetails": {
+          "DepartureAirport": "",
+          "ArrivalAirport": "",
+          "MarketingAirline": "",
+          "Equipment": ""
+        }
+      },
+      {
+        "FlightLegDetails": {
+          "DepartureAirport": "",
+          "ArrivalAirport": "",
+          "MarketingAirline": "",
+          "Equipment": ""
+        }
+      },
+      {
+        "FlightLegDetails": {
+          "DepartureAirport": "",
+          "ArrivalAirport": "",
+          "MarketingAirline": "",
+          "Equipment": ""
+        }
+      },
+      {
+        "FlightLegDetails": {
+          "DepartureAirport": "",
+          "ArrivalAirport": "",
+          "MarketingAirline": "",
+          "Equipment": ""
+        }
+      }
+    ]
+  }
+}

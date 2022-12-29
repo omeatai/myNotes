@@ -1,4 +1,126 @@
+DAVE GRAY & NET NINJA
+
+React Hooks
+React Redux Toolkit
+React Query
+React Authentication
+React Typescript
+
+
+
+
+
+CODEWARS #6 - Closest Elevator (solved in Python & Javascript)
+
+Codewars Problem: https://www.codewars.com/kata/5c374b346a5d0f77af500a5a/train/javascript
+
+Codewars Playlist: https://www.youtube.com/playlist?list=PL6rbQ5F5xbtUOVW7hAplbsHn8-eopr4y4
+
+Website: http://www.ifeanyiomeata.com
+Twiter: https://twitter.com/iomeata
+Linkedin: https://www.linkedin.com/in/omeatai/
+
+#codewars #ClosestElevator #algorithm  #python #javascript #code #devcommunity #developer #leetcode #hackerrank #coderbyte #100daysofcode #100dayschallenge #100daysofpython #100daysofjavascript
+codewars, ClosestElevator, algorithm, python, javascript, code, devcommunity, developer, leetcode, hackerrank, coderbyte, 100daysofcode, 100dayschallenge, 100daysofpython, 100daysofjavascript, algorithm
+
+
+00:00 Intro
+00:20 Challenge
+02:40 Javascript Solution #1
+10:00 Javascript Solution #2 (using Ternary Operator)
+11:42 Javascript Solution #3 (Refactoring)
+13:55 Python Solution #1
+16:54 Python Solution #2 (using Sorted Method)
+19:33 Python Solution #3 (Refactoring)
+
+
+/imagine beautiful website for shoes ui, ux, ui/ux, 3D, realistic, website, ecommerce, shop, shopify --v 4 --stylize 500
+
+
+
+Hi, check out my latest codewars challenge:
+
+CODEWARS #6 - Closest Elevator (solved in Python & Javascript)
+
+Playlist: https://www.youtube.com/playlist?list=PL6rbQ5F5xbtUOVW7hAplbsHn8-eopr4y4
+
+Video: https://youtu.be/tcRMo2QGX-8
+
+#codewars #ClosestElevator #algorithm  #python #javascript #code #devcommunity #developer #leetcode #hackerrank #coderbyte #100daysofcode #100dayschallenge #100daysofpython #100daysofjavascript
+
+
+Hi, I asked Chat-GPT to create a "QRcode Generator App" for me and it really surprised me!
+
+Demo: https://qrcode-ifeanyi.vercel.app/
+Github: https://github.com/omeatai/QRcode-Generator
+Watch on Youtube: https://youtu.be/7oITMoDR4Us
+Tech Stack: React, Javascript, TailwindCSS, Chat-GPT, Vercel
+
+#QRcodeGenerator #React #Javascript #TailwindCSS #Chat-GPT #Vercel #devcommunity #100daysofcoding #100daysofcode #100daysofreact #dev #nodejs #python #django #git #github #Frontend #software #developer #tech #project #projects
+
+QRcodeGenerator, React, Javascript, TailwindCSS, Chat-GPT, Vercel, devcommunity, 100daysofcoding, 100daysofcode, 100daysofreact, dev, nodejs, python, django, git, github, Frontend, software, developer, tech, project, projects
+
+
+
+Hi, check out my recent project: "Open Weather App" which I built with React, NextJS and TailwindCSS. Follow if you would like to see more projects in the React and Python Stacks. Thanks.
+
+Demo: https://lnkd.in/dn5fcrGq
+Github: https://lnkd.in/dU6BYtXA
+Watch on Youtube: https://lnkd.in/d-dpTQqd
+Website: https://ifeanyiomeata.com
+Tech Stack: React, NextJS, Javascript, TailwindCSS, Open Weather API, Abstract Timezone API, Vercel
+
+#OpenWeatherApp #React #NextJS #Javascript #TailwindCSS #OpenWeatherAPI #AbstractTimezoneAPI #Vercel #devcommunity #100daysofcoding #100daysofcode #100daysofreact #dev #nodejs #python #django #git #github #Frontend #software #developer
+OpenWeatherApp, React, NextJS, Javascript, TailwindCSS, OpenWeatherAPI, AbstractTimezoneAPI, Vercel, devcommunity, 100daysofcoding, 100daysofcode, 100daysofreact, dev, nodejs, python, django, git, github, Frontend, software, developer #tech #project #projects
+
+
+Hi, check out my recent project: "The Movie Search App" which I built with React. Follow if you would like to see more projects in React and Python Tech stacks. Thanks.
+
+Demo: https://movie-search-ifeanyi.netlify.app/
+Github: https://github.com/omeatai/Movie-search-app
+React Playlist: https://www.youtube.com/playlist?list=PL6rbQ5F5xbtVWkPxM0ltTYBNYe2eUagmL
+Watch on Youtube: https://www.youtube.com/watch?v=un-XntFB88g
+Tech Stack: React, Javascript, TailwindCSS, IMDB API, Netlify
+
+#MovieApp #React #Javascript #IMDB #Netlify #Frontend #software #developer
+
+
+
+Hi, check out my latest project:
+
+React App - Digital Clock and React Counter App
+
+https://youtu.be/U25WrFn8Fc8
+
+Live DEMO - https://omeatai.github.io/Digital-Clock-Project/
+
+Project Files - https://github.com/omeatai/Digital-Clock-Project
+
+https://youtu.be/U25WrFn8Fc8
+
+#react #reactjs #javascript #devcommunity #dev #node #nodejs #github #100daysofcoding #100daysofcode #100daysofreact #webapplication #useState #useEffect 
+
+
+Best 10 sites to find a remote job paying in USD:
+
+1. remoteok. com
+2. weworkremotely. com
+3. remotive. io
+4. remoteleaf. com
+5. justremote. co
+6. dailyremote. com
+7. producthunt. com/jobs
+8. flexjobs. com
+9. remote. co
+10. hired. com
+
 STUDY
+
+Command + Shift + 4 - Screen Capture
+Command + Control + Space - Emoji keyboard
+
+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
+Git
 
 APPLICATION NO. V400851899
 IRCC NO. 1000008533323
@@ -11,6 +133,8 @@ ABUJ1928701991500
 Visitor visa application	V400851899	IFEANYI CHUKWUEMEKA OMEATA	September 21, 2022	Submitted
 
 GETTING HIRED
+
+DESIGNING DATA INTENSIVE APPLICATIONS - ORIELY
 
 01-10-2022   Build a notes app and Tenzies games
 02-10-2022   WORKING WITH APIS - INTRO TO APIS
